@@ -107,9 +107,6 @@ const generarFiguras3 = (cantidad: number): {rowIndex: number, colIndex: number,
             rowIndex = Math.floor(Math.random() * 8);
             colIndex = Math.floor(Math.random() * 10);
             
-            const celda1 = verificaIndices(rowIndex+1, colIndex, arrayIndex.value)
-            const celda2 = verificaIndices(rowIndex+2, colIndex+2, arrayIndex.value)
-
             var verificaLado: boolean = 
             verificaIndices(rowIndex+1, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+2, colIndex, arrayIndex.value)
@@ -206,7 +203,8 @@ const verificaIndices = (rowIndexTest: number, colIndexTest: number, arrayIndex:
 
 const asignarClaseOcupado = () => {
     
-    const figuras3 = generarFiguras3(2);
+    const figuras4 = generarFiguras4(1);
+    const figuras3 = generarFiguras3(2)
     const figuras = generarFiguras2(3);
     const cuadros = generarCuadros(4);
 
@@ -238,7 +236,7 @@ const asignarClaseOcupado = () => {
             if (direction === "down" && size === 4) {
                 tabla.value[rowIndex + 1][colIndex] = "ocupado";
                 tabla.value[rowIndex + 2][colIndex] = "ocupado";
-                tabla.value[rowIndex + 2][colIndex] = "ocupado";
+                tabla.value[rowIndex + 3][colIndex] = "ocupado";
             }
         }
     })
