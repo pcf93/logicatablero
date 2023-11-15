@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import Tablero from './components/Tablero.vue';
+import TableroRandom from './components/TableroRandom.vue';
 
 import { ref, onMounted } from 'vue'
 
@@ -19,7 +19,7 @@ import { ref, onMounted } from 'vue'
   <title>Document</title>
 </head>
 <body>
-  <Tablero/>
+  <TableroRandom/>
 </body>
 </html>
      
