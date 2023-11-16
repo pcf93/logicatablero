@@ -31,7 +31,7 @@
 
     const arrayIndex = ref<IndexInfo[]>([])
 
-    const generarCuadros = (cantidad: number): {rowIndex: number, colIndex: number, direction: string, size: number}[] => {
+    const generarCuadros = (cantidad: number): void => {
     const cuadros: {rowIndex: number, colIndex: number, direction: string, size: number}[] = [];
     while (cuadros.length < cantidad) {
         var rowIndex = Math.floor(Math.random() * 10);
@@ -39,17 +39,18 @@
         const direction = Math.random() < 0.5 ? "right" : "down";
         const size = 1
 
+        console.log(arrayIndex.value)
+        
         if (verificaIndices(rowIndex, colIndex, arrayIndex.value)){
             cuadros.push({rowIndex, colIndex, direction, size})
             arrayIndex.value.push({rowIndex, colIndex, direction, size})
         }
     }
-    return cuadros;
 }
 
     console.log(arrayIndex.value)
 
-    const generarFiguras2 = (cantidad: number): {rowIndex: number, colIndex: number, direction: string, size: number}[] => {
+    const generarFiguras2 = (cantidad: number): void => {
     const figuras: {rowIndex: number, colIndex: number, direction: string, size: number}[] = [];
     while (figuras.length < cantidad) {
         var rowIndex = Math.floor(Math.random() * 10);
@@ -61,35 +62,45 @@
         if (direction == "right"){
             rowIndex = Math.floor(Math.random() * 10);
             colIndex = Math.floor(Math.random() * 9);
-            var verificaLado: boolean = verificaIndices(rowIndex, colIndex+1, arrayIndex.value)
+            console.log(rowIndex, colIndex)
+            var verificaLado: boolean = 
+            verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
+            verificaIndices(rowIndex, colIndex+1, arrayIndex.value)
         } else {
             rowIndex = Math.floor(Math.random() * 9);
             colIndex = Math.floor(Math.random() * 10);
-            var verificaLado: boolean = verificaIndices(rowIndex +1, colIndex, arrayIndex.value)
+            console.log(rowIndex, colIndex)
+            var verificaLado: boolean = 
+            verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
+            verificaIndices(rowIndex +1, colIndex, arrayIndex.value)
         }
         
-        if (verificaIndices(rowIndex, colIndex, arrayIndex.value) || verificaLado){
+        console.log(verificaLado)
+        
+        if (verificaLado){
 
-            arrayIndex.value.push({rowIndex, colIndex, direction, size})
+            
             figuras.push({rowIndex, colIndex, direction, size})
+            arrayIndex.value.push({rowIndex, colIndex, direction, size})
 
             if (direction === "right"){
                 colIndex++;
+                
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
             } else {
                 rowIndex++;
+                
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
             }
         
     }}
-    return figuras;
 }
 
-const generarFiguras3 = (cantidad: number): {rowIndex: number, colIndex: number, direction: string, size: number}[] => {
+const generarFiguras3 = (cantidad: number): void => {
     const figuras: {rowIndex: number, colIndex: number, direction: string, size: number}[] = [];
     while (figuras.length < cantidad) {
-        var rowIndex = Math.floor(Math.random() * 10);
-        var colIndex = Math.floor(Math.random() * 10);
+        var rowIndex;
+        var colIndex;
         
         const direction = Math.random() < 0.5 ? "right" : "down";
         const size = 3;
@@ -97,25 +108,27 @@ const generarFiguras3 = (cantidad: number): {rowIndex: number, colIndex: number,
         if (direction == "right"){
             rowIndex = Math.floor(Math.random() * 10);
             colIndex = Math.floor(Math.random() * 8);
-            
-            const celda1 = verificaIndices(rowIndex, colIndex+1, arrayIndex.value)
-            const celda2 = verificaIndices(rowIndex, colIndex+2, arrayIndex.value)
-            
+            console.log(rowIndex, colIndex)
             var verificaLado: boolean = 
-            celda1 && celda2
+            verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
+            verificaIndices(rowIndex, colIndex+1, arrayIndex.value) &&
+            verificaIndices(rowIndex, colIndex+2, arrayIndex.value)
         } else {
             rowIndex = Math.floor(Math.random() * 8);
             colIndex = Math.floor(Math.random() * 10);
-            
+            console.log(rowIndex, colIndex)
             var verificaLado: boolean = 
+            verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+1, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+2, colIndex, arrayIndex.value)
         }
         
-        if (verificaIndices(rowIndex, colIndex, arrayIndex.value) || verificaLado){
-
-            arrayIndex.value.push({rowIndex, colIndex, direction, size})
+        console.log(verificaLado)
+        
+        if (verificaLado){
+            
             figuras.push({rowIndex, colIndex, direction, size})
+            arrayIndex.value.push({rowIndex, colIndex, direction, size})
 
             if (direction === "right"){
                 colIndex++;
@@ -130,14 +143,14 @@ const generarFiguras3 = (cantidad: number): {rowIndex: number, colIndex: number,
             }
         
     }}
-    return figuras;
 }
 
-const generarFiguras4 = (cantidad: number): {rowIndex: number, colIndex: number, direction: string, size: number}[] => {
+const generarFiguras4 = (cantidad: number): void => {
     const figuras: {rowIndex: number, colIndex: number, direction: string, size: number}[] = [];
+
     while (figuras.length < cantidad) {
-        var rowIndex = Math.floor(Math.random() * 10);
-        var colIndex = Math.floor(Math.random() * 10);
+        var rowIndex;
+        var colIndex;
         
         const direction = Math.random() < 0.5 ? "right" : "down";
         const size = 4;
@@ -146,6 +159,7 @@ const generarFiguras4 = (cantidad: number): {rowIndex: number, colIndex: number,
             rowIndex = Math.floor(Math.random() * 10);
             colIndex = Math.floor(Math.random() * 7);
             var verificaLado: boolean = 
+            verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex, colIndex+1, arrayIndex.value) &&
             verificaIndices(rowIndex, colIndex+2, arrayIndex.value) &&
             verificaIndices(rowIndex, colIndex+3, arrayIndex.value)
@@ -153,15 +167,18 @@ const generarFiguras4 = (cantidad: number): {rowIndex: number, colIndex: number,
             rowIndex = Math.floor(Math.random() * 7);
             colIndex = Math.floor(Math.random() * 10);
             var verificaLado: boolean = 
+            verificaIndices(rowIndex, colIndex, arrayIndex.value)
             verificaIndices(rowIndex+1, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+2, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+3, colIndex, arrayIndex.value)
         }
         
-        if (verificaIndices(rowIndex, colIndex, arrayIndex.value) || verificaLado){
+        console.log(verificaLado)
+        
+        if (verificaLado){
 
-            arrayIndex.value.push({rowIndex, colIndex, direction, size})
             figuras.push({rowIndex, colIndex, direction, size})
+            arrayIndex.value.push({rowIndex, colIndex, direction, size})
 
             if (direction === "right"){
                 colIndex++;
@@ -175,12 +192,10 @@ const generarFiguras4 = (cantidad: number): {rowIndex: number, colIndex: number,
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
                 rowIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
-                colIndex++;
+                rowIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
             }
-        
-    }}
-    return figuras;
+        }}
 }
 
 const verificaIndices = (rowIndexTest: number, colIndexTest: number, arrayIndex: IndexInfo[] ): boolean => {
@@ -188,57 +203,37 @@ const verificaIndices = (rowIndexTest: number, colIndexTest: number, arrayIndex:
         var esValido: boolean = true
 
         for (const index of arrayIndex){
-            if ( (index.colIndex === colIndexTest && index.rowIndex === rowIndexTest) ||
-                 (index.colIndex === colIndexTest + 1 || index.colIndex === colIndexTest - 1 && index.rowIndex === rowIndexTest) ||
-                 ((index.colIndex === colIndexTest + 1 || index.colIndex === colIndexTest - 1) && (index.rowIndex === rowIndexTest + 1 || index.rowIndex === rowIndexTest - 1)) ||
-                 (index.colIndex === colIndexTest && (index.rowIndex === rowIndexTest + 1 || index.rowIndex === rowIndexTest - 1)) ){
-                    esValido = false
-                    break;
-                 }
+            if (
+    (index.colIndex === colIndexTest && index.rowIndex === rowIndexTest) ||
+    ((index.colIndex === colIndexTest + 1 || index.colIndex === colIndexTest - 1) && index.rowIndex === rowIndexTest) ||
+    (index.colIndex === colIndexTest && (index.rowIndex === rowIndexTest + 1 || index.rowIndex === rowIndexTest - 1)) ||
+    ((index.colIndex === colIndexTest + 1 || index.colIndex === colIndexTest - 1) && (index.rowIndex === rowIndexTest + 1 || index.rowIndex === rowIndexTest - 1))
+) {
+    esValido = false;
+    break;
+}
         }
-        console.log(esValido)
+
         return esValido
         
     }
 
-const asignarClaseOcupado = () => {
+
+
+    const asignarClaseOcupado = () => {
     
-    const figuras4 = generarFiguras4(1);
-    const figuras3 = generarFiguras3(2)
-    const figuras = generarFiguras2(3);
-    const cuadros = generarCuadros(4);
+    generarFiguras4(1);
+    generarFiguras3(2);
+    generarFiguras2(3);
+    generarCuadros(4);
 
-    const elementos = figuras3.concat(figuras.concat(cuadros));
+    console.log(arrayIndex.value)
 
-    elementos.forEach(elemento => {
+    arrayIndex.value.forEach(elemento => {
         const {rowIndex, colIndex, direction, size} = elemento;
-        if (direction){
+
             tabla.value[rowIndex][colIndex] = "ocupado";
-            if (direction === "right" && size === 2){
-                tabla.value[rowIndex][colIndex + 1] = "ocupado";
-            } 
-            if (direction === "down" && size === 2) {
-                tabla.value[rowIndex + 1][colIndex] = "ocupado";
-            }
-            if (direction === "right" && size === 3){
-                tabla.value[rowIndex][colIndex + 1] = "ocupado";
-                tabla.value[rowIndex][colIndex + 2] = "ocupado";
-            } 
-            if (direction === "down" && size === 3) {
-                tabla.value[rowIndex + 1][colIndex] = "ocupado";
-                tabla.value[rowIndex + 2][colIndex] = "ocupado";
-            }
-            if (direction === "right" && size === 4){
-                tabla.value[rowIndex][colIndex + 1] = "ocupado";
-                tabla.value[rowIndex][colIndex + 2] = "ocupado";
-                tabla.value[rowIndex][colIndex + 3] = "ocupado";
-            } 
-            if (direction === "down" && size === 4) {
-                tabla.value[rowIndex + 1][colIndex] = "ocupado";
-                tabla.value[rowIndex + 2][colIndex] = "ocupado";
-                tabla.value[rowIndex + 3][colIndex] = "ocupado";
-            }
-        }
+
     })
 }
 
