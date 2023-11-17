@@ -2,7 +2,7 @@
   <div class="write-message">
     <form>
       <div class="new-message-field">
-        <label for="username">Username</label>
+        <label for="username">Nom d'usuari</label>
         <input
           type="text"
           id="email"
@@ -12,7 +12,7 @@
         /><br />
       </div>
       <div class="new-message-field">
-        <label for="subject">Subject</label>
+        <label for="subject">Assumpte</label>
         <input
           type="text"
           id="subject"
@@ -22,7 +22,7 @@
         /><br />
       </div>
       <div class="new-message-field">
-        <label for="content">Content</label>
+        <label for="content">Missatge</label>
         <textarea
           type="text"
           id="content"
@@ -32,8 +32,8 @@
       </div>
     </form>
     <div class="button-box">
-      <button class="send" @click="enviarMensaje">Send</button>
-      <button class="cancel" @click="$emit('cambiarOpcion', 2)">Cancel</button>
+      <button class="send" @click="enviarMensaje">Enviar</button>
+      <button class="cancel" @click="$emit('cambiarOpcion', 2)">Cancelar</button>
     </div>
     <p style="text-align: center">{{ resultado }}</p>
   </div>
@@ -93,10 +93,11 @@
 </script>
 
 <style scoped lang="scss">
+  
   form {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 10px;
+    margin-left: 2vw;
   }
 
   .new-message-field {
@@ -106,6 +107,7 @@
     margin: 10px;
     font-size: 0.8em;
     width: 100%;
+    
   }
 
   label {

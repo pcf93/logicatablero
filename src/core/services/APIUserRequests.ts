@@ -11,11 +11,11 @@ const getIdByEmail = async (email: string) => {
 }
 
 const loginUser = async (
-  email: string,
+  name: string,
   password: string
 ): Promise<AxiosResponse<User>> => {
   return axiosInstance.post<User>('/Login/login', {
-    userEmail: email,
+    userName: name,
     userPassword: password,
   })
 }

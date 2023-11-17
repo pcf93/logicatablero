@@ -5,7 +5,7 @@
     :message="message"
     :section="section"
   />
-  <p v-if="sentMessages.length == 0">Todavía no tienes mensajes enviados.</p>
+  <p v-if="sentMessages.length == 0">Encara no tens missatges enviats.</p>
 </template>
 
 <script setup lang="ts">

@@ -6,7 +6,7 @@
       class="new-message"
       @click="changeOption(1)"
     >
-      <p>New Message</p>
+      <p>Nou missatge</p>
     </div>
 
     <div
@@ -15,7 +15,7 @@
       class="inbox"
       @click="changeOption(2)"
     >
-      <p>Inbox</p>
+      <p>Safata d'entrada</p>
     </div>
     <div
       id="sent"
@@ -23,7 +23,7 @@
       class="sent"
       @click="changeOption(3)"
     >
-      <p>Sent</p>
+      <p>Missatges enviats</p>
     </div>
     <input type="text" placeholder="Search.." checked="true" />
     <div class="pendiente-inbox" v-if="countUnread !== 0">
@@ -80,9 +80,10 @@
   .message-bar-header {
     display: flex;
     position: relative;
-    height: 30px;
+    height: 40px;
     text-align: center;
     border-bottom: 1px solid gray;
+    background-color: white;
   }
 
   .pendiente-inbox {
@@ -105,10 +106,9 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-    margin-left: 30px;
-    width: 100px;
-    height: 30px;
-    font-size: 0.7em;
+    margin-left: 5vw;
+    width: 20vw;
+    font-size: 0.75em;
     background-color: lightgray;
     cursor: pointer;
   }
@@ -122,9 +122,8 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-    font-size: 0.7em;
-    height: 30px;
-    width: 50px;
+    font-size: 0.75em;
+    width: 20vw;
     cursor: pointer;
   }
 
@@ -138,9 +137,8 @@
     text-align: center;
     justify-content: center;
     background-color: lightgray;
-    font-size: 0.7em;
-    width: 50px;
-    height: 30px;
+    font-size: 0.75em;
+    width: 20vw;
     cursor: pointer;
   }
 
@@ -151,9 +149,9 @@
 
   .message-bar-header > input {
     height: 50%;
-    width: 15px;
+    width: 15vw;
     margin: auto;
-    margin-right: 1%;
+    margin-right: 2vw;
     padding-right: 30px;
   }
 

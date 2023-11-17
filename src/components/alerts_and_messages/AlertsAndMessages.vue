@@ -127,5 +127,6 @@
     margin-top: 50px;
     margin-bottom: 50px;
     border: 1px solid gray;
+    background-color: white;
   }
 </style>

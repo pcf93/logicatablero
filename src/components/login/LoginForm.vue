@@ -2,11 +2,11 @@
   <div class="login" v-if="!isLogged">
     <form @submit.prevent="loginUser()" class="login-form">
       <div class="login-field">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" v-model="userEmail" /><br />
+        <label for="email">Nom d'usuari</label>
+        <input type="text" id="email" name="email" v-model="userName" /><br />
       </div>
       <div class="login-field">
-        <label for="password">Password</label>
+        <label for="password">Contrasenya</label>
         <input
           type="password"
           id="password"
@@ -31,11 +31,11 @@
   import { ref } from 'vue'
 
   const userPassword = ref<string>('')
-  const userEmail = ref<string>('')
+  const userName = ref<string>('')
   const { isLogged, errorMessage } = useLogin()
 
   async function loginUser() {
-    useLogin().login(userEmail.value, userPassword.value)
+    useLogin().login(userName.value, userPassword.value)
   }
 </script>
 
@@ -48,6 +48,8 @@
     border: 1px solid grey;
     padding: 10px;
     padding-bottom: 5px;
+    margin-top: 5vh;
+    background-color: white;
   }
 
   .login-form {
@@ -55,6 +57,7 @@
     flex-wrap: wrap;
     justify-content: center;
     width: auto;
+    
   }
 
   .login-field {

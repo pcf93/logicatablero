@@ -1,3 +1,4 @@
+import TableroRandomVue from '@/components/TableroRandom.vue'
 import AlertsAndMessages from '@/components/alerts_and_messages/AlertsAndMessages.vue'
 import HomeOptions from '@/components/home/HomeOptions.vue'
 import LoginForm from '@/components/login/LoginForm.vue'
@@ -17,6 +18,11 @@ const router = createRouter({
       path: '/reminders-calendar',
       name: 'reminders',
       component: RemindersCalendar,
+    },
+    {
+      path: '/tauler-previ',
+      name: 'tauler previ',
+      component: TableroRandomVue,
     },
     {
       path: '/',

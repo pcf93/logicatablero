@@ -6,7 +6,7 @@
     :section="section"
     @cambia-opcion="$emit('cambiaOpcion', 1)"
   />
-  <p v-if="inboxMessages.length == 0">Todavía no tienes mensajes recibidos.</p>
+  <p v-if="inboxMessages.length == 0">Encara no tens missatges rebuts.</p>
 </template>
 
 <script setup lang="ts">

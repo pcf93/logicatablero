@@ -1,24 +1,16 @@
 <template>
   <header>
     <div class="header-item" id="logo">
-      <img src="@/assets/images/logo-easy-connect_SBS.png" />
+      <img src="@/assets/images/enfonsa-la-flota-logo.png" />
     </div>
     <div class="header-item" id="user" v-if="isLogged">
-      <img src="@/assets/images/senior.png" />
+      <img src="@/assets/images/avatar.png" />
       <p>{{ userInfo?.userName }} {{ userInfo?.userLastName }}</p>
       <div class="pendiente-user">
         <img src="@/assets/images/Ellipse1.png" />
         <p class="contador-user">6</p>
       </div>
     </div>
-    <div class="header-item" id="settings" v-if="isLogged">
-      <img src="@/assets/images/config.png" />
-      <p class="menu-text">SETTINGS</p>
-    </div>
-    <div class="header-item" id="dots" v-if="isLogged">
-      <img src="@/assets/images/dot3.png" />
-    </div>
-
     <div class="header-item" id="logout" @click="logout()" v-if="isLogged">
       <RouterLink to="/login">
         <div class="logout-icon">
@@ -36,12 +28,24 @@
   const { isLogged, userInfo, logout } = useLogin()
 </script>
 <style scoped lang="scss">
+  
   header {
     display: flex;
-    justify-content: flex-end;
-    align-content: center;
-    height: 80px;
-    margin-top: 20px;
+    background-color: #295e8d;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+}
+
+  #logo {
+    margin-right: auto;
+  }
+
+  #logo > img {
+    width: 200px;
+    padding-left: 20px;
+    z-index: -1;
   }
 
   #logo {
@@ -61,6 +65,7 @@
     align-content: center;
     max-height: 40px;
     width: auto;
+    margin-right: 5vw;
   }
 
   #user > img {
@@ -73,6 +78,8 @@
     display: none;
   }
 
+
+
   #settings,
   #logout {
     display: flex;
@@ -82,6 +89,7 @@
     height: 50px;
     width: 50px;
     text-align: center;
+    margin-right: 2vw;
   }
 
   #logout-icon {
@@ -91,7 +99,7 @@
   #settings > img,
   #dots > img,
   #logout > img {
-    height: 30px;
+    height: 60px;
   }
 
   #dots > img {

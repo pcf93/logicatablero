@@ -14,6 +14,9 @@
 </script>
 <style lang="scss">
   body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #78aad7;
+}
+
 </style>

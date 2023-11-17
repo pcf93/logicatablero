@@ -2,17 +2,17 @@
   <div class="register">
     <form class="register-form" @submit.prevent="register()">
       <div class="register-field">
-        <label for="email">Email</label>
+        <label for="email">Nom d'usuari</label>
         <input
           type="text"
           id="email"
           name="email"
           required
-          v-model="user.userEmail"
+          v-model="user.userName"
         /><br />
       </div>
       <div class="register-field">
-        <label for="password">Password</label>
+        <label for="password">Contrasenya</label>
         <input
           type="password"
           id="password"
@@ -22,27 +22,17 @@
         /><br />
       </div>
       <div class="register-field">
-        <label for="name">Name</label>
+        <label for="name">Correu electrònic</label>
         <input
           type="text"
           id="name"
           name="name"
           required
-          v-model="user.userName"
+          v-model="user.userEmail"
         /><br />
       </div>
       <div class="register-field">
-        <label for="lastname">Last Name</label>
-        <input
-          type="text"
-          id="lastname"
-          name="lastname"
-          required
-          v-model="user.userLastName"
-        /><br />
-      </div>
-      <div class="register-field">
-        <label for="country">Country</label>
+        <label for="country">Ciutat</label>
         <input
           type="text"
           id="country"
@@ -52,19 +42,28 @@
         /><br />
       </div>
       <div class="register-field">
-        <label for="phonenumber">Phone number</label>
+        <label for="birthdate">Data de naixament</label>
+        <input
+          type="date"
+          id="birthdate"
+          name="birthdate"
+          required
+          v-model="user.userBirthDate"
+        /><br />
+      </div>
+      <div class="register-field">
+        <label for="phonenumber">Telefon (opcional)</label>
         <input
           type="text"
           id="phonenumber"
           name="phonenumber"
-          required
           v-model="user.userPhone"
         /><br />
       </div>
       <div class="register-box">
-        <button type="submit" class="send">REGISTER USER</button>
+        <button type="submit" class="send">REGISTRE USUARI</button>
         <RouterLink to="/login">
-          <button class="cancel">BACK TO LOGIN</button></RouterLink
+          <button class="cancel">TORNA A LOGIN</button></RouterLink
         >
       </div>
       <p v-for="message in errorMessageList" :key="message">
@@ -90,7 +89,7 @@
     userLastName: '',
     userEmail: '',
     userPhone: '',
-    userBirthDate: '2023-10-31T07:46:47.315Z',
+    userBirthDate: '',
     userCity: '',
     darkMode: false,
     userLanguageID: 1,
@@ -133,6 +132,11 @@
 <style scoped lang="scss">
   .register {
     border: 1px solid gray;
+    margin-top: 5vh;
+    background-color: white;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .register-form {
@@ -202,6 +206,7 @@
       flex-wrap: wrap;
       justify-content: center;
       width: auto;
+      
     }
 
     .register-field {
@@ -259,6 +264,7 @@
       text-align: center;
       width: 30%;
       margin: 0 auto;
+      margin-top: 5vh;
     }
 
     .register-form {

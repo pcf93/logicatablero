@@ -1,6 +1,23 @@
 <template>
   <section class="menu">
     <div class="option">
+      <RouterLink to="/tauler-previ">
+      <div class="box" @click="$emit('cambiarOpcion', 3)">
+        <img src="@/assets/images/Rectangle1.png" />
+        <div class="layer2">
+          <img src="@/assets/images/Layer2.png" />
+        </div>
+        <div class="iconos">
+          <img src="@/assets/images/military-boat-xxl.png" />
+        </div>
+        <div class="layer3">
+          <img src="@/assets/images/Layer3.png" />
+        </div>
+        <p class="option-text">INICIAR PARTIDA</p>
+      </div>
+    </RouterLink>
+    </div>
+    <div class="option">
       <RouterLink to="/alerts-and-messaging">
         <div class="box" @click="$emit('cambiarOpcion', 1)">
           <img src="@/assets/images/Rectangle1.png" />
@@ -8,7 +25,7 @@
             <img src="@/assets/images/Layer2.png" />
           </div>
           <div class="iconos">
-            <img src="@/assets/images/warnings-off2.png" />
+            <img src="@/assets/images/speech-bubble-2-xxl.png" />
           </div>
           <div class="layer3">
             <img src="@/assets/images/Layer3.png" />
@@ -17,7 +34,7 @@
             <img src="@/assets/images/Ellipse1.png" />
             <p class="contador">{{ countUnread }}</p>
           </div>
-          <p class="option-text">ALERTS AND MESSAGING</p>
+          <p class="option-text">MISSATGES</p>
         </div>
       </RouterLink>
     </div>
@@ -29,7 +46,7 @@
             <img src="@/assets/images/Layer2.png" />
           </div>
           <div class="iconos">
-            <img src="@/assets/images/reminders-calendar.png" />
+            <img src="@/assets/images/joystick-2-xxl.png" />
           </div>
           <div class="layer3">
             <img src="@/assets/images/Layer3.png" />
@@ -38,28 +55,9 @@
             <img src="@/assets/images/Ellipse1.png" />
             <p class="contador">1</p>
           </div>
-          <p class="option-text">REMINDERS CALENDAR</p>
+          <p class="option-text">PARTIDES INICIADES</p>
         </div>
       </RouterLink>
-    </div>
-    <div class="option">
-      <div class="box" @click="$emit('cambiarOpcion', 3)">
-        <img src="@/assets/images/Rectangle1.png" />
-        <div class="layer2">
-          <img src="@/assets/images/Layer2.png" />
-        </div>
-        <div class="iconos">
-          <img src="@/assets/images/ties2.png" />
-        </div>
-        <div class="layer3">
-          <img src="@/assets/images/Layer3.png" />
-        </div>
-        <div class="pendiente">
-          <img src="@/assets/images/Ellipse1.png" />
-          <p class="contador">2</p>
-        </div>
-        <p class="option-text">CIRCLE OF CARE</p>
-      </div>
     </div>
     <div class="option">
       <div class="box">
@@ -68,7 +66,7 @@
           <img src="@/assets/images/Layer2.png" />
         </div>
         <div class="iconos">
-          <img src="@/assets/images/daily-care-o-gram.png" />
+          <img src="@/assets/images/contacts-xxl.png" />
         </div>
         <div class="layer3">
           <img src="@/assets/images/Layer3.png" />
@@ -77,7 +75,7 @@
           <img src="@/assets/images/Ellipse1.png" />
           <p class="contador">1</p>
         </div>
-        <p class="option-text">DAILY CARE-O-GRAM</p>
+        <p class="option-text">CONTACTES</p>
       </div>
     </div>
     <div class="option">
@@ -87,60 +85,20 @@
           <img src="@/assets/images/Layer2.png" />
         </div>
         <div class="iconos">
-          <img src="@/assets/images/casemanager.png" />
+          <img src="@/assets/images/email-3-xxl.png" />
         </div>
         <div class="layer3">
           <img src="@/assets/images/Layer3.png" />
         </div>
-        <p class="option-text">REPOSITORY</p>
-      </div>
-    </div>
-    <div class="option">
-      <div class="box">
-        <img src="@/assets/images/Rectangle1.png" />
-        <div class="layer2">
-          <img src="@/assets/images/Layer2.png" />
-        </div>
-        <div class="iconos">
-          <img src="@/assets/images/my-health-reports.png" />
-        </div>
-        <div class="layer3">
-          <img src="@/assets/images/Layer3.png" />
-        </div>
-        <p class="option-text">REPORTS</p>
-      </div>
-    </div>
-    <div class="option">
-      <div class="box">
-        <img src="@/assets/images/Rectangle1.png" />
-        <div class="layer2">
-          <img src="@/assets/images/Layer2.png" />
-        </div>
-        <div class="iconos">
-          <img src="@/assets/images/my-health-reports.png" />
-        </div>
-        <div class="layer3">
-          <img src="@/assets/images/Layer3.png" />
-        </div>
-        <div class="rectanglePoints">
-          <img src="@/assets/images/Rectangle2.png" />
-          <p class="totalPoints">Total Points 725</p>
-        </div>
-        <p class="option-text">MY POINTS</p>
+        <p class="option-text">SOL·LICITUTS</p>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    currentOption: Number,
-  })
-
-  const emit = defineEmits(['cambiarOpcion'])
-
-  import { useLogin } from '@/core/componentLogic/useLogin'
-  import { useMessages } from '@/core/componentLogic/useMessages'
+import { useLogin } from '@/core/componentLogic/useLogin'
+import { useMessages } from '@/core/componentLogic/useMessages'
 
   const { userInfo } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
