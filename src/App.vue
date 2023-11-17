@@ -1,55 +1,19 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import TableroRandom from './components/TableroRandom.vue';
-
-import { ref, onMounted } from 'vue'
-
-
-</script>
-
-
-
 <template>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <TableroRandom/>
-</body>
-</html>
-     
+  <HomeHeader />
+  <HomeOptions v-if="isLogged" />
+
+  <router-view />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup lang="ts">
+  import HomeHeader from './components/home/HomeHeader.vue'
+  import HomeOptions from './components/home/HomeOptions.vue'
+  import { useLogin } from './core/componentLogic/useLogin'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  const { isLogged } = useLogin()
+</script>
+<style lang="scss">
+  body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>

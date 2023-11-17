@@ -30,6 +30,7 @@
     const tabla = ref(Array.from({ length: 10}, () => Array(10).fill('')))
 
     const arrayIndex = ref<IndexInfo[]>([])
+    const arrayInt = ref<number[]>([])
 
     const generarCuadros = (cantidad: number): void => {
     const cuadros: {rowIndex: number, colIndex: number, direction: string, size: number}[] = [];
@@ -38,8 +39,6 @@
         var colIndex = Math.floor(Math.random() * 10);
         const direction = Math.random() < 0.5 ? "right" : "down";
         const size = 1
-
-        console.log(arrayIndex.value)
         
         if (verificaIndices(rowIndex, colIndex, arrayIndex.value)){
             cuadros.push({rowIndex, colIndex, direction, size})
@@ -47,8 +46,6 @@
         }
     }
 }
-
-    console.log(arrayIndex.value)
 
     const generarFiguras2 = (cantidad: number): void => {
     const figuras: {rowIndex: number, colIndex: number, direction: string, size: number}[] = [];
@@ -62,21 +59,17 @@
         if (direction == "right"){
             rowIndex = Math.floor(Math.random() * 10);
             colIndex = Math.floor(Math.random() * 9);
-            console.log(rowIndex, colIndex)
             var verificaLado: boolean = 
             verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex, colIndex+1, arrayIndex.value)
         } else {
             rowIndex = Math.floor(Math.random() * 9);
             colIndex = Math.floor(Math.random() * 10);
-            console.log(rowIndex, colIndex)
             var verificaLado: boolean = 
             verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex +1, colIndex, arrayIndex.value)
         }
-        
-        console.log(verificaLado)
-        
+
         if (verificaLado){
 
             
@@ -108,7 +101,6 @@ const generarFiguras3 = (cantidad: number): void => {
         if (direction == "right"){
             rowIndex = Math.floor(Math.random() * 10);
             colIndex = Math.floor(Math.random() * 8);
-            console.log(rowIndex, colIndex)
             var verificaLado: boolean = 
             verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex, colIndex+1, arrayIndex.value) &&
@@ -116,15 +108,12 @@ const generarFiguras3 = (cantidad: number): void => {
         } else {
             rowIndex = Math.floor(Math.random() * 8);
             colIndex = Math.floor(Math.random() * 10);
-            console.log(rowIndex, colIndex)
             var verificaLado: boolean = 
             verificaIndices(rowIndex, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+1, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+2, colIndex, arrayIndex.value)
         }
-        
-        console.log(verificaLado)
-        
+
         if (verificaLado){
             
             figuras.push({rowIndex, colIndex, direction, size})
@@ -172,9 +161,7 @@ const generarFiguras4 = (cantidad: number): void => {
             verificaIndices(rowIndex+2, colIndex, arrayIndex.value) &&
             verificaIndices(rowIndex+3, colIndex, arrayIndex.value)
         }
-        
-        console.log(verificaLado)
-        
+
         if (verificaLado){
 
             figuras.push({rowIndex, colIndex, direction, size})
@@ -220,14 +207,12 @@ const verificaIndices = (rowIndexTest: number, colIndexTest: number, arrayIndex:
 
 
 
-    const asignarClaseOcupado = () => {
+const asignarClaseOcupado = () => {
     
     generarFiguras4(1);
     generarFiguras3(2);
     generarFiguras2(3);
     generarCuadros(4);
-
-    console.log(arrayIndex.value)
 
     arrayIndex.value.forEach(elemento => {
         const {rowIndex, colIndex, direction, size} = elemento;
@@ -235,9 +220,31 @@ const verificaIndices = (rowIndexTest: number, colIndexTest: number, arrayIndex:
             tabla.value[rowIndex][colIndex] = "ocupado";
 
     })
+    
+}
+
+const generaArrayNumeros = () => {
+    
+    const elementosHTMLCollection: HTMLCollection = document.getElementsByTagName('td');
+    console.log(elementosHTMLCollection)
+
+    for (let i = 0; i < 100; i++){
+        
+        console.log(elementosHTMLCollection.item(i))
+
+        if (elementosHTMLCollection.item(i)?.className === "ocupado") {
+            arrayInt.value.push(1)
+        } else {
+            arrayInt.value.push(0)
+        }
+    }
+
+    console.log(arrayInt.value)
 }
 
 asignarClaseOcupado();
+
+generaArrayNumeros();
 
   </script>
   
