@@ -89,7 +89,7 @@
   .pendiente-inbox {
     position: absolute;
     top: -20px;
-    left: 160px;
+    left: 40vw;
   }
 
   .contador-inbox {
@@ -155,7 +155,7 @@
     padding-right: 30px;
   }
 
-  @media only screen and (min-width: 640px) and (max-width: 1024px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .message-bar-header {
       height: 50px;
     }
@@ -167,17 +167,17 @@
     .new-message {
       width: 150px;
       height: 50px;
-      font-size: 1em;
+      font-size: 0.9em;
     }
 
     .inbox {
-      font-size: 1em;
+      font-size: 0.9em;
       height: 50px;
       width: 80px;
     }
 
     .sent {
-      font-size: 1em;
+      font-size: 0.9em;
       width: 80px;
       height: 50px;
     }

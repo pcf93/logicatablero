@@ -7,8 +7,7 @@
           type="text"
           id="email"
           name="email"
-          placeholder="example@outlook.com"
-          v-model="email"
+          v-model="userName"
         /><br />
       </div>
       <div class="new-message-field">
@@ -17,7 +16,6 @@
           type="text"
           id="subject"
           name="subject"
-          placeholder="Subject"
           v-model="message.messageSubject"
         /><br />
       </div>
@@ -53,7 +51,7 @@
     useMessages()
   const resultado = ref<string>('')
 
-  const email = ref<string>(replyEmail.value)
+  const userName = ref<string>(replyEmail.value)
 
   const message: NewMessage = reactive({
     messageSenderId: userInfo.value?.userId as number,

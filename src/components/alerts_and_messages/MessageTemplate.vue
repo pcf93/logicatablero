@@ -58,7 +58,7 @@
           emailReplySender.value = response.data.userEmail
           emailReplySubject.value = props.message.messageSubject
           fullName.value =
-            response.data.userName + ' ' + response.data.userLastName
+            response.data.userName
         })
         .catch((error) => {
           console.log(error)
@@ -68,7 +68,7 @@
       getUser(props.message.messageReceiverId)
         .then((response) => {
           fullName.value =
-            response.data.userName + ' ' + response.data.userLastName
+            response.data.userName
         })
         .catch((error) => {
           console.log(error)

@@ -126,7 +126,17 @@
   .alerts {
     margin-top: 50px;
     margin-bottom: 50px;
+    margin: auto;
     border: 1px solid gray;
     background-color: white;
+    width: 90%;
+  }
+
+  @media only screen and (min-width: 1024px) {
+
+    .alerts {
+      width: 50%;
+      margin: auto;
+    }
   }
 </style>

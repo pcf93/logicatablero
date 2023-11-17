@@ -3,25 +3,25 @@ import { AxiosResponse } from 'axios'
 import { axiosInstance } from '../definitions/http/axiosinstance'
 
 const getUser = async (id: number) => {
-  return axiosInstance.get<User>(`/Login/users/${id}`)
+  return axiosInstance.get<User>(`/users/${id}`)
 }
 
 const getIdByEmail = async (email: string) => {
-  return axiosInstance.get<number>(`/Login/users/email/${email}`)
+  return axiosInstance.get<number>(`/users/email/${email}`)
 }
 
 const loginUser = async (
   name: string,
   password: string
 ): Promise<AxiosResponse<User>> => {
-  return axiosInstance.post<User>('/Login/login', {
+  return axiosInstance.post<User>('/login', {
     userName: name,
     userPassword: password,
   })
 }
 
 const registerUser = async (user: RegisterUser) => {
-  return axiosInstance.post<User>('/Login/register', {
+  return axiosInstance.post<User>('/register', {
     userNickname: user.userNickname,
     userPassword: user.userPassword,
     userName: user.userName,
