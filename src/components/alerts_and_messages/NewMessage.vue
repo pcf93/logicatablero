@@ -61,7 +61,7 @@
   })
 
   async function enviarMensaje() {
-    await getIdByEmail(email.value)
+    await getIdByEmail(userName.value)
       .then((response) => {
         message.messageReceiverId = response.data
         console.log(response.data)
