@@ -26,12 +26,17 @@
   <script setup lang="ts">
 
     import { ref } from 'vue'
+    import { useLogin } from '@/core/componentLogic/useLogin';
 
     interface IndexInfo {
   rowIndex: number;
   colIndex: number;
   direction: string;
   size: number;
+}
+const { userId, isLogged, userJWT } = useLogin()
+if (userJWT.value!.length > 0){
+  isLogged.value = true
 }
 
     const tabla = ref(Array.from({ length: 10}, () => Array(10).fill('')))

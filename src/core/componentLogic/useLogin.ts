@@ -1,6 +1,6 @@
 import { useMessages } from '@/core/componentLogic/useMessages'
 import { loginUser } from '@/core/services/APIUserRequests'
-import { User } from '@/type'
+import router from '@/router'
 import { ref } from 'vue'
 
 const isLogged = ref<boolean>(false)
@@ -53,8 +53,6 @@ function setCookie(cname: string, cvalue: string, exdays: number) {
           Object.values(parseJwt(userJWT.value))[2] as string
         )
         setCookie('JWT', response.data, 1)
-
-        console.log(parseJwt(userJWT.value))
       })
       .catch((error) => {
         errorMessage.value = error.response.data
@@ -68,6 +66,8 @@ function setCookie(cname: string, cvalue: string, exdays: number) {
     countUnread.value = 0
 
     clearInterval(newInterval.value)
+
+    document.cookie = 'JWT=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 
   }
   return { isLogged, errorMessage, newInterval, userJWT, userId, userName, login, logout }

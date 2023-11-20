@@ -11,6 +11,7 @@
   import { useLogin } from './core/componentLogic/useLogin'
 
   const { isLogged } = useLogin()
+  console.log(isLogged.value)
 </script>
 <style lang="scss">
   body {
