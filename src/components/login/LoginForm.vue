@@ -35,7 +35,7 @@
   const { isLogged, errorMessage } = useLogin()
 
   async function loginUser() {
-    useLogin().login(userName.value, userPassword.value)
+    await useLogin().login(userName.value, userPassword.value)
   }
 </script>
 

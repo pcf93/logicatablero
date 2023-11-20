@@ -5,7 +5,7 @@
     </div>
     <div class="header-item" id="user" v-if="isLogged">
       <img src="@/assets/images/avatar.png" />
-      <p>{{ userInfo?.userName }} {{ userInfo?.userLastName }}</p>
+      <p>&nbsp;&nbsp;&nbsp;Hola, {{ userName }} </p>
       <div class="pendiente-user">
         <img src="@/assets/images/Ellipse1.png" />
         <p class="contador-user">6</p>
@@ -25,7 +25,7 @@
 <script setup lang="ts">
   import { useLogin } from '@/core/componentLogic/useLogin'
 
-  const { isLogged, userInfo, logout } = useLogin()
+  const { isLogged, userId, userName, newInterval, logout } = useLogin()
 </script>
 <style scoped lang="scss">
   
@@ -35,7 +35,7 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 10vh;
+    height: 15vh;
 }
 
   #logo {
@@ -43,9 +43,7 @@
   }
 
   #logo > img {
-    width: 200px;
-    padding-left: 20px;
-    z-index: -1;
+    width: 50vw;
   }
 
   #logo {
@@ -53,8 +51,8 @@
   }
 
   #logo > img {
-    width: 200px;
-    padding-left: 20px;
+    width: 50vw;
+    padding-left: 5vw;
     z-index: -1;
   }
 
@@ -72,6 +70,10 @@
     max-height: 40px;
     width: auto;
     margin-right: 10px;
+  }
+
+  #user > p {
+    display: none;
   }
 
   #user > span {
@@ -154,6 +156,10 @@
       width: auto;
       margin-right: 5px;
     }
+
+    #user > p {
+    display: block;
+  }
 
     #dots > img {
       display: flex;

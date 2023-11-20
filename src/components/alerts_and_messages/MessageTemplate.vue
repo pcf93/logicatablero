@@ -82,7 +82,9 @@
   var isRead = ref<boolean>(props.message.isRead)
 
   const toggleDetalle = () => {
-    changeStatus(props.message.messageId)
+    
+    if (props.section == "inbox"){
+      changeStatus(props.message.messageId)
     receivedMessages.value.forEach((message) => {
       if (message.messageId == props.message.messageId) {
         if (!message.isRead) {
@@ -92,6 +94,10 @@
       }
     })
     isRead.value = true
+
+    }
+    
+    
     isOpened.value = !isOpened.value
   }
 

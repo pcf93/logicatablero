@@ -6,15 +6,19 @@ const getUser = async (id: number) => {
   return axiosInstance.get<User>(`/users/${id}`)
 }
 
-const getIdByEmail = async (email: string) => {
-  return axiosInstance.get<number>(`/users/email/${email}`)
+const getIdByName = async (name: string) => {
+  return axiosInstance.get<number>(`/users/userName/${name}`)
+}
+
+const getUserInfo = async (email: string) => {
+  return axiosInstance.get<User>(`/users/email`)
 }
 
 const loginUser = async (
   name: string,
   password: string
-): Promise<AxiosResponse<User>> => {
-  return axiosInstance.post<User>('/login', {
+): Promise<AxiosResponse<string>> => {
+  return axiosInstance.post<string>('/login', {
     userName: name,
     userPassword: password,
   })
@@ -22,18 +26,13 @@ const loginUser = async (
 
 const registerUser = async (user: RegisterUser) => {
   return axiosInstance.post<User>('/register', {
-    userNickname: user.userNickname,
-    userPassword: user.userPassword,
     userName: user.userName,
-    userLastName: user.userLastName,
+    userPassword: user.userPassword,
     userEmail: user.userEmail,
     userPhone: user.userPhone,
     userBirthDate: user.userBirthDate,
     userCity: user.userCity,
-    darkMode: user.darkMode,
-    userLanguageId: user.userLanguageID,
-    userTypeId: user.userTypeID,
   })
 }
 
-export { getIdByEmail, getUser, loginUser, registerUser }
+export { getIdByName, getUser, loginUser, getUserInfo, registerUser }

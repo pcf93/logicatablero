@@ -7,7 +7,7 @@
           type="text"
           id="email"
           name="email"
-          v-model="userName"
+          v-model="userNameReceiver"
         /><br />
       </div>
       <div class="new-message-field">
@@ -41,30 +41,32 @@
   import { useLogin } from '@/core/componentLogic/useLogin'
   import { useMessages } from '@/core/componentLogic/useMessages'
   import { sendMessage } from '@/core/services/APIMessageRequests'
-  import { getIdByEmail } from '@/core/services/APIUserRequests'
+  import { getIdByName } from '@/core/services/APIUserRequests'
   import { NewMessage } from '@/type'
   import { AxiosError } from 'axios'
   import { reactive, ref } from 'vue'
 
-  const { userInfo } = useLogin()
+  const { userId } = useLogin()
   const { replyEmail, replySubject, receivedMessages, sentMessages } =
     useMessages()
   const resultado = ref<string>('')
 
-  const userName = ref<string>(replyEmail.value)
+  const userNameReceiver = ref<string>(replyEmail.value)
 
   const message: NewMessage = reactive({
-    messageSenderId: userInfo.value?.userId as number,
+    messageSenderId: userId.value as number,
     messageReceiverId: 0,
     messageSubject: replySubject.value,
     messageContent: '',
   })
 
   async function enviarMensaje() {
-    await getIdByEmail(userName.value)
+    await getIdByName(userNameReceiver.value)
       .then((response) => {
         message.messageReceiverId = response.data
         console.log(response.data)
+        console.log(userNameReceiver.value)
+
       })
       .catch((error: AxiosError) => {
         message.messageReceiverId = 0

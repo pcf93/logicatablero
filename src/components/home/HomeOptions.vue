@@ -100,13 +100,13 @@
 import { useLogin } from '@/core/componentLogic/useLogin'
 import { useMessages } from '@/core/componentLogic/useMessages'
 
-  const { userInfo } = useLogin()
+  const { userId } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
 
-  console.log(userInfo.value)
+  console.log(userId.value)
 
-  setReceivedMessages(userInfo.value?.userId as number)
-  setSentMessages(userInfo.value?.userId as number)
+  setReceivedMessages(userId.value as number)
+  setSentMessages(userId.value as number)
 </script>
 
 <style scoped lang="scss">
