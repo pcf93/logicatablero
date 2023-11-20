@@ -74,6 +74,8 @@
 
   #user > p {
     display: none;
+    color: white;
+    font-weight: bolder;
   }
 
   #user > span {
@@ -111,6 +113,8 @@
   #settings > p,
   #logout > p {
     display: none;
+    color: white;
+    font-weight: bolder;
   }
 
   .menu-text {
@@ -200,6 +204,10 @@
       width: auto;
       margin-right: 5px;
     }
+
+    #user > p {
+    display: block;
+  }
 
     #dots > img {
       display: flex;

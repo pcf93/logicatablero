@@ -60,6 +60,7 @@
           v-model="user.userPhone"
         /><br />
       </div>
+      <vue-recaptcha ref="recaptcha" @verify="onVerify" sitekey="6Ldx0w4pAAAAAGP2PLxsmQqBvoejhLbjQu6Dlytx"></vue-recaptcha>
       <div class="register-box">
         <button type="submit" class="send">REGISTRE USUARI</button>
         <RouterLink to="/login">
@@ -78,6 +79,7 @@
   import router from '@/router'
   import { RegisterUser } from '@/type'
   import { reactive, ref } from 'vue'
+  import { VueRecaptcha } from 'vue-recaptcha'
 
   var errorMessage = ref<string>('')
   var errorMessageList = ref<string[]>([])
@@ -97,6 +99,12 @@
     userPhoto: '',
   })
 
+  var robot = ref(false)
+
+  function onVerify(response: boolean){
+    if (response) robot.value = true
+  }
+
   async function register() {
     errorMessageList.value = []
     const emailPattern =
@@ -104,17 +112,22 @@
     const passwordPattern = /^(?=.*[a-z])(?=.*[\d])(?=.*[^\d\w]).{5,}$/
 
     if (!emailPattern.test(user.userEmail)) {
-      errorMessage.value = 'El mail no es correcto'
+      errorMessage.value = 'El mail no es correcte'
       errorMessageList.value.push(errorMessage.value)
     }
     if (!passwordPattern.test(user.userPassword)) {
-      errorMessage.value = 'La contraseña no es correcta'
+      errorMessage.value = 'La contrasenya no es correcta'
+      errorMessageList.value.push(errorMessage.value)
+    }
+
+    if (robot){
+      errorMessage.value = 'No has marcat la casella del reCAPTCHA'
       errorMessageList.value.push(errorMessage.value)
     }
 
     if (
       emailPattern.test(user.userEmail) &&
-      passwordPattern.test(user.userPassword)
+      passwordPattern.test(user.userPassword) && robot.value
     ) {
       registerUser(user)
         .then((response) => {
@@ -122,7 +135,7 @@
           router.push('/login')
         })
         .catch((error) => {
-          errorMessageList.value.push(error)
+          errorMessageList.value.push('Usuari i/o mail ja existeix.')
           console.log(user)
         })
     }
