@@ -4,6 +4,7 @@ import HomeOptions from '@/components/home/HomeOptions.vue'
 import LoginForm from '@/components/login/LoginForm.vue'
 import RegisterForm from '@/components/login/RegisterForm.vue'
 import ContactList from '@/components/contacts/ContactsList.vue'
+import RequestsList from '@/components/requests/RequestsList.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -23,6 +24,11 @@ const router = createRouter({
       path: '/contacts',
       name: 'contacts',
       component: ContactList,
+    },
+    {
+      path: '/solicituds',
+      name: 'solicituds',
+      component: RequestsList,
     },
     {
       path: '/',

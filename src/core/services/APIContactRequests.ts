@@ -31,6 +31,17 @@ const getContacts = async (
     return response
   }
 
+  const getContactRequests = async (id: number): Promise<AxiosResponse<Array<FriendRequest>>> => {
+    const response = await axiosInstance.get<Array<FriendRequest>>(`/FriendRequest/friendRequests/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie('JWT')}`,
+      },
+    }
+    )
+    return response
+  }
+
   const sendContactRequest = async (request: NewRequest) => {
     return axiosInstance.post<FriendRequest>('/FriendRequest/addFriendRequest', {
       friendRequestReceiverId: request.friendRequestReceiverId,
@@ -45,6 +56,7 @@ const getContacts = async (
 
   export {
     getContacts,
+    getContactRequests,
     sendContactRequest
   }
 

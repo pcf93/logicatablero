@@ -81,6 +81,7 @@
     </RouterLink>
     </div>
     <div class="option">
+      <RouterLink to="/solicituds">
       <div class="box">
         <img src="@/assets/images/Rectangle1.png" />
         <div class="layer2">
@@ -94,6 +95,7 @@
         </div>
         <p class="option-text">SOL·LICITUTS</p>
       </div>
+    </RouterLink>
     </div>
   </section>
 </template>
@@ -105,7 +107,7 @@ import { useContacts } from '@/core/componentLogic/useContacts'
 
   const { userId, userName, parseJwt, getCookie } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
-  const { setContacts } = useContacts()
+  const { setContacts, setContactRequests } = useContacts()
 
   userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
   userId.value = parseInt(
@@ -116,6 +118,8 @@ import { useContacts } from '@/core/componentLogic/useContacts'
   setReceivedMessages(userId.value)
   setSentMessages(userId.value)
   setContacts(userId.value)
+  setContactRequests(userId.value)
+  
 
 
 </script>
