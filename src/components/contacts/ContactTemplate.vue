@@ -2,7 +2,7 @@
     <div class="contact-box">
         <p>{{ friendString }}</p>
         <img src="@/assets/images/challenge.png">
-        <img src="@/assets/images/cancel.png">
+        <img src="@/assets/images/cancel.png" @click="deleteContact">
     </div>
 </template>
 
@@ -12,10 +12,12 @@
 import { PropType, ref } from 'vue';
 import { FriendRequest } from '@/type';
 import { useLogin } from '@/core/componentLogic/useLogin';
+import { useContacts } from '@/core/componentLogic/useContacts';
 import { getUser } from '@/core/services/APIUserRequests';
+import { deleteContactRequest } from '@/core/services/APIContactRequests'
 
 const { userId } = useLogin()
-
+const { friendRequestList } = useContacts()
 const props = defineProps({
     contact: { type: Object as PropType<FriendRequest>, required: true },
   })
@@ -41,7 +43,17 @@ getUser(friend.value)
 
 setUser()
 
+async function deleteContact(){
+    await deleteContactRequest(props.contact.friendRequestId)
+    .then(() => {
+        alert('Contacte eliminat!')
 
+        const index = friendRequestList.value.indexOf(props.contact)
+        if (index > -1) {
+          friendRequestList.value.splice(index, 1)
+        }
+    })
+}
 
 </script>
 

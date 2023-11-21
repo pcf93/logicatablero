@@ -2,7 +2,7 @@
     <div class="contact-box" v-if="!acceptada">
         <p>{{ friendString }}</p>
         <img src="@/assets/images/confirm.png" v-if="userId != props.contact.friendRequestSenderId" @click="acceptRequest">
-        <img src="@/assets/images/cancel.png" v-if="userId != props.contact.friendRequestSenderId">
+        <img src="@/assets/images/cancel.png" v-if="userId != props.contact.friendRequestSenderId" @click="refuseRequest">
         <span v-if="userId == props.contact.friendRequestSenderId">Pendent</span>
     </div>
 </template>
@@ -15,7 +15,7 @@ import { FriendRequest } from '@/type';
 import { useLogin } from '@/core/componentLogic/useLogin';
 import { useContacts } from '@/core/componentLogic/useContacts'
 import { getUser } from '@/core/services/APIUserRequests';
-import { acceptContactRequest } from '@/core/services/APIContactRequests';
+import { acceptContactRequest, deleteContactRequest } from '@/core/services/APIContactRequests';
 const { userId  } = useLogin()
 const { friendRequestList } = useContacts()
 
@@ -56,6 +56,18 @@ async function acceptRequest(){
           friendRequestList.value.splice(index, 1)
         }
 
+    })
+}
+
+async function refuseRequest(){
+    await deleteContactRequest(props.contact.friendRequestId)
+    .then(() => {
+        alert('Sol·licitud rebutjada!')
+
+        const index = friendRequestList.value.indexOf(props.contact)
+        if (index > -1) {
+          friendRequestList.value.splice(index, 1)
+        }
     })
 }
 

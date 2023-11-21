@@ -64,10 +64,20 @@ const getContacts = async (
     })
   }
 
+  const deleteContactRequest = async (id: number) => {
+    return axiosInstance.delete<FriendRequest>(`/FriendRequest/refuse/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie('JWT')}`,
+      },
+    })
+  }
+
   export {
     getContacts,
     getContactRequests,
     sendContactRequest,
-    acceptContactRequest
+    acceptContactRequest,
+    deleteContactRequest
   }
 

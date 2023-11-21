@@ -11,6 +11,9 @@
       </p>
     </div>
     <ContactTemplate v-for="contact in friends" :key="contact.friendRequestId" :contact="contact"></ContactTemplate>
+    <div class="contact-box" v-if="friends.length == 0">
+        <p>De moment no tens contactes</p>
+    </div>
 
 </template>
 
