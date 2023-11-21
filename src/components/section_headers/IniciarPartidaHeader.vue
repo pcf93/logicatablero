@@ -1,8 +1,8 @@
 <template>
   
   <section class="cabecera-opcion">
-    <img src="@/assets/images/warnings-off2.png">
-    <span>ALERTS AND MESSAGING</span>
+    <img src="@/assets/images/military-boat-xxl.png">
+    <span>INICIAR PARTIDA</span>
   </section>  
 
 </template>
@@ -19,6 +19,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: gray;
     font-size: 20px;
+    margin-bottom: 5vh;
 }
 
 .cabecera-opcion > img{

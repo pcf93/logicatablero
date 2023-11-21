@@ -1,7 +1,5 @@
 <template>
-  <HomeHeader />
-  <HomeOptions v-if="isLogged" />
-
+  <HomeHeader v-if="isLogged"/>
   <router-view />
 </template>
 

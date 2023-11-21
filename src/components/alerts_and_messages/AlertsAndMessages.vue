@@ -1,4 +1,6 @@
 <template>
+  <HomeOptions v-if="isLogged" />
+  <AlertsMessagesHeader></AlertsMessagesHeader>
   <section class="alerts" v-if="isLogged">
     <MessagesHeader
       @cambiar-opcion="(n) => (currentOption = n)"
@@ -25,8 +27,10 @@
   import { useMessages } from '@/core/componentLogic/useMessages'
   import { Message } from '@/type'
   import { computed, ref } from 'vue'
+  import HomeOptions from '../home/HomeOptions.vue'
   import InboxMessages from './InboxMessages.vue'
   import MessagesHeader from './MessagesHeader.vue'
+  import AlertsMessagesHeader from '@/components/section_headers/AlertsMessagesHeader.vue'
   import NewMessage from './NewMessage.vue'
   import SentMessages from './SentMessages.vue'
 
@@ -34,6 +38,12 @@
   var noLeidos = ref<number>(3)
   var search = ref<string>('')
   var { isLogged } = useLogin()
+  const { userId, userName, parseJwt, getCookie } = useLogin()
+
+  userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
+  userId.value = parseInt(
+          Object.values(parseJwt(getCookie('JWT')))[2] as string
+        )
 
   const { receivedMessages, sentMessages } = useMessages()
 

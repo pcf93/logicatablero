@@ -60,6 +60,17 @@
           v-model="user.userPhone"
         /><br />
       </div>
+      <div class="register-field">
+        <label for="2FA">Autenticació dues passes?</label>
+        <input
+          type="checkbox"
+          id="2FA"
+          name="2FA"
+          v-model="is2FAenabled"
+          @change=" generaSecret"
+        /><br />
+      </div>
+
       <vue-recaptcha ref="recaptcha" @verify="onVerify" sitekey="6Ldx0w4pAAAAAGP2PLxsmQqBvoejhLbjQu6Dlytx"></vue-recaptcha>
       <div class="register-box">
         <button type="submit" class="send">REGISTRE USUARI</button>
@@ -80,9 +91,12 @@
   import { RegisterUser } from '@/type'
   import { reactive, ref } from 'vue'
   import { VueRecaptcha } from 'vue-recaptcha'
-
+  import { toDataURL } from 'qrcode'
+  
   var errorMessage = ref<string>('')
   var errorMessageList = ref<string[]>([])
+
+  var is2FAenabled = ref(false)
 
   const user: RegisterUser = reactive({
     userNickname: '',
@@ -101,10 +115,20 @@
 
   var robot = ref(false)
 
-  function onVerify(response: boolean){
+  const onVerify = (response: boolean) =>{
     if (response) robot.value = true
   }
 
+  const generaSecret = () => {
+    
+    if (is2FAenabled.value){
+      console.log('Estado del check: ' + is2FAenabled.value)
+
+    }
+    
+    
+  }
+  
   async function register() {
     errorMessageList.value = []
     const emailPattern =

@@ -1,4 +1,6 @@
 <template>
+    <HomeOptions v-if="isLogged" />
+    <IniciarPartidaHeaderVue></IniciarPartidaHeaderVue>
     
     <div class="tauler-previ">
     <table>
@@ -27,6 +29,8 @@
 
     import { ref } from 'vue'
     import { useLogin } from '@/core/componentLogic/useLogin';
+    import HomeOptions from '@/components/home/HomeOptions.vue'
+    import IniciarPartidaHeaderVue from './section_headers/IniciarPartidaHeader.vue';
 
     interface IndexInfo {
   rowIndex: number;
@@ -34,10 +38,12 @@
   direction: string;
   size: number;
 }
-const { userId, isLogged, userJWT } = useLogin()
-if (userJWT.value!.length > 0){
-  isLogged.value = true
-}
+const { userId, userName, isLogged, parseJwt, getCookie } = useLogin()
+
+  userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
+  userId.value = parseInt(
+          Object.values(parseJwt(getCookie('JWT')))[2] as string
+        )
 
     const tabla = ref(Array.from({ length: 10}, () => Array(10).fill('')))
 
@@ -282,7 +288,6 @@ generaArrayNumeros();
 }
 
 table {
-    height: 200px;
     width: 90%;
     border-collapse: collapse;
     margin: auto;

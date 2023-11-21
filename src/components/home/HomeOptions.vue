@@ -100,17 +100,20 @@
 import { useLogin } from '@/core/componentLogic/useLogin'
 import { useMessages } from '@/core/componentLogic/useMessages'
 
-  const { userId, isLogged, userJWT } = useLogin()
+  const { userId, userName, parseJwt, getCookie } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
+
+  userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
+  userId.value = parseInt(
+          Object.values(parseJwt(getCookie('JWT')))[2] as string
+        )
 
   console.log(userId.value)
 
   setReceivedMessages(userId.value as number)
   setSentMessages(userId.value as number)
 
-if (userJWT.value!.length > 0){
-  isLogged.value = true
-}
+
 </script>
 
 <style scoped lang="scss">

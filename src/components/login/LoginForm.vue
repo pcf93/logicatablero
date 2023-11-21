@@ -28,11 +28,16 @@
 
 <script setup lang="ts">
   import { useLogin } from '@/core/componentLogic/useLogin'
+import router from '@/router';
   import { ref } from 'vue'
 
   const userPassword = ref<string>('')
   const userName = ref<string>('')
   const { isLogged, errorMessage } = useLogin()
+
+  if (isLogged.value){
+    router.push("/home")
+  }
 
   async function loginUser() {
     await useLogin().login(userName.value, userPassword.value)
