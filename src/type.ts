@@ -57,3 +57,15 @@ export type RegisterUser = {
   userTypeID: number
   userLanguageID: number
 }
+
+export type FriendRequest = {
+  friendRequestId: number,
+  friendRequestSenderId: number,
+  friendRequestReceiverId: number,
+  friendRequestStatus: number,
+}
+
+export type NewRequest = {
+  friendRequestSenderId: number,
+  friendRequestReceiverId: number
+}

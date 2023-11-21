@@ -1,5 +1,5 @@
 <template>
-  <HomeHeader v-if="isLogged"/>
+  <HomeHeader/>
   <router-view />
 </template>
 
@@ -9,7 +9,7 @@
   import { useLogin } from './core/componentLogic/useLogin'
 
   const { isLogged } = useLogin()
-  console.log(isLogged.value)
+
 </script>
 <style lang="scss">
   body {

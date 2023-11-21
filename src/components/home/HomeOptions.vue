@@ -60,6 +60,7 @@
       </RouterLink>
     </div>
     <div class="option">
+      <RouterLink to="/contacts">
       <div class="box">
         <img src="@/assets/images/Rectangle1.png" />
         <div class="layer2">
@@ -77,6 +78,7 @@
         </div>
         <p class="option-text">CONTACTES</p>
       </div>
+    </RouterLink>
     </div>
     <div class="option">
       <div class="box">
@@ -99,19 +101,21 @@
 <script setup lang="ts">
 import { useLogin } from '@/core/componentLogic/useLogin'
 import { useMessages } from '@/core/componentLogic/useMessages'
+import { useContacts } from '@/core/componentLogic/useContacts'
 
   const { userId, userName, parseJwt, getCookie } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
+  const { setContacts } = useContacts()
 
   userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
   userId.value = parseInt(
           Object.values(parseJwt(getCookie('JWT')))[2] as string
         )
 
-  console.log(userId.value)
 
-  setReceivedMessages(userId.value as number)
-  setSentMessages(userId.value as number)
+  setReceivedMessages(userId.value)
+  setSentMessages(userId.value)
+  setContacts(userId.value)
 
 
 </script>

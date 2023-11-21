@@ -3,7 +3,7 @@ import AlertsAndMessages from '@/components/alerts_and_messages/AlertsAndMessage
 import HomeOptions from '@/components/home/HomeOptions.vue'
 import LoginForm from '@/components/login/LoginForm.vue'
 import RegisterForm from '@/components/login/RegisterForm.vue'
-import RemindersCalendar from '@/components/reminders_calendar/RemindersCalendar.vue'
+import ContactList from '@/components/contacts/ContactsList.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -15,14 +15,14 @@ const router = createRouter({
       component: AlertsAndMessages,
     },
     {
-      path: '/reminders-calendar',
-      name: 'reminders',
-      component: RemindersCalendar,
-    },
-    {
       path: '/tauler-previ',
       name: 'tauler previ',
       component: TableroRandomVue,
+    },
+    {
+      path: '/contacts',
+      name: 'contacts',
+      component: ContactList,
     },
     {
       path: '/',
