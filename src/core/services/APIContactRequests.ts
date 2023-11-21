@@ -54,9 +54,20 @@ const getContacts = async (
     })
   }
 
+  const acceptContactRequest = async (id: number) => {
+    return axiosInstance.put<FriendRequest>(`/FriendRequest/accept/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie('JWT')}`,
+      },
+    })
+  }
+
   export {
     getContacts,
     getContactRequests,
-    sendContactRequest
+    sendContactRequest,
+    acceptContactRequest
   }
 

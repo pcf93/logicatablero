@@ -19,7 +19,7 @@ import {FriendRequest} from '@/type'
 import { setgroups } from 'process'
 
 var { isLogged } = useLogin()
-const { friends, setContacts } = useContacts()
+const { friends, setContactRequests } = useContacts()
 
 const { userId, userName, parseJwt, getCookie } = useLogin()
 
@@ -29,6 +29,8 @@ const { userId, userName, parseJwt, getCookie } = useLogin()
         )
 
 console.log(friends.value)
+
+setContactRequests(userId.value)
 
 </script>
 
