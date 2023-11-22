@@ -48,7 +48,19 @@ const { userId, userName, isLogged, parseJwt, getCookie } = useLogin()
     const tabla = ref(Array.from({ length: 10}, () => Array(10).fill('')))
 
     const arrayIndex = ref<IndexInfo[]>([])
-    const arrayInt = ref<number[]>([])
+    const arrayInt = ref<number[][]>([])
+    const arrayIntUnidimensional = ref<number[]>([])
+
+    const filas = 10
+    const columnas = 10
+    for (let i = 0; i < filas; i++) {
+        const fila: number[] = [];
+        for (let j = 0; j < columnas; j++) {
+            fila.push(0); // Añadir cero a cada columna
+    }
+
+  arrayInt.value.push(fila); // Añadir la fila al array bidimensional
+}
 
     const generarCuadros = (cantidad: number): void => {
     const cuadros: {rowIndex: number, colIndex: number, direction: string, size: number}[] = [];
@@ -61,6 +73,7 @@ const { userId, userName, isLogged, parseJwt, getCookie } = useLogin()
         if (verificaIndices(rowIndex, colIndex, arrayIndex.value)){
             cuadros.push({rowIndex, colIndex, direction, size})
             arrayIndex.value.push({rowIndex, colIndex, direction, size})
+            arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
         }
     }
 }
@@ -93,15 +106,18 @@ const { userId, userName, isLogged, parseJwt, getCookie } = useLogin()
             
             figuras.push({rowIndex, colIndex, direction, size})
             arrayIndex.value.push({rowIndex, colIndex, direction, size})
+            arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
 
             if (direction === "right"){
                 colIndex++;
                 
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
             } else {
                 rowIndex++;
                 
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
             }
         
     }}
@@ -136,17 +152,22 @@ const generarFiguras3 = (cantidad: number): void => {
             
             figuras.push({rowIndex, colIndex, direction, size})
             arrayIndex.value.push({rowIndex, colIndex, direction, size})
+            arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
 
             if (direction === "right"){
                 colIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
                 colIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
             } else {
                 rowIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
                 rowIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
             }
         
     }}
@@ -184,21 +205,28 @@ const generarFiguras4 = (cantidad: number): void => {
 
             figuras.push({rowIndex, colIndex, direction, size})
             arrayIndex.value.push({rowIndex, colIndex, direction, size})
+            arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
 
             if (direction === "right"){
                 colIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
                 colIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
                 colIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
             } else {
                 rowIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
                 rowIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
                 rowIndex++;
                 arrayIndex.value.push({rowIndex, colIndex, direction, size})
+                arrayIntUnidimensional.value[ 10 * rowIndex + colIndex ] = 1
             }
         }}
 }
@@ -249,7 +277,19 @@ function reiniciarTablero(){
 
     })
     arrayIndex.value = []
+    arrayInt.value = []
+    arrayIntUnidimensional.value = []
+    for (let i = 0; i < 100; i++) {
+        arrayIntUnidimensional.value.push(0)
+    }
+
+    for (let i = 0; i < arrayInt.value.length; i++) {
+  // Utilizar el spread operator para concatenar la fila actual al array unidimensional
+  arrayIntUnidimensional.value.push(...arrayInt.value[i]);
+}
     asignarClaseOcupado()
+    console.log(arrayInt.value)
+    console.log(arrayIntUnidimensional.value)
 }
 
 const generaArrayNumeros = () => {
@@ -257,18 +297,8 @@ const generaArrayNumeros = () => {
     const elementosHTMLCollection: HTMLCollection = document.getElementsByTagName('td');
     console.log(elementosHTMLCollection)
 
-    for (let i = 0; i < 100; i++){
-        
-        console.log(elementosHTMLCollection.item(i))
-
-        if (elementosHTMLCollection.item(i)?.className === "ocupado") {
-            arrayInt.value.push(1)
-        } else {
-            arrayInt.value.push(0)
-        }
-    }
-
     console.log(arrayInt.value)
+    console.log(arrayIntUnidimensional.value)
 }
 
 asignarClaseOcupado();
