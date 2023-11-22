@@ -288,6 +288,19 @@ const asignarClaseOcupado = () => {
 }
 
 function reiniciarTablero(){
+    
+    matchData.arrayPlayer = [0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,
+                                        ]
+
     arrayIndex.value.forEach(elemento => {
         const {rowIndex, colIndex} = elemento;
 

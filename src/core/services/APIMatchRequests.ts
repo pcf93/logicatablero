@@ -1,5 +1,5 @@
 import { Match, SearchMatchmaking } from '@/type'
-import axios, { AxiosResponse } from 'axios'
+import axios, { Axios, AxiosResponse } from 'axios'
 import { axiosInstance } from '../definitions/http/axiosinstance'
 
 function getCookie(cname: string) {
@@ -17,8 +17,28 @@ function getCookie(cname: string) {
   return ''
 }
 
+const getMatch = async (id: number): Promise<AxiosResponse<Match>> => {
+    const response = await axiosInstance.get<Match>(`Match/getMatch/${id}`,
+    {
+        headers: {
+          Authorization: `Bearer ${getCookie('JWT')}`,
+        },
+    })
+    return response
+}
+
 const findMatchmakingMatch = async (): Promise<AxiosResponse<Match>> => {
     const response = await axiosInstance.get<Match>(`/Match/findMatchmaking`, 
+    {
+        headers: {
+          Authorization: `Bearer ${getCookie('JWT')}`,
+        },
+    })
+    return response
+}
+
+const getActiveMatches = async (id: number): Promise<AxiosResponse<Array<Match>>> => {
+    const response = await axiosInstance.get<Array<Match>>(`/Match/getActiveMatches/${id}`,
     {
         headers: {
           Authorization: `Bearer ${getCookie('JWT')}`,
@@ -58,7 +78,9 @@ const joinMatchmakingMatch = async (matchData: SearchMatchmaking): Promise<Axios
 }
 
 export {
+    getMatch,
     findMatchmakingMatch,
+    getActiveMatches,
     createMatchmakingMatch,
     joinMatchmakingMatch
 }

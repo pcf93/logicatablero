@@ -6,24 +6,30 @@ import RegisterForm from '@/components/login/RegisterForm.vue'
 import ContactList from '@/components/contacts/ContactsList.vue'
 import RequestsList from '@/components/requests/RequestsList.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import MatchesList from '@/components/matches/MatchesList.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/alerts-and-messaging',
-      name: 'alerts',
+      path: '/missatges',
+      name: 'missatges',
       component: AlertsAndMessages,
     },
     {
-      path: '/tauler-previ',
-      name: 'tauler previ',
+      path: '/iniciar-partida',
+      name: 'iniciar partida',
       component: TableroRandomVue,
     },
     {
-      path: '/contacts',
-      name: 'contacts',
+      path: '/contactes',
+      name: 'contactes',
       component: ContactList,
+    },
+    {
+      path: '/partides',
+      name: 'partides',
+      component: MatchesList,
     },
     {
       path: '/solicituds',
@@ -41,8 +47,8 @@ const router = createRouter({
       component: LoginForm,
     },
     {
-      path: '/register',
-      name: 'register',
+      path: '/registre',
+      name: 'registre',
       component: RegisterForm,
     },
     {

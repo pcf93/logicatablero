@@ -1,7 +1,7 @@
 <template>
   <section class="menu">
     <div class="option">
-      <RouterLink to="/tauler-previ">
+      <RouterLink to="/iniciar-partida">
       <div class="box" @click="$emit('cambiarOpcion', 3)">
         <img src="@/assets/images/Rectangle1.png" />
         <div class="layer2">
@@ -18,7 +18,7 @@
     </RouterLink>
     </div>
     <div class="option">
-      <RouterLink to="/alerts-and-messaging">
+      <RouterLink to="/missatges">
         <div class="box" @click="$emit('cambiarOpcion', 1)">
           <img src="@/assets/images/Rectangle1.png" />
           <div class="layer2">
@@ -39,7 +39,7 @@
       </RouterLink>
     </div>
     <div class="option">
-      <RouterLink to="/reminders-calendar">
+      <RouterLink to="/partides">
         <div class="box" @click="$emit('cambiarOpcion', 2)">
           <img src="@/assets/images/Rectangle1.png" />
           <div class="layer2">
@@ -60,7 +60,7 @@
       </RouterLink>
     </div>
     <div class="option">
-      <RouterLink to="/contacts">
+      <RouterLink to="/contactes">
       <div class="box">
         <img src="@/assets/images/Rectangle1.png" />
         <div class="layer2">
@@ -104,10 +104,12 @@
 import { useLogin } from '@/core/componentLogic/useLogin'
 import { useMessages } from '@/core/componentLogic/useMessages'
 import { useContacts } from '@/core/componentLogic/useContacts'
+import { useMatches } from '@/core/componentLogic/useMatches'
 
   const { userId, userName, parseJwt, getCookie } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
   const { setContacts, setContactRequests } = useContacts()
+  const { setActiveMatches } = useMatches()
 
   userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
   userId.value = parseInt(
@@ -119,8 +121,7 @@ import { useContacts } from '@/core/componentLogic/useContacts'
   setSentMessages(userId.value)
   setContacts(userId.value)
   setContactRequests(userId.value)
-  
-
+  setActiveMatches(userId.value)
 
 </script>
 

@@ -74,8 +74,8 @@ export type Match = {
   matchId: number,
   player1Id: number,
   player2Id: number,
-  arrayPlayer1Id: number[],
-  arrayPlayer2Id: number[],
+  arrayPlayer1: number[],
+  arrayPlayer2: number[],
   matchStatus: number,
   matchStartType: number
 }
