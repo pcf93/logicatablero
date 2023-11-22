@@ -69,3 +69,20 @@ export type NewRequest = {
   friendRequestSenderId: number,
   friendRequestReceiverId: number
 }
+
+export type Match = {
+  matchId: number,
+  player1Id: number,
+  player2Id: number,
+  arrayPlayer1Id: number[],
+  arrayPlayer2Id: number[],
+  matchStatus: number,
+  matchStartType: number
+}
+
+export type SearchMatchmaking = {
+  playerId: number,
+  arrayPlayer: number[]
+}
+
+

@@ -17,7 +17,7 @@ import { getUser } from '@/core/services/APIUserRequests';
 import { deleteContactRequest } from '@/core/services/APIContactRequests'
 
 const { userId } = useLogin()
-const { friendRequestList } = useContacts()
+const { friends } = useContacts()
 const props = defineProps({
     contact: { type: Object as PropType<FriendRequest>, required: true },
   })
@@ -48,9 +48,9 @@ async function deleteContact(){
     .then(() => {
         alert('Contacte eliminat!')
 
-        const index = friendRequestList.value.indexOf(props.contact)
+        const index = friends.value.indexOf(props.contact)
         if (index > -1) {
-          friendRequestList.value.splice(index, 1)
+          friends.value.splice(index, 1)
         }
     })
 }

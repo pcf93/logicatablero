@@ -17,8 +17,6 @@
 
 </template>
 
-
-
 <script setup lang="ts">
 import ContactsHeader from '../section_headers/ContactsHeader.vue'
 import HomeOptions from '../home/HomeOptions.vue'

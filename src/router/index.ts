@@ -1,4 +1,4 @@
-import TableroRandomVue from '@/components/TableroRandom.vue'
+import TableroRandomVue from '@/components/matches/TableroRandom.vue'
 import AlertsAndMessages from '@/components/alerts_and_messages/AlertsAndMessages.vue'
 import HomeOptions from '@/components/home/HomeOptions.vue'
 import LoginForm from '@/components/login/LoginForm.vue'

@@ -30,8 +30,6 @@ const { userId, userName, parseJwt, getCookie } = useLogin()
 
 console.log(friends.value)
 
-setContactRequests(userId.value)
-
 </script>
 
 
