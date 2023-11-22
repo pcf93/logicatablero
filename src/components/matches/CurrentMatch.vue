@@ -3,7 +3,7 @@
 <h1>Partida cargada con éxito. Esta es la partida: {{ match?.matchId }}</h1>
 <div class="tableros">
 <PlayerBoard :array="tuArray!"></PlayerBoard>
-<RivalBoard></RivalBoard>
+<RivalBoard :array="arrayRival!"></RivalBoard>
 </div>
 
 </template>

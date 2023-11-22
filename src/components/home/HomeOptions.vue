@@ -72,9 +72,9 @@
         <div class="layer3">
           <img src="@/assets/images/Layer3.png" />
         </div>
-        <div class="pendiente">
+        <div class="pendiente" v-if="countContacts > 0">
           <img src="@/assets/images/Ellipse1.png" />
-          <p class="contador">1</p>
+          <p class="contador">{{ countContacts }}</p>
         </div>
         <p class="option-text">CONTACTES</p>
       </div>
@@ -108,7 +108,7 @@ import { useMatches } from '@/core/componentLogic/useMatches'
 
   const { userId, userName, parseJwt, getCookie } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
-  const { setContacts, setContactRequests } = useContacts()
+  const { setContacts, setContactRequests, countContacts } = useContacts()
   const { setActiveMatches } = useMatches()
 
   userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string

@@ -10,6 +10,7 @@
     "lint:style": "stylelint src/**/*.{css,scss,vue}"
   },
   "dependencies": {
+    "@types/dom-speech-recognition": "^0.0.4",
     "axios": "^1.5.1",
     "cors": "^2.8.5",
     "qrcode": "^1.5.3",

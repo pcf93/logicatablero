@@ -9,14 +9,17 @@ import {
 
 const friends = ref<Array<FriendRequest>>([])
 const friendRequestList = ref<Array<FriendRequest>>([])
+const countContacts = ref<number>(0)
 
 export function useContacts() {
   async function setContacts(userId: number) {
     try {
       const response = await getContacts(userId)
       friends.value = []
+      countContacts.value = 0
       response.data.forEach((friendRequest: FriendRequest) => {
         friends.value.push(friendRequest)
+        countContacts.value++
       })
       if (response.status === 400) {
         friends.value = []
@@ -43,6 +46,7 @@ export function useContacts() {
   return {
     friends,
     friendRequestList,
+    countContacts,
     setContacts,
     setContactRequests
   }
