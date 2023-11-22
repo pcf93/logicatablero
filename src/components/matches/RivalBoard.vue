@@ -42,6 +42,8 @@ recognition = new webkitSpeechRecognition();
         console.error('Error en el reconocimiento de voz', (event as SpeechRecognitionErrorEvent).error);
     }
 
+    // mirate este video, puede ayudarte https://www.youtube.com/watch?v=jIUW1_fzDAE
+
 const beforeUnmount = (): void => {
     if (recognition){
         recognition.stop()
