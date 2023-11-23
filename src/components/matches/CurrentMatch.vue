@@ -10,8 +10,8 @@
     </div>
 <div class="tablero">
     <div class="vides">
-        <p v-if="userId == match?.player2Id">Tu: {{ match?.vidasPlayer1 }} vides</p>
-        <p v-if="userId == match?.player1Id">Tu: {{ match?.vidasPlayer2 }} vides</p>
+        <p v-if="userId == match?.player2Id">Rival: {{ match?.vidasPlayer1 }} vides</p>
+        <p v-if="userId == match?.player1Id">Rival: {{ match?.vidasPlayer2 }} vides</p>
 </div>
     <RivalBoard :match="matchData?.matchId!" :array="arrayRival!" :turn="matchData?.playerTurnId!" :rival="idRival!"></RivalBoard>
 </div>

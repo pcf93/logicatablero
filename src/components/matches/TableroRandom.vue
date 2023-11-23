@@ -462,6 +462,10 @@ font-weight: bolder;
         background-color: #295e8d;
     }
 
+    .ocupado {
+    background-color: #959595;
+}
+
     .button-container {
         display: flex;
         flex-wrap: wrap;

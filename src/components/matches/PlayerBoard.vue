@@ -1,7 +1,7 @@
 <template>
 
     <div class="tauler-previ">
-    <table>
+    <table id="tabla" :class="{turnoRival: turnoRival}">
 
         <tbody>
 
@@ -18,9 +18,11 @@
 </template>
   
   <script setup lang="ts">
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
+    import { useLogin } from '@/core/componentLogic/useLogin';
     import { useMatches} from '@/core/componentLogic/useMatches'
-    
+
+    const { userId } = useLogin()
     const { match } = useMatches()
 
     const props = defineProps({
@@ -28,8 +30,20 @@
   })
 
     const tabla = ref(Array.from({ length: 10}, () => Array(10).fill('')))
+    
+    const tablaJugador = document.getElementById('tabla')
+
+    const turnoRival = ref(false)
 
     function pintaTablero(){
+
+        if (userId.value != match.value?.playerTurnId){
+                turnoRival.value = true
+            } else {
+                turnoRival.value = false
+            }
+        
+        
         for(let i=0; i<100; i++){
         let row = 0
         let col = 0
@@ -81,8 +95,14 @@
 
     pintaTablero()
 
-    setInterval(function(){pintaTablero()}, 1000)
+
+
+    setInterval(
+        function(){
+            pintaTablero()
+        }, 1000)
     
+
     
 
   </script>
@@ -96,6 +116,15 @@ table {
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 5vh;
+}
+
+.turnoRival {
+
+    width: 90%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 5vh;
+    opacity: 0.5;
 }
 
 /* Estilos para las celdas de la tabla */
