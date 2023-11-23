@@ -1,7 +1,7 @@
 <template>
     <HomeOptions v-if="isLogged && activeMatchId == 0" />
     <MatchesHeader v-if=" activeMatchId == 0"></MatchesHeader>
-    <button v-if="activeMatchId != 0" @click="activeMatchId = 0">Torna a llista de partides</button>
+    <button class="tornar" v-if="activeMatchId != 0" @click="activeMatchId = 0">Torna a llista de partides</button>
     <div v-if="activeMatchId == 0">
         <MatchItemTemplate v-for="match in activeMatchesList" :key="match.matchId" :match="match"></MatchItemTemplate>
     </div>
@@ -75,6 +75,12 @@ const matchSelected = ref(false)
 .box-menu > img {
     width: 5vh;
     cursor: pointer;
+}
+
+.tornar{
+    width: 40%;
+    height: 10%;
+    background-color: blue;
 }
 
 </style>

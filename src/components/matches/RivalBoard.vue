@@ -14,8 +14,6 @@
 
         </table>
     </div>
-    <button @click="recognition?.start()">Comenzar a grabar</button>
-    <div> {{  transcription }}</div>
 </template>
   
 <script setup lang="ts">
@@ -121,6 +119,17 @@ td {
     font-weight: bolder;
 }
 
+@media only screen and (max-width: 768px) and (orientation: landscape){
+    .tauler-previ{
+        width: 40vw;
+    }
+
+    td{
+        width: 3vw;
+        height: 3vw;
+    }
+}
+
 @media only screen and (min-width: 1024px) {
 
     .tauler-previ {
@@ -129,7 +138,7 @@ td {
     }
 
     table {
-        width: 30%;
+        width: 90%;
         margin: 0;
         margin-left: 10%;
     }

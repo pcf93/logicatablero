@@ -76,6 +76,10 @@ export type Match = {
   player2Id: number,
   arrayPlayer1: number[],
   arrayPlayer2: number[],
+  vidasPlayer1: number,
+  vidasPlayer2: number,
+  playerTurnId: number,
+  ganadorId: number,
   matchStatus: number,
   matchStartType: number
 }

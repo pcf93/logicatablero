@@ -35,7 +35,7 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 15vh;
+    height: 10vh;
 }
 
   #logo {
@@ -141,6 +141,12 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     color: white;
+  }
+
+  @media only screen and (max-width: 768px) and (orientation: landscape){
+    header{
+      height: 30vh;
+    }
   }
 
   @media only screen and (min-width: 640px) and (max-width: 1024px) {

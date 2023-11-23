@@ -28,6 +28,7 @@ import HomeOptions from '@/components/home/HomeOptions.vue'
 import IniciarPartidaHeaderVue from '@/components/section_headers/IniciarPartidaHeader.vue';
 import { findMatchmakingMatch, createMatchmakingMatch, joinMatchmakingMatch } from '@/core/services/APIMatchRequests'
 import { SearchMatchmaking } from '@/type'
+import HomeFooter from '../home/HomeFooter.vue';
 
 interface IndexInfo {
     rowIndex: number;
@@ -332,7 +333,9 @@ async function cercaMatchmaking() {
 <style scoped lang="scss">
 /* Estilos para la tabla */
 
-.tauler-previ {
+@media only screen and (max-width: 768px) and (orientation: portrait){
+
+    .tauler-previ {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -381,6 +384,61 @@ td {
     background-color: rgb(160, 22, 22);
     color: white;
     font-weight: bolder;
+}
+}
+
+@media only screen and (max-width: 768px) and (orientation: landscape){
+
+.tauler-previ {
+display: flex;
+align-items: center;
+flex-wrap: nowrap;
+}
+
+table {
+width: 40%;
+border-collapse: collapse;
+margin: auto;
+}
+
+/* Estilos para las celdas de la tabla */
+td {
+position: relative;
+border: 1px solid #dddddd;
+width: 4vw;
+height: 4vw;
+background-color: #295e8d;
+}
+
+.ocupado {
+background-color: #959595;
+}
+
+.cuadro-arrastrable {
+position: absolute;
+background-color: #66ccff;
+user-select: none;
+}
+
+.button-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+width: 40%;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 15vh;
+}
+
+.button-container>button {
+width: 100%;
+height: 10vh;
+margin-top: 1vh;
+border-radius: 2vh;
+background-color: rgb(160, 22, 22);
+color: white;
+font-weight: bolder;
+}
 }
 
 @media only screen and (min-width: 1024px) {

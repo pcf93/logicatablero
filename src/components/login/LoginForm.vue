@@ -17,19 +17,21 @@
 
       <div class="button-box">
         <button type="submit" class="send">LOGIN</button>
-        <RouterLink to="/register">
+        <RouterLink to="/registre">
           <button class="cancel">REGISTER</button>
         </RouterLink>
       </div>
     </form>
     <p>{{ errorMessage }}</p>
   </div>
+  <HomeFooter/>
 </template>
 
 <script setup lang="ts">
   import { useLogin } from '@/core/componentLogic/useLogin'
 import router from '@/router';
   import { ref } from 'vue'
+  import HomeFooter from '../home/HomeFooter.vue';
 
   const userPassword = ref<string>('')
   const userName = ref<string>('')

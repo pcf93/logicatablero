@@ -83,6 +83,7 @@
       </p>
     </form>
   </div>
+  <HomeFooter></HomeFooter>
 </template>
 
 <script setup lang="ts">
@@ -92,6 +93,7 @@
   import { reactive, ref } from 'vue'
   import { VueRecaptcha } from 'vue-recaptcha'
   import { toDataURL } from 'qrcode'
+  import HomeFooter from '../home/HomeFooter.vue'
   
   var errorMessage = ref<string>('')
   var errorMessageList = ref<string[]>([])
@@ -171,7 +173,7 @@
     border: 1px solid gray;
     margin-top: 5vh;
     background-color: white;
-    width: 90vw;
+    width: 97vw;
     margin-left: auto;
     margin-right: auto;
   }
