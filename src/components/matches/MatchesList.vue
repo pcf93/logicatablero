@@ -24,6 +24,7 @@ import { setgroups } from 'process'
 import { ref, reactive } from 'vue'
 import { getIdByName } from '@/core/services/APIUserRequests'
 import { sendContactRequest } from '@/core/services/APIContactRequests'
+import { getMatch } from '@/core/services/APIMatchRequests'
 import { Axios, AxiosError } from 'axios'
 
 
@@ -40,8 +41,6 @@ const matchSelected = ref(false)
   userId.value = parseInt(
           Object.values(parseJwt(getCookie('JWT')))[2] as string
         )
-
-
 
 </script>
 

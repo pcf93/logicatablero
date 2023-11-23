@@ -2,6 +2,7 @@ import { useMessages } from '@/core/componentLogic/useMessages'
 import { getIdByName, loginUser } from '@/core/services/APIUserRequests'
 import router from '@/router'
 import { ref } from 'vue'
+import { useMatches } from './useMatches'
 
 const isLogged = ref(sessionStorage.getItem('isLogged') === 'true')
 const errorMessage = ref<string>('')
@@ -15,6 +16,7 @@ const newInterval = ref<number>()
 
 const { receivedMessages, sentMessages, countUnread} =
   useMessages()
+const { match, activeMatchId } = useMatches()
 
 
 
@@ -52,6 +54,7 @@ const { receivedMessages, sentMessages, countUnread} =
     sessionStorage.setItem('isLogged', 'false')
     receivedMessages.value = []
     sentMessages.value = []
+    activeMatchId.value = 0
     countUnread.value = 0
 
     clearInterval(newInterval.value)

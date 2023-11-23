@@ -19,32 +19,71 @@
   
   <script setup lang="ts">
     import { ref } from 'vue'
+    import { useMatches} from '@/core/componentLogic/useMatches'
     
+    const { match } = useMatches()
+
     const props = defineProps({
     array: { type: Array<number>, required: true },
   })
 
     const tabla = ref(Array.from({ length: 10}, () => Array(10).fill('')))
 
-    console.log(props.array)
-
-    for(let i=0; i<100; i++){
+    function pintaTablero(){
+        for(let i=0; i<100; i++){
         let row = 0
         let col = 0
+        
         if(props.array[i] == 1){
 
             if (i <= 9){
                 row = i
                 col = 0
             } else {
-                row = parseInt(i.toString().charAt(0))
-                col = parseInt(i.toString().charAt(1))
+                col = parseInt(i.toString().charAt(0))
+                row = parseInt(i.toString().charAt(1))
             }
 
-            tabla.value[row][col] = 'ocupado'
+            tabla.value[col][row] = 'ocupado'
 
         }
+
+        if(props.array[i] == 2){
+
+            if (i <= 9){
+                row = i
+                col = 0
+            } else {
+                col = parseInt(i.toString().charAt(0))
+                row = parseInt(i.toString().charAt(1))
+            }
+
+            tabla.value[col][row] = 'agua'
+
+            }
+
+            if(props.array[i] == 3){
+
+                if (i <= 9){
+                    row = i
+                    col = 0
+                } else {
+                    col = parseInt(i.toString().charAt(0))
+                row = parseInt(i.toString().charAt(1))
+                }
+
+                tabla.value[col][row] = 'tocado'
+
+                }
     }
+
+    }
+
+    pintaTablero()
+
+    setInterval(function(){pintaTablero()}, 1000)
+    
+    
 
   </script>
   
@@ -70,6 +109,14 @@ td{
 
 .ocupado{
   background-color: #959595;
+}
+
+.agua {
+    background-color: rgb(16, 237, 237);
+}
+
+.tocado {
+    background-color: #ff0000;
 }
 
 .cuadro-arrastrable {

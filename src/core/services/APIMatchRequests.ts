@@ -1,4 +1,4 @@
-import { Match, SearchMatchmaking } from '@/type'
+import { Match, SearchMatchmaking, ShootCoordinate } from '@/type'
 import axios, { Axios, AxiosResponse } from 'axios'
 import { axiosInstance } from '../definitions/http/axiosinstance'
 
@@ -22,7 +22,7 @@ const getMatch = async (id: number): Promise<AxiosResponse<Match>> => {
     {
         headers: {
           Authorization: `Bearer ${getCookie('JWT')}`,
-        },
+        }
     })
     return response
 }
@@ -77,10 +77,28 @@ const joinMatchmakingMatch = async (matchData: SearchMatchmaking): Promise<Axios
     return response
 }
 
+const shootCoordinate = async (shootData: ShootCoordinate): Promise<AxiosResponse<number>> => {
+  const response = await axiosInstance.put<number>(`/Match/shoot`,
+  {
+    matchId: shootData.matchId,
+    playerId: shootData.playerId,
+    coordinate: shootData.coordinate
+
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${getCookie('JWT')}`,
+    },
+}
+  )
+  return response
+}
+
 export {
     getMatch,
     findMatchmakingMatch,
     getActiveMatches,
     createMatchmakingMatch,
-    joinMatchmakingMatch
+    joinMatchmakingMatch,
+    shootCoordinate
 }

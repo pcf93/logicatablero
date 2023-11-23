@@ -18,12 +18,28 @@
   
 <script setup lang="ts">
 import { table } from 'console';
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { useLogin } from '@/core/componentLogic/useLogin'
+import { useMatches } from '@/core/componentLogic/useMatches'
+import { shootCoordinate } from '@/core/services/APIMatchRequests'
+import { ShootCoordinate } from '@/type'
 
 const tabla = ref(Array.from({ length: 10 }, () => Array(10).fill('')))
+const { userId } = useLogin()
+const { match } = useMatches()
+
 
 const transcription = ref<string>('')
 let recognition: SpeechRecognition | null = null;
+
+const props = defineProps({
+    array: { type: Array<number>, required: true },
+    turn: { type: Number, required: true},
+    match: { type: Number, required: true},
+    rival: { type: Number, required: true},
+})
+
+const rival = ref<number>(props.rival)
 
 recognition = new webkitSpeechRecognition();
     recognition.lang = 'es-ES';
@@ -48,20 +64,66 @@ const beforeUnmount = (): void => {
     }
 }
 
-const props = defineProps({
-    array: { type: Array<number>, required: true },
-})
+
 
 function sacaIndice(rowIndex: number, colIndex: number) {
     console.log(10 * rowIndex + colIndex)
 }
 
-function ensayoClic(rowIndex: number, colIndex: number) {
-    if (props.array[10 * rowIndex + colIndex] == 1) {
-        console.log("Acertaste!")
-        tabla.value[rowIndex][colIndex] = 'ocupado'
+async function ensayoClic(rowIndex: number, colIndex: number) {
+    
+    if (userId.value == match.value?.playerTurnId && (props.array[10 * rowIndex + colIndex] != 2 || props.array[10 * rowIndex + colIndex] != 3) ){
+        
+        console.log("te toca!!")
+
+        await shootCoordinate({matchId: props.match,
+            playerId: userId.value, 
+            coordinate: 10 * rowIndex + colIndex})
+            .then((response) => {
+                if (response.data == 1){
+                    tabla.value[rowIndex][colIndex] = 'agua'
+                    match.value!.playerTurnId = props.rival
+                    console.log(match.value?.playerTurnId)
+                } else {
+                    tabla.value[rowIndex][colIndex] = 'tocado'
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 }
+
+for(let i=0; i<100; i++){
+        let row = 0
+        let col = 0
+        if(props.array[i] == 2){
+
+            if (i <= 9){
+                row = i
+                col = 0
+            } else {
+                col = parseInt(i.toString().charAt(0))
+                row = parseInt(i.toString().charAt(1))
+            }
+
+            tabla.value[col][row] = 'agua'
+
+        }
+        if(props.array[i] == 3){
+
+            if (i <= 9){
+                row = i
+                col = 0
+            } else {
+                col = parseInt(i.toString().charAt(0))
+                row = parseInt(i.toString().charAt(1))
+}
+
+                tabla.value[col][row] = 'tocado'
+
+}
+    }
 
 </script>
   
@@ -91,6 +153,14 @@ td {
 
 .ocupado {
     background-color: #959595;
+}
+
+.agua {
+    background-color: rgb(16, 237, 237);
+}
+
+.tocado {
+    background-color: #ff0000;
 }
 
 .cuadro-arrastrable {

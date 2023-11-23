@@ -89,4 +89,10 @@ export type SearchMatchmaking = {
   arrayPlayer: number[]
 }
 
+export type ShootCoordinate = {
+  matchId: number,
+  playerId: number,
+  coordinate: number
+}
+
 
