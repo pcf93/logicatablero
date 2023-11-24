@@ -1,7 +1,52 @@
 <template>
-
-    <div class="tauler-previ">
-    <table id="tabla" :class="{turnoRival: turnoRival}">
+<table class="taula-numeros" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+    </table>
+    <div class="tauler-jugador">
+        <table class="taula-lletres" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>B</td>
+        </tr>
+        <tr>
+            <td>C</td>
+        </tr>
+        <tr>
+            <td>D</td>
+        </tr>
+        <tr>
+            <td>E</td>
+        </tr>
+        <tr>
+            <td>F</td>
+        </tr>
+        <tr>
+            <td>G</td>
+        </tr>
+        <tr>
+            <td>H</td>
+        </tr>
+        <tr>
+            <td>I</td>
+        </tr>
+        <tr>
+            <td>J</td>
+        </tr>
+    </table>
+        <table id="tabla" :class="{turnoRival: userId == match?.playerTurnId}">
 
         <tbody>
 
@@ -31,19 +76,8 @@
 
     const tabla = ref(Array.from({ length: 10}, () => Array(10).fill('')))
     
-    const tablaJugador = document.getElementById('tabla')
-
-    const turnoRival = ref(false)
-
     function pintaTablero(){
 
-        if (userId.value != match.value?.playerTurnId){
-                turnoRival.value = true
-            } else {
-                turnoRival.value = false
-            }
-        
-        
         for(let i=0; i<100; i++){
         let row = 0
         let col = 0
@@ -111,11 +145,42 @@
    
 /* Estilos para la tabla */
 
-table {
+.tauler-jugador{
+    display: flex;
+}
+
+#tabla {
     width: 90%;
+    height: 80%;
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 5vh;
+}
+
+table.taula-numeros{
+    width: 90vw;
+    font-weight: bolder;
+    margin-bottom: 0;
+    margin-left: 7.5vw;
+}
+
+.taula-numeros > tr, .taula-numeros > tr > td {
+    border: hidden;
+    background-color: #78aad7;
+    font-weight:bolder;
+    font-size: 1em;
+}
+
+table.taula-lletres{
+    width: 7.5%;
+    height: 88%;
+}
+
+div > .taula-lletres > tr, div > .taula-lletres > tr > td {
+    border: hidden;
+    background-color: #78aad7;
+    font-weight:bolder;
+    font-size: 1;
 }
 
 .turnoRival {
@@ -175,7 +240,7 @@ td{
 }
 
 @media only screen and (max-width: 768px) and (orientation: landscape){
-    .tauler-previ{
+    .tauler-jugador{
         width: 40vw;
     }
 
@@ -183,47 +248,87 @@ td{
         width: 3vw;
         height: 3vw;
     }
-}
 
-@media only screen and (min-width: 1024px) {
-
-    .tauler-previ{
-    display: flex;
-    align-items: center;
-}
-    
-    table{
-        width: 90%;
-        margin: 0;
-        margin-left: 10%;
+    table.taula-lletres{
+        height: 95%;
+        text-align: center;
     }
 
-    td{
+    table.taula-numeros{
+        width: 65%;
+        text-align: center;
+        margin-right: 5vw;
+    }
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait){
+
+    table.taula-lletres{
+        height: 94%;
+        text-align: center;
+    }
+
+    table.taula-numeros{
+        width: 90%;
+        text-align: center;
+        margin-left: 9vw;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .tauler-jugador{
+    display: flex;
+}
+
+#tabla {
+
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 5vh;
+}
+
+td{
     position: relative;
     border: 1px solid #dddddd;
     width: 3vw;
     height: 3vw;
     background-color: #295e8d;
 }
-.button-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15vh;
+
+table.taula-numeros{
+    width: 89%;
+    font-weight: bolder;
+    margin-bottom: 0;
+    margin-left: 10%;
 }
 
-.button-container > button {
-    width: 100%;
-    height: 3vh;
-    margin-top: 1vh;
-    border-radius: 2vh;
-    background-color: rgb(160, 22, 22);
-    color: white;
-    font-weight: bolder;
-    font-size: 1.4em
+.taula-numeros > tr, .taula-numeros > tr > td {
+    border: hidden;
+    background-color: #78aad7;
+    font-weight:bolder;
+    font-size: 1em;
+}
+
+table.taula-lletres{
+    width: 3%;
+    margin-left: 2%;
+    height: 90%;
+    text-align: center;
+}
+
+div > .taula-lletres > tr, div > .taula-lletres > tr > td {
+    border: hidden;
+    background-color: #78aad7;
+    font-weight:bolder;
+    font-size: 1;
+}
+
+.turnoRival {
+
+    width: 90%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 5vh;
+    opacity: 0.5;
 }
   }
 
