@@ -1,15 +1,28 @@
 <template>
-    <HomeOptions v-if="isLogged" />
     <ContactsHeader></ContactsHeader>
+    <RouterLink to="/home">
+        <button class="btn btn-primary">Tornar al menu</button>
+    </RouterLink>
+    <div class="contacts">
     <div class="search-box">
         <div class="box-menu">
-        <input type="text" placeholder="Cerca contacte" v-model="requestReceiver">
+        <input type="text" placeholder="Agrega contacte" v-model="requestReceiver">
         <img src="@/assets/images/send.png" @click="enviaSolicitudContacte">
         </div>
-        <p v-for="message in errorRequest" :key="message">
-        {{ message }}
-      </p>
+        
     </div>
+    <div class="alert alert-warning" role="alert" v-if="resultatSolicitud=='error'">
+        L'usuari no existeix
+    </div>
+    <div class="alert alert-warning" role="alert" v-if="resultatSolicitud=='pendent'">
+        Ja tens una sol·licitud pendent o ja sou amics
+    </div>
+    <div class="alert alert-success" role="alert" v-if="resultatSolicitud=='ok'">
+        Sol·licitud enviada exitosament
+    </div>
+</div>
+    
+
     <ContactTemplate v-for="contact in friends" :key="contact.friendRequestId" :contact="contact"></ContactTemplate>
     <div class="contact-box" v-if="friends.length == 0">
         <p>De moment no tens contactes</p>
@@ -23,6 +36,7 @@ import HomeOptions from '../home/HomeOptions.vue'
 import ContactTemplate from '@/components/contacts/ContactTemplate.vue'
 import { useLogin } from '@/core/componentLogic/useLogin'
 import { useContacts } from '@/core/componentLogic/useContacts'
+import { useWindowSize } from '@vueuse/core'
 import {FriendRequest, NewRequest} from '@/type'
 import { setgroups } from 'process'
 import { ref, reactive } from 'vue'
@@ -32,11 +46,13 @@ import { Axios, AxiosError } from 'axios'
 
 var { isLogged } = useLogin()
 const { friends, setContacts } = useContacts()
+const { width, height } = useWindowSize()
 
 const { userId, userName, parseJwt, getCookie } = useLogin()
 
 const requestReceiver = ref<string>('')
 const errorRequest = ref<string[]>([])
+const resultatSolicitud = ref<string>('')
 
   userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
   userId.value = parseInt(
@@ -69,16 +85,19 @@ async function enviaSolicitudContacte(){
             errorRequest.value = []
             console.log(response.data)
             errorRequest.value.push("Sol·licitud enviada exitosament")
+            resultatSolicitud.value = 'ok'
         })
         .catch((error: AxiosError) => {
             if (error.code == 'ERR_BAD_REQUEST'){
                 errorRequest.value = []
                 console.log(error)
                 errorRequest.value.push("Ja sou amics o hi ha una sol·licitud pendent")
+                resultatSolicitud.value = 'pendent'
             } else {
                 errorRequest.value = []
                 console.log(error)
                 errorRequest.value.push("L'usuari no existeix")
+                resultatSolicitud.value = 'error'
             }
             
         })
@@ -92,19 +111,23 @@ async function enviaSolicitudContacte(){
 
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .search-box{
-    display: flex;
-    flex-wrap: wrap;
     width: 90%;
     border: 1px solid black;
-    height: 20vh;
+    height: 10vh;
     margin: auto;
     background-color: white;
     display: flex;
-    align-items: center;
     justify-content: space-around;
+    margin-bottom: 5vh;
+}
+
+.alert-warning, .alert-success{
+    width: 90vw;
+    margin: auto;
+    margin-top: -4vh;
     margin-bottom: 5vh;
 }
 
@@ -114,7 +137,7 @@ async function enviaSolicitudContacte(){
 }
 
 .box-menu > input {
-    width: 40%;
+    width: 80%;
 }
 
 .box-menu > img {

@@ -94,6 +94,7 @@
   import { VueRecaptcha } from 'vue-recaptcha'
   import { toDataURL } from 'qrcode'
   import HomeFooter from '../home/HomeFooter.vue'
+import { setgroups } from 'process'
 
   var errorMessage = ref<string>('')
   var errorMessageList = ref<string[]>([])
@@ -119,6 +120,7 @@
 
   const onVerify = (response: boolean) =>{
     if (response) robot.value = true
+    console.log(robot.value)
   }
 
   const generaSecret = () => {
@@ -131,7 +133,7 @@
     
   }
   
-   async function register( email: string, password: string, captchaChecked: boolean){
+   const register = ( email: string, password: string, captchaChecked: boolean) => {
     errorMessageList.value = []
     const emailPattern =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -149,7 +151,7 @@
       return false;
     }
 
-    if (robot){
+    if (!captchaChecked){
       errorMessage.value = 'No has marcat la casella del reCAPTCHA'
       errorMessageList.value.push(errorMessage.value)
       return false;
@@ -159,7 +161,7 @@
       emailPattern.test(email) &&
       passwordPattern.test(password) && captchaChecked
     ) {
-      await registerUser(user)
+      registerUser(user)
         .then((response) => {
           console.log(response.data)
           router.push('/login')

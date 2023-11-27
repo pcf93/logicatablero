@@ -199,5 +199,82 @@ import { useMatches } from '@/core/componentLogic/useMatches'
     bottom: 3vh;
     right: 5vw;
   }
+
+  @media only screen and (max-width: 768px) and (orientation: landscape){
+    .menu {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+  }
+
+  .box {
+    position: relative;
+    width: 40vw;
+    height: 20vh;
+    margin-top: 1vh;
+    z-index: 2;
+    cursor: pointer;
+    margin: 1vw;
+  }
+
+  .option-fondo{
+    width: 40vw;
+    height: 20vh;
+    background-color: white;
+  }
+
+  .layer2 {
+    position: absolute;
+    top: 1vh;
+    left: 2vw;
+  }
+
+  .layer3 {
+    position: absolute;
+    bottom: 0;
+    right: 1vw;
+  }
+
+  .iconos {
+    position: absolute;
+    top: 3vh;
+    left: 5vw;
+  }
+
+  .iconos > img {
+    width: 8vw;
+    height: 10vh;
+  }
+
+  .pendiente {
+    position: absolute;
+    top: 1vh;
+    right: 2vw;
+  }
+
+  .contador {
+    position: absolute;
+    top: 1vh;
+    right: 2vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+
+  .option-text {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    max-width: 150px;
+    font-weight: bold;
+    text-align: right;
+    font-size: 0.7em;
+    color: grey;
+    position: absolute;
+    bottom: -1vw;
+    right: 5vw;
+  }
+  }
   
 </style>

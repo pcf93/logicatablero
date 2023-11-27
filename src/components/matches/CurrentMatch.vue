@@ -1,5 +1,4 @@
 <template>
-<h1>Partida cargada con éxito. Esta es la partida: {{ match?.matchId }} y es el turno de: {{ match?.playerTurnId }}</h1>
 <div class="tableros">
     <div class="tablero">
         <div class="vides">

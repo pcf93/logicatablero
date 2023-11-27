@@ -130,13 +130,14 @@
 
   #logo {
     margin-right: auto;
+    height: 10vh;
+    width: 10vw;
   }
 
   #logo > img {
-    width: 10vw;
     height: 10vh;
+    width: 10vh;
     padding-left: 5vw;
-    z-index: -1;
   }
 
   #user {
@@ -144,19 +145,19 @@
     display: flex;
     align-items: center;
     align-content: center;
-    max-height: 2%;
-    width: auto;
+    justify-content: center;
+    height: 10vh;
+    width: 10vh;
     margin-right: 5vw;
   }
 
   #user > img {
-    height: 2%;
-    width: auto;
+    height: 10vh;
+    width: 10vh;
     margin-right: 10px;
   }
 
   #user > p {
-    display: none;
     color: white;
     font-weight: bolder;
   }

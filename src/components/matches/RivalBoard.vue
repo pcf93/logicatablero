@@ -62,6 +62,7 @@
         
     </div>
     <button @click = recognition?.start()>Iniciar reconocimiento de voz</button>
+    <button @click = recognition?.stop()>Parar reconocimiento de voz</button>
     <p> Resultado: {{ resultado }}</p>
 </template>
   
@@ -209,7 +210,7 @@ const props = defineProps({
             console.error('Error en el reconocimiento de voz', (event as SpeechRecognitionErrorEvent).error);
         }
 
-        recognition.start()
+        //recognition.start()
     }
     )
     

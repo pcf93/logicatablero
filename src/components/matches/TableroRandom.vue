@@ -353,12 +353,6 @@ async function cercaMatchmaking() {
     flex-direction: column;
 }
 
-.btn-primary{
-    margin-bottom: 2vh;
-    margin-left: 5vw;
-    margin-top: -3vh;
-}
-
 .button-container > button {
     margin-top: 2vh;
 }

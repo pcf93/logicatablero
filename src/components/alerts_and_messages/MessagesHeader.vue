@@ -71,43 +71,43 @@
 </script>
 
 <style scoped lang="scss">
-  .alerts {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    border: 1px solid gray;
-  }
 
   .message-bar-header {
     display: flex;
     position: relative;
-    height: 40px;
-    text-align: center;
+    align-content: center;
+    justify-content: center;
+    height: 10vh;
     border-bottom: 1px solid gray;
     background-color: white;
   }
 
-  .pendiente-inbox {
+  .pendiente-inbox, .pendiente-inbox > img {
     position: absolute;
-    top: -20px;
-    left: 40vw;
+    top: -1vh;
+    left: 18vw;
+    width: 30%;
   }
 
   .contador-inbox {
     position: absolute;
-    top: -10px;
-    left: 10px;
+    top: -0.7vh;
+    left: 20vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
+    font-size: 0.9em;
     color: white;
   }
 
   .new-message {
     display: flex;
-    align-items: center;
     text-align: center;
     justify-content: center;
+    align-items: center;
+    padding-top: 2vh;
     margin-left: 5vw;
     width: 20vw;
+    height: 100%;
     font-size: 0.75em;
     background-color: lightgray;
     cursor: pointer;
@@ -122,6 +122,7 @@
     align-items: center;
     text-align: center;
     justify-content: center;
+    padding-top: 2vh;
     font-size: 0.75em;
     width: 20vw;
     cursor: pointer;
@@ -137,6 +138,7 @@
     text-align: center;
     justify-content: center;
     background-color: lightgray;
+    padding-top: 2vh;
     font-size: 0.75em;
     width: 20vw;
     cursor: pointer;

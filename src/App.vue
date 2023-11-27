@@ -25,4 +25,10 @@
     flex-direction: column;
 }
 
+  .btn-primary{
+      margin-bottom: 2vh;
+      margin-left: 5vw;
+      margin-top: -3vh;
+  }
+
 </style>

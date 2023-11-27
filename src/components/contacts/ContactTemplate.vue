@@ -59,18 +59,17 @@ async function deleteContact(){
 
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .contact-box{
     width: 90%;
     border: 1px solid black;
     height: 10vh;
-    margin: auto;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 5vh;
+    margin-top: 0;
 }
 
 .contact-box > img {

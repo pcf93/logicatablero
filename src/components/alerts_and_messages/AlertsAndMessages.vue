@@ -1,6 +1,8 @@
 <template>
-  <HomeOptions v-if="isLogged" />
   <AlertsMessagesHeader></AlertsMessagesHeader>
+  <RouterLink to="/home">
+    <button class="btn btn-primary">Tornar al menu</button>
+  </RouterLink>
   <section class="alerts" v-if="isLogged">
     <MessagesHeader
       @cambiar-opcion="(n) => (currentOption = n)"
@@ -132,8 +134,15 @@
             }*/
 </script>
 
-<style scope lang="scss">
+<style scoped lang="scss">
   .alerts {
+    position: absolute;
+    top: 30vh;
+    left: 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content:left;
+
     margin-top: 50px;
     margin-bottom: 50px;
     margin: auto;

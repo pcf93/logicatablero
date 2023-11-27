@@ -1,7 +1,9 @@
 <template>
-    <HomeOptions v-if="isLogged && activeMatchId == 0" />
     <MatchesHeader v-if=" activeMatchId == 0"></MatchesHeader>
-    <button class="tornar" v-if="activeMatchId != 0" @click="activeMatchId = 0">Torna a llista de partides</button>
+    <RouterLink to="/home">
+    <button class="btn btn-primary">Tornar al menu</button>
+  </RouterLink>
+    <button class="btn btn-secondary" id="tornar" v-if="activeMatchId != 0" @click="activeMatchId = 0">Torna a llista de partides</button>
     <div v-if="activeMatchId == 0">
         <MatchItemTemplate v-for="match in activeMatchesList" :key="match.matchId" :match="match"></MatchItemTemplate>
     </div>
@@ -46,7 +48,8 @@ const matchSelected = ref(false)
 
 
 
-<style lang="scss">
+<style scoped lang="scss">
+
 
 .search-box{
     display: flex;
