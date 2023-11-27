@@ -1,7 +1,9 @@
 <template>
-    <HomeOptions v-if="isLogged" />
     <IniciarPartidaHeaderVue></IniciarPartidaHeaderVue>
-
+    
+    <RouterLink to="/home">
+    <button class="btn btn-primary">Tornar al menu</button>
+    </RouterLink>
     <div class="tauler-previ">
         <table>
             <tbody>
@@ -12,12 +14,25 @@
             </tbody>
         </table>
         <div class="button-container">
-            <button>Començar partida contra IA</button>
-            <button @click="cercaMatchmaking()">Començar partida contra rival aleatori</button>
-            <button>Començar partida contra amic</button>
-            <button @click="reiniciarTablero()">Canviar tauler</button>
+            <button class="btn btn-success" @click="cercaMatchmaking()">Partida VS rival aleatori</button>
+            <button class="btn btn-success">Partida VS amic</button>
+            <button class="btn btn-warning" @click="reiniciarTablero()">Canviar tauler</button>
         </div>
     </div>
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <img src="..." class="rounded mr-2" alt="...">
+    <strong class="mr-auto">Bootstrap</strong>
+    <small>11 mins ago</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Hello, world! This is a toast message.
+  </div>
+</div>
+
 </template>
   
 <script setup lang="ts">
@@ -37,7 +52,7 @@ interface IndexInfo {
     size: number;
 }
 
-const { userId, userName, isLogged, parseJwt, getCookie } = useLogin()
+const { userId, userName, isLogged, selectedOptionMobile, parseJwt, getCookie } = useLogin()
 userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
 userId.value = parseInt(Object.values(parseJwt(getCookie('JWT')))[2] as string)
 
@@ -333,6 +348,21 @@ async function cercaMatchmaking() {
 <style scoped lang="scss">
 /* Estilos para la tabla */
 
+.button-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-primary{
+    margin-bottom: 2vh;
+    margin-left: 5vw;
+    margin-top: -3vh;
+}
+
+.button-container > button {
+    margin-top: 2vh;
+}
+
 @media only screen and (max-width: 768px) and (orientation: portrait){
 
     .tauler-previ {
@@ -374,16 +404,6 @@ td {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 15vh;
-}
-
-.button-container>button {
-    width: 100%;
-    height: 3vh;
-    margin-top: 1vh;
-    border-radius: 2vh;
-    background-color: rgb(160, 22, 22);
-    color: white;
-    font-weight: bolder;
 }
 }
 

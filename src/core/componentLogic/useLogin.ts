@@ -11,6 +11,7 @@ const userJWT = ref<string | null>('')
 
 const userId = ref<number>(0)
 const userName = ref<string | null>('')
+const selectedOptionMobile = ref(false)
 
 const newInterval = ref<number>()
 
@@ -102,5 +103,5 @@ const { match, activeMatchId } = useMatches()
     }
     return "";
   }
-  return { isLogged, errorMessage, newInterval, userJWT, userId, userName, login, logout, setCookie, getCookie, parseJwt }
+  return { isLogged, errorMessage, newInterval, userJWT, userId, userName, selectedOptionMobile, login, logout, setCookie, getCookie, parseJwt }
 }

@@ -3,7 +3,7 @@
     <div class="option">
       <RouterLink to="/iniciar-partida">
       <div class="box" @click="$emit('cambiarOpcion', 3)">
-        <img src="@/assets/images/Rectangle1.png" />
+        <div class="option-fondo"></div>
         <div class="layer2">
           <img src="@/assets/images/Layer2.png" />
         </div>
@@ -20,7 +20,7 @@
     <div class="option">
       <RouterLink to="/missatges">
         <div class="box" @click="$emit('cambiarOpcion', 1)">
-          <img src="@/assets/images/Rectangle1.png" />
+          <div class="option-fondo"></div>
           <div class="layer2">
             <img src="@/assets/images/Layer2.png" />
           </div>
@@ -41,7 +41,7 @@
     <div class="option">
       <RouterLink to="/partides">
         <div class="box" @click="$emit('cambiarOpcion', 2)">
-          <img src="@/assets/images/Rectangle1.png" />
+          <div class="option-fondo"></div>
           <div class="layer2">
             <img src="@/assets/images/Layer2.png" />
           </div>
@@ -62,7 +62,7 @@
     <div class="option">
       <RouterLink to="/contactes">
       <div class="box">
-        <img src="@/assets/images/Rectangle1.png" />
+        <div class="option-fondo"></div>
         <div class="layer2">
           <img src="@/assets/images/Layer2.png" />
         </div>
@@ -83,7 +83,7 @@
     <div class="option">
       <RouterLink to="/solicituds">
       <div class="box">
-        <img src="@/assets/images/Rectangle1.png" />
+        <div class="option-fondo"></div>
         <div class="layer2">
           <img src="@/assets/images/Layer2.png" />
         </div>
@@ -130,94 +130,61 @@ import { useMatches } from '@/core/componentLogic/useMatches'
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 50px;
-    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
   }
 
   .box {
     position: relative;
-    width: auto;
-    height: auto;
-    margin: 10px;
+    width: 90vw;
+    margin-top: 1vh;
     z-index: 2;
     cursor: pointer;
   }
 
+  .option-fondo{
+    width: 90vw;
+    height: 15vh;
+    background-color: white;
+  }
+
   .layer2 {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 1vh;
+    left: 2vw;
   }
 
   .layer3 {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 0;
+    right: 1vw;
   }
 
   .iconos {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 3vh;
+    left: 10vw;
+  }
+
+  .iconos > img {
+    width: 20vw;
+    height: 10vh;
   }
 
   .pendiente {
     position: absolute;
-    top: 6px;
-    right: 6px;
+    top: 1vh;
+    right: 2vw;
   }
 
   .contador {
     position: absolute;
-    top: -10px;
-    right: 10px;
+    top: 0.5vh;
+    right: 3vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    color: white;
-  }
-
-  .pendiente-user {
-    position: absolute;
-    top: 0px;
-    left: 50px;
-  }
-
-  .contador-user {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
-    color: white;
-  }
-
-  .pendiente-inbox {
-    position: absolute;
-    top: -10px;
-    left: 270px;
-  }
-
-  .contador-inbox {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
-    color: white;
-  }
-
-  .rectanglePoints {
-    display: flex;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-  }
-
-  .totalPoints {
-    position: absolute;
-    top: -8px;
-    right: 15px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
   }
 
@@ -226,14 +193,11 @@ import { useMatches } from '@/core/componentLogic/useMatches'
     max-width: 150px;
     font-weight: bold;
     text-align: right;
+    font-size: 0.7em;
     color: grey;
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: 3vh;
+    right: 5vw;
   }
-
-  .iconos > img {
-    height: 100px;
-    width: auto;
-  }
+  
 </style>

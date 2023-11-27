@@ -6,10 +6,6 @@
     <div class="header-item" id="user" v-if="isLogged">
       <img src="@/assets/images/avatar.png" />
       <p>&nbsp;&nbsp;&nbsp;Hola, {{ userName }} </p>
-      <div class="pendiente-user">
-        <img src="@/assets/images/Ellipse1.png" />
-        <p class="contador-user">6</p>
-      </div>
     </div>
     <div class="header-item" id="logout" @click="logout()" v-if="isLogged">
       <RouterLink to="/login">
@@ -40,6 +36,7 @@
 
   #logo {
     margin-right: auto;
+
   }
 
   #logo > img {
@@ -82,7 +79,91 @@
     display: none;
   }
 
+  #settings,
+  #logout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    margin-right: 2vw;
+  }
 
+  #logout-icon {
+    width: 10px;
+  }
+
+  #settings > img,
+  #dots > img,
+  #logout > img {
+    height: 60px;
+  }
+
+  #dots > img {
+    display: none;
+  }
+
+  #settings > p,
+  #logout > p {
+    display: none;
+    color: white;
+    font-weight: bolder;
+  }
+
+  .menu-text {
+    text-align: center;
+  }
+
+  #dots {
+    display: none;
+    height: 20px;
+    width: auto;
+    transform: translateY(30px);
+  }
+
+  @media only screen and (max-width: 768px) and (orientation: landscape){
+    header {
+    height: 15vh;
+}
+
+  #logo {
+    margin-right: auto;
+  }
+
+  #logo > img {
+    width: 10vw;
+    height: 10vh;
+    padding-left: 5vw;
+    z-index: -1;
+  }
+
+  #user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    max-height: 2%;
+    width: auto;
+    margin-right: 5vw;
+  }
+
+  #user > img {
+    height: 2%;
+    width: auto;
+    margin-right: 10px;
+  }
+
+  #user > p {
+    display: none;
+    color: white;
+    font-weight: bolder;
+  }
+
+  #user > span {
+    display: none;
+  }
 
   #settings,
   #logout {
@@ -142,11 +223,6 @@
     font-weight: bold;
     color: white;
   }
-
-  @media only screen and (max-width: 768px) and (orientation: landscape){
-    header{
-      height: 30vh;
-    }
   }
 
   @media only screen and (min-width: 640px) and (max-width: 1024px) {

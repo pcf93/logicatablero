@@ -15,7 +15,8 @@
 
 </script>
 <style lang="scss">
-  body {
+
+  #app {
     margin: 0px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #78aad7;
