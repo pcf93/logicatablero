@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <form class="register-form" @submit.prevent="register()">
+    <form class="register-form" @submit.prevent="register(user.userEmail, user.userPassword, robot)">
       <div class="register-field">
         <label for="email">Nom d'usuari</label>
         <input
@@ -94,7 +94,7 @@
   import { VueRecaptcha } from 'vue-recaptcha'
   import { toDataURL } from 'qrcode'
   import HomeFooter from '../home/HomeFooter.vue'
-  
+
   var errorMessage = ref<string>('')
   var errorMessageList = ref<string[]>([])
 
@@ -115,7 +115,7 @@
     userPhoto: '',
   })
 
-  var robot = ref(false)
+  const robot = ref(false)
 
   const onVerify = (response: boolean) =>{
     if (response) robot.value = true
@@ -131,31 +131,35 @@
     
   }
   
-  async function register() {
+   async function register( email: string, password: string, captchaChecked: boolean){
     errorMessageList.value = []
     const emailPattern =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    const passwordPattern = /^(?=.*[a-z])(?=.*[\d])(?=.*[^\d\w]).{5,}$/
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    if (!emailPattern.test(user.userEmail)) {
+    const passwordPattern = /^(?=.*[a-z])(?=.*[\d])(?=.*[^\d\w]).{5,}$/;
+
+    if (!emailPattern.test(email)) {
       errorMessage.value = 'El mail no es correcte'
       errorMessageList.value.push(errorMessage.value)
+      return false;
     }
-    if (!passwordPattern.test(user.userPassword)) {
+    if (!passwordPattern.test(password)) {
       errorMessage.value = 'La contrasenya no es correcta'
       errorMessageList.value.push(errorMessage.value)
+      return false;
     }
 
     if (robot){
       errorMessage.value = 'No has marcat la casella del reCAPTCHA'
       errorMessageList.value.push(errorMessage.value)
+      return false;
     }
 
     if (
-      emailPattern.test(user.userEmail) &&
-      passwordPattern.test(user.userPassword) && robot.value
+      emailPattern.test(email) &&
+      passwordPattern.test(password) && captchaChecked
     ) {
-      registerUser(user)
+      await registerUser(user)
         .then((response) => {
           console.log(response.data)
           router.push('/login')
@@ -164,8 +168,12 @@
           errorMessageList.value.push('Usuari i/o mail ja existeix.')
           console.log(user)
         })
+      return true;
     }
+
+    console.log(email, password, captchaChecked)
   }
+
 </script>
 
 <style scoped lang="scss">
