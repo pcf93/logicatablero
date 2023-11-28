@@ -30,8 +30,8 @@
       </div>
     </form>
     <div class="button-box">
-      <button class="send" @click="enviarMensaje">Enviar</button>
-      <button class="cancel" @click="$emit('cambiarOpcion', 2)">Cancelar</button>
+      <button class="send" @click="enviarMensaje">ENVIAR</button>
+      <button class="cancel" @click="$emit('cambiarOpcion', 2)">CANCELAR</button>
     </div>
     <p style="text-align: center">{{ resultado }}</p>
   </div>
@@ -94,60 +94,68 @@
 
 <style scoped lang="scss">
   
+  .write-message{
+    width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
   form {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 2vw;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .new-message-field {
     display: flex;
     flex-direction: flex-end;
     flex-wrap: wrap;
-    margin: 10px;
+    margin: 3vw;
     font-size: 0.8em;
     width: 100%;
     
   }
 
   label {
-    padding-right: 10px;
-    width: 10%;
+    width: 20vw;
     margin-right: auto;
   }
 
   input,
   textarea {
-    width: 60%;
+    width: 80vw;
   }
 
   #content {
-    height: 100px;
+    width: 80vw;
+    height: 20vh;
   }
 
   .button-box {
-    text-align: center;
-    margin-left: 16%;
+    display: flex;
+    justify-content: center;
+    padding: 0;
   }
 
   .send {
-    width: 80px;
+    width: 30vw;
     height: 30px;
     background-color: #10d6a5;
     color: #006845;
     font-weight: 200;
-    margin-right: 10px;
+    font-size: 0.8em;
     border: none;
     cursor: pointer;
   }
 
   .cancel {
-    width: 80px;
+    width: 30vw;
     height: 30px;
     background-color: orangered;
     color: white;
     font-weight: 200;
-    margin-left: 10px;
+    font-size: 0.8em;
     border: none;
     cursor: pointer;
   }

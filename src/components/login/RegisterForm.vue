@@ -1,8 +1,17 @@
 <template>
   <div class="register">
+    <div class="instruccions">
+      <h2>Requisits formulari</h2>
+      <ul>
+        <li id="errorCorreu">El correu ha de tenir format vàlid, és a dir, el signe @, un nom davant i el domini darrere (exemple@gmail.com)</li>
+        <li id="errorContrasenya">La contrasenya ha de tenir, al menys, una lletra minúscula, un caràcter especial i un número. La seva longitud ha de ser, al menys, de cinc caràcters.</li>
+        <li id="errorNom">Els camps "Ciutat", "Data de naixament" i "Telefon" son opcionals.</li>
+      </ul>
+    </div>
+    
     <form class="register-form" @submit.prevent="register(user.userEmail, user.userPassword, robot)">
       <div class="register-field">
-        <label for="email">Nom d'usuari</label>
+        <label for="email">Nom d'usuari<span class="obligatori">&nbsp;*</span></label>
         <input
           type="text"
           id="email"
@@ -12,7 +21,7 @@
         /><br />
       </div>
       <div class="register-field">
-        <label for="password">Contrasenya</label>
+        <label for="password">Contrasenya<span class="obligatori">&nbsp;*</span></label>
         <input
           type="password"
           id="password"
@@ -22,7 +31,7 @@
         /><br />
       </div>
       <div class="register-field">
-        <label for="name">Correu electrònic</label>
+        <label for="name">Correu electrònic<span class="obligatori">&nbsp;*</span></label>
         <input
           type="text"
           id="name"
@@ -37,7 +46,6 @@
           type="text"
           id="country"
           name="country"
-          required
           v-model="user.userCity"
         /><br />
       </div>
@@ -47,12 +55,11 @@
           type="date"
           id="birthdate"
           name="birthdate"
-          required
           v-model="user.userBirthDate"
         /><br />
       </div>
       <div class="register-field">
-        <label for="phonenumber">Telefon (opcional)</label>
+        <label for="phonenumber">Telefon</label>
         <input
           type="text"
           id="phonenumber"
@@ -73,17 +80,16 @@
 
       <vue-recaptcha ref="recaptcha" @verify="onVerify" sitekey="6Ldx0w4pAAAAAGP2PLxsmQqBvoejhLbjQu6Dlytx"></vue-recaptcha>
       <div class="register-box">
-        <button type="submit" class="send">REGISTRE USUARI</button>
+        <button type="submit" class="send">REGISTRAR</button>
         <RouterLink to="/login">
           <button class="cancel">TORNA A LOGIN</button></RouterLink
         >
       </div>
-      <p v-for="message in errorMessageList" :key="message">
+      <div class="alert alert-danger" v-for="message in errorMessageList" :key="message">
         {{ message }}
-      </p>
+      </div>
     </form>
   </div>
-  <HomeFooter></HomeFooter>
 </template>
 
 <script setup lang="ts">
@@ -94,7 +100,7 @@
   import { VueRecaptcha } from 'vue-recaptcha'
   import { toDataURL } from 'qrcode'
   import HomeFooter from '../home/HomeFooter.vue'
-import { setgroups } from 'process'
+  import { setgroups } from 'process'
 
   var errorMessage = ref<string>('')
   var errorMessageList = ref<string[]>([])
@@ -137,25 +143,7 @@ import { setgroups } from 'process'
     errorMessageList.value = []
     const emailPattern =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
     const passwordPattern = /^(?=.*[a-z])(?=.*[\d])(?=.*[^\d\w]).{5,}$/;
-
-    if (!emailPattern.test(email)) {
-      errorMessage.value = 'El mail no es correcte'
-      errorMessageList.value.push(errorMessage.value)
-      return false;
-    }
-    if (!passwordPattern.test(password)) {
-      errorMessage.value = 'La contrasenya no es correcta'
-      errorMessageList.value.push(errorMessage.value)
-      return false;
-    }
-
-    if (!captchaChecked){
-      errorMessage.value = 'No has marcat la casella del reCAPTCHA'
-      errorMessageList.value.push(errorMessage.value)
-      return false;
-    }
 
     if (
       emailPattern.test(email) &&
@@ -171,9 +159,25 @@ import { setgroups } from 'process'
           console.log(user)
         })
       return true;
+    } else {
+      if (!emailPattern.test(email)) {
+      errorMessage.value = 'El mail no es correcte'
+      errorMessageList.value.push(errorMessage.value)
+      
+    }
+    if (!passwordPattern.test(password)) {
+      errorMessage.value = 'La contrasenya no es correcta'
+      errorMessageList.value.push(errorMessage.value)
+      
     }
 
-    console.log(email, password, captchaChecked)
+    if (!captchaChecked){
+      errorMessage.value = 'No has marcat la casella del reCAPTCHA'
+      errorMessageList.value.push(errorMessage.value)
+      
+    }
+    return false;
+    }
   }
 
 </script>
@@ -186,6 +190,14 @@ import { setgroups } from 'process'
     width: 97vw;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .instruccions{
+    text-align: justify;
+    font-size: 0.8em;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 2vh;
   }
 
   .register-form {
@@ -223,25 +235,39 @@ import { setgroups } from 'process'
   }
 
   .send {
-    width: 80px;
-    height: 30px;
+    width: 40vw;
+    height: 5vh;
     background-color: #10d6a5;
     color: #006845;
     font-weight: 200;
-    margin-right: 10px;
+    font-size: 0.8em;
+    margin-right: 5vw;
     border: none;
     cursor: pointer;
   }
 
   .cancel {
-    width: 80px;
-    height: 30px;
+    width: 40vw;
+    height: 5vh;
     background-color: orangered;
     color: white;
     font-weight: 200;
-    margin-left: 10px;
+    font-size: 0.8em;
+    margin-left:5vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     border: none;
     cursor: pointer;
+  }
+
+  span.obligatori{
+    font-weight: bolder;
+    color: red;
+  }
+
+  .alert-danger{
+    width: 90vw;
+    font-size: 0.8em;
   }
   @media only screen and (min-width: 640px) and (max-width: 1024px) {
     .register {

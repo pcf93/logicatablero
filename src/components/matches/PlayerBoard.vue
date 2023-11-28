@@ -128,7 +128,7 @@ onMounted(() => {
     height: 75vw;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10vh;
+    margin-bottom: 3vh;
 }
 
 #tablaJugador {
@@ -157,8 +157,8 @@ onMounted(() => {
 td{
     position: relative;
     border: 1px solid #dddddd;
-    width: 9vw;
-    height: 9vw;
+    width: 8vw;
+    height: 7vw;
     background-color: #295e8d;
 }
 
@@ -167,11 +167,11 @@ td{
 }
 
 .agua {
-    background-color: rgb(16, 237, 237);
+    background-color: #71a1ff;
 }
 
 .tocado {
-    background-color: #ff0000;
+    background-color: #e06666;
 }
 
 .cuadro-arrastrable {

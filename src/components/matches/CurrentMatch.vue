@@ -2,25 +2,30 @@
 <div class="tableros">
     <div class="tableroJugador">
         <div class="vides">
+            <div id="torn-jugador" class="marcador-torn" :class="{desactivat: userId == match?.playerTurnId}">
             <div class="vides-logo">
                 <img src="@/assets/images/heart.png">
-            </div> 
-            <div class="vides-contador-jugador">
+                <div class="vides-contador-jugador">
                 <span :class="{unNumero:match.vidasPlayer1 < 10}" v-if="userId == match?.player1Id">{{ match?.vidasPlayer1 }}</span>
                 <span :class="{unNumero:match.vidasPlayer2 < 10}" v-if="userId == match?.player2Id">{{ match?.vidasPlayer2 }}</span>
-                
             </div>
+            </div> 
+            
             <p class="info">{{ userName }}</p>
+            </div>
             <p class="info"> VS </p>
+            <div id="torn-rival" class="marcador-torn" :class="{desactivat: userId != match?.playerTurnId}">
             <p class="info">{{ rivalName }}</p>
-            <div class="vides-contador-rival">
+            
+            <div class="vides-logo">
+                <div class="vides-contador-rival">
                 
                 <span :class="{unNumero:match.vidasPlayer1 < 10}" v-if="userId == match?.player2Id">{{ match?.vidasPlayer1 }}</span>
                 <span :class="{unNumero:match.vidasPlayer2 < 10}" v-if="userId == match?.player1Id">{{ match?.vidasPlayer2 }}</span>
             </div>
-            <div class="vides-logo">
                 <img src="@/assets/images/heart.png">
             </div>
+        </div>
     </div>
         <PlayerBoard :array="tuArray!"></PlayerBoard>
     </div>
@@ -41,6 +46,7 @@ import { getMatch } from '@/core/services/APIMatchRequests'
 import { Console } from 'console';
 import PlayerBoard from './PlayerBoard.vue';
 import RivalBoard from './RivalBoard.vue';
+import { refDebounced } from '@vueuse/core';
 
 const { userId } = useLogin()
 const { match, jugadorActual, rivalActual } = useMatches()
@@ -94,6 +100,7 @@ onBeforeUnmount(()=>{
 })
 
 async function setUsers(){
+
     await getUser(match.value?.player1Id!)
     .then((response) => {
         if (userId.value == match.value?.player1Id!){
@@ -133,7 +140,20 @@ async function setUsers(){
         height: 5vh;
         flex-direction: row;
         justify-content: space-around;
+        margin-bottom: 1vh;
     }
+
+    .marcador-torn{
+        display: flex;
+        border-radius: 10vw;
+    }
+
+    .marcador-torn.desactivat{
+        display: flex;
+        border-radius: 10vw;
+        border: 1px solid red;
+    }
+
     .tableros{
         display: flex;
         flex-wrap: wrap;
@@ -149,9 +169,23 @@ async function setUsers(){
         width: 100%;
     }
 
+    .vides-logo{
+        position: relative;
+    }
+    
     .vides-logo > img {
         height: 5vh;
         width: 5vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
+
+    .vides-logo > div.vides-contador-jugador, .vides-logo > div.vides-contador-rival{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
     }
 
     .vides-contador-jugador, .vides-contador-rival{
@@ -163,26 +197,6 @@ async function setUsers(){
 
     .vides-contador-jugador, .vides-contador-rival {
         position: absolute;
-        color: white;
-        font-weight: bold;
-    }
-
-    .vides-contador-jugador{
-        top: 18.5vh;
-        left: 7vw;
-    }
-
-    .vides-contador-rival{
-        top: 18.5vh;
-        right: 7vw;
-    }
-
-    .videsRival, .videsRival > img {
-        height: 12vw;
-        width: 12vw;
-    }
-
-    .videsRival > span {
         color: white;
         font-weight: bold;
     }
@@ -199,6 +213,8 @@ async function setUsers(){
 
     .info{
         font-weight: bolder;
+        margin-left: 5vw;
+        margin-right: 5vw;
     }
 
 }

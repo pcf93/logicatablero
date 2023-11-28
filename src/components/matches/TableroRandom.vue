@@ -246,8 +246,11 @@ const generarFiguras4 = (cantidad: number): void => {
 
 const verificaIndices = (rowIndexTest: number, colIndexTest: number, arrayIndex: IndexInfo[]): boolean => {
 
-    var esValido: boolean = true
+var esValido: boolean = true
 
+if ( (rowIndexTest < 0 || rowIndexTest > 9) ||( colIndexTest < 0 || colIndexTest > 9)){
+    esValido = false
+} else {
     for (const index of arrayIndex) {
         if (
             (index.colIndex === colIndexTest && index.rowIndex === rowIndexTest) ||
@@ -259,8 +262,9 @@ const verificaIndices = (rowIndexTest: number, colIndexTest: number, arrayIndex:
             break;
         }
     }
+}
 
-    return esValido
+return esValido
 
 }
 

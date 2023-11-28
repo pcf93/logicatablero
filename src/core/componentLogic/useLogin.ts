@@ -46,7 +46,7 @@ const { match, activeMatchId } = useMatches()
         router.push("/home")
       })
       .catch((error) => {
-        errorMessage.value = error.response.data
+        errorMessage.value = "Usuari i/o contrasenya incorrectes."
       })
   }
 

@@ -16,8 +16,8 @@
     <p class="show-message-subject">{{ message.messageSubject }}</p>
     <p class="show-message-content">{{ message.messageContent }}</p>
     <div class="button-box">
-      <button class="reply" @click="respondeMensaje()">REPLY</button>
-      <button class="delete" @click="borraMensaje()">DELETE</button>
+      <button class="reply" @click="respondeMensaje()" v-if="props.section == 'inbox' ">REPLY</button>
+      <button class="delete" @click="borraMensaje()" v-if="props.section == 'inbox' ">DELETE</button>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@
     if (props.section == 'inbox') {
       getUser(props.message.messageSenderId)
         .then((response) => {
-          emailReplySender.value = response.data.userEmail
+          emailReplySender.value = response.data.userName
           emailReplySubject.value = props.message.messageSubject
           fullName.value =
             response.data.userName

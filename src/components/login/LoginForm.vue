@@ -22,9 +22,8 @@
         </RouterLink>
       </div>
     </form>
-    <p>{{ errorMessage }}</p>
+    <div class="alert alert-danger" v-if="errorMessage.length > 0">{{ errorMessage }}</div>
   </div>
-  <HomeFooter/>
 </template>
 
 <script setup lang="ts">
@@ -51,11 +50,13 @@ import router from '@/router';
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: auto;
+    width: 97vw;
     border: 1px solid grey;
     padding: 10px;
     padding-bottom: 5px;
     margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
   }
 
@@ -94,25 +95,34 @@ import router from '@/router';
   }
 
   .send {
-    width: 80px;
-    height: 30px;
+    width: 40vw;
+    height: 5vh;
     background-color: #10d6a5;
     color: #006845;
     font-weight: 200;
-    margin-right: 10px;
+    font-size: 0.8em;
+    margin-right: 5vw;
     border: none;
     cursor: pointer;
   }
 
   .cancel {
-    width: 80px;
-    height: 30px;
+    width: 40vw;
+    height: 5vh;
     background-color: orangered;
     color: white;
     font-weight: 200;
-    margin-left: 10px;
+    font-size: 0.8em;
+    margin-left:5vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     border: none;
     cursor: pointer;
+  }
+
+  .alert-danger{
+    width: 90vw;
+    font-size: 0.8em;
   }
   @media only screen and (min-width: 640px) and (max-width: 1024px) {
     .login {

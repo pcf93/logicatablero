@@ -25,7 +25,6 @@
     >
       <p>Missatges enviats</p>
     </div>
-    <input type="text" placeholder="Search.." checked="true" />
     <div class="pendiente-inbox" v-if="countUnread !== 0">
       <img src="@/assets/images/Ellipse1.png" />
       <p class="contador-inbox">{{ countUnread }}</p>
@@ -85,14 +84,14 @@
   .pendiente-inbox, .pendiente-inbox > img {
     position: absolute;
     top: -1vh;
-    left: 18vw;
+    left: 22vw;
     width: 30%;
   }
 
   .contador-inbox {
     position: absolute;
     top: -0.7vh;
-    left: 20vw;
+    left: 25vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     font-size: 0.9em;
@@ -105,7 +104,6 @@
     justify-content: center;
     align-items: center;
     padding-top: 2vh;
-    margin-left: 5vw;
     width: 20vw;
     height: 100%;
     font-size: 0.75em;

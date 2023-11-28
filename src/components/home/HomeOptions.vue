@@ -72,10 +72,6 @@
         <div class="layer3">
           <img src="@/assets/images/Layer3.png" />
         </div>
-        <div class="pendiente" v-if="countContacts > 0">
-          <img src="@/assets/images/Ellipse1.png" />
-          <p class="contador">{{ countContacts }}</p>
-        </div>
         <p class="option-text">CONTACTES</p>
       </div>
     </RouterLink>
@@ -93,7 +89,7 @@
         <div class="layer3">
           <img src="@/assets/images/Layer3.png" />
         </div>
-        <p class="option-text">SOL·LICITUTS</p>
+        <p class="option-text">SOL·LICITUDS</p>
       </div>
     </RouterLink>
     </div>
