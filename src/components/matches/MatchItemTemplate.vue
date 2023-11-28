@@ -20,7 +20,7 @@ const player2 = ref<string>('')
 
 const { userId } = useLogin()
 const { friends } = useContacts()
-const {  match, activeMatchId } = useMatches()
+const {  match, activeMatchId, jugadorActual, rivalActual } = useMatches()
 const props = defineProps({
     match: { type: Object as PropType<Match>, required: true },
   })

@@ -1,6 +1,6 @@
 <template>
     <MatchesHeader v-if=" activeMatchId == 0"></MatchesHeader>
-    <RouterLink to="/home">
+    <RouterLink to="/home" v-if=" activeMatchId == 0">
     <button class="btn btn-primary">Tornar al menu</button>
   </RouterLink>
     <button class="btn btn-secondary" id="tornar" v-if="activeMatchId != 0" @click="activeMatchId = 0">Torna a llista de partides</button>
@@ -50,7 +50,13 @@ const matchSelected = ref(false)
 
 <style scoped lang="scss">
 
-
+.btn-secondary{
+    width: 80vw;
+    margin-top:1vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1vh;
+}
 .search-box{
     display: flex;
     flex-wrap: wrap;

@@ -8,6 +8,8 @@ import {
 const activeMatchesList = ref<Array<Match>>([])
 const activeMatchId = ref<number>(0)
 const match = ref<Match | null>()
+const jugadorActual = ref<string>('')
+const rivalActual = ref<string>('')
 
 export function useMatches() {
   async function setActiveMatches(userId: number) {
@@ -30,6 +32,8 @@ export function useMatches() {
     activeMatchesList,
     activeMatchId,
     match,
+    jugadorActual,
+    rivalActual,
     setActiveMatches
   }
 }

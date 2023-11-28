@@ -1,52 +1,6 @@
 <template>
-<table class="taula-numeros" cellspacing="0" cellpadding="0">
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
-        </tr>
-    </table>
     <div class="tauler-jugador">
-        <table class="taula-lletres" cellspacing="0" cellpadding="0">
-        <tr>
-            <td>A</td>
-        </tr>
-        <tr>
-            <td>B</td>
-        </tr>
-        <tr>
-            <td>C</td>
-        </tr>
-        <tr>
-            <td>D</td>
-        </tr>
-        <tr>
-            <td>E</td>
-        </tr>
-        <tr>
-            <td>F</td>
-        </tr>
-        <tr>
-            <td>G</td>
-        </tr>
-        <tr>
-            <td>H</td>
-        </tr>
-        <tr>
-            <td>I</td>
-        </tr>
-        <tr>
-            <td>J</td>
-        </tr>
-    </table>
-        <table id="tabla" :class="{turnoRival: userId == match?.playerTurnId}">
+        <table id="tablaJugador" :class="{turnoRival: userId == match?.playerTurnId}">
 
         <tbody>
 
@@ -59,7 +13,6 @@
 
     </table>
     </div>
-
 </template>
   
   <script setup lang="ts">
@@ -136,7 +89,31 @@
             pintaTablero()
         }, 1000)
     
+onMounted(() => {
+    const celdas = document.getElementById("tablaJugador")!.getElementsByTagName("td");
 
+    celdas[0].innerHTML = 'A/1'
+    celdas[1].innerHTML = '2'
+    celdas[2].innerHTML = '3'
+    celdas[3].innerHTML = '4'
+    celdas[4].innerHTML = '5'
+    celdas[5].innerHTML = '6'
+    celdas[6].innerHTML = '7'
+    celdas[7].innerHTML = '8'
+    celdas[8].innerHTML = '9'
+    celdas[9].innerHTML = '10'
+
+    celdas[10].innerHTML = 'B'
+    celdas[20].innerHTML = 'C'
+    celdas[30].innerHTML = 'D'
+    celdas[40].innerHTML = 'E'
+    celdas[50].innerHTML = 'F'
+    celdas[60].innerHTML = 'G'
+    celdas[70].innerHTML = 'H'
+    celdas[80].innerHTML = 'I'
+    celdas[90].innerHTML = 'J'
+
+})
     
 
   </script>
@@ -147,45 +124,29 @@
 
 .tauler-jugador{
     display: flex;
+    width: 75vw;
+    height: 75vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10vh;
 }
 
-#tabla {
-    width: 90%;
-    height: 80%;
+#tablaJugador {
+
     border-collapse: collapse;
     margin: auto;
-    margin-bottom: 5vh;
+
 }
 
-table.taula-numeros{
-    width: 90vw;
+#tablaJugador > tbody > tr > td {
     font-weight: bolder;
-    margin-bottom: 0;
-    margin-left: 7.5vw;
-}
-
-.taula-numeros > tr, .taula-numeros > tr > td {
-    border: hidden;
-    background-color: #78aad7;
-    font-weight:bolder;
-    font-size: 1em;
-}
-
-table.taula-lletres{
-    width: 7.5%;
-    height: 88%;
-}
-
-div > .taula-lletres > tr, div > .taula-lletres > tr > td {
-    border: hidden;
-    background-color: #78aad7;
-    font-weight:bolder;
-    font-size: 1;
+    color: white;
+    font-size: 0.9em;
 }
 
 .turnoRival {
 
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 5vh;
