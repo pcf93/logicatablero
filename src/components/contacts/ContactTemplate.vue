@@ -77,4 +77,29 @@ async function deleteContact(){
     cursor: pointer;
 }
 
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+    .contact-box{
+    width: 90%;
+    border: 1px solid black;
+    height: 20vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 0;
+}
+
+.contact-box > img {
+    width: 10vh;
+    cursor: pointer;
+}
+}
+
+@media only screen and (min-width: $mobile-landscape-width){
+
+    .contact-box{
+        width: 30%;
+    }
+}
+
 </style>

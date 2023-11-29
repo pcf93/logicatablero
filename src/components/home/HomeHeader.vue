@@ -36,15 +36,6 @@
 
   #logo {
     margin-right: auto;
-
-  }
-
-  #logo > img {
-    width: 50vw;
-  }
-
-  #logo {
-    margin-right: auto;
   }
 
   #logo > img {
@@ -123,21 +114,21 @@
     transform: translateY(30px);
   }
 
-  @media only screen and (max-width: 768px) and (orientation: landscape){
+  @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
     header {
     height: 15vh;
 }
 
   #logo {
     margin-right: auto;
+    max-width: 30vw;
     height: 10vh;
-    width: 10vw;
   }
 
   #logo > img {
+    max-width: 40vw;
     height: 10vh;
-    width: 10vh;
-    padding-left: 5vw;
+    z-index: -1;
   }
 
   #user {

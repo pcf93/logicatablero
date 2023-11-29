@@ -200,41 +200,90 @@ td{
     font-weight: bolder;
 }
 
-@media only screen and (max-width: 768px) and (orientation: landscape){
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
     .tauler-jugador{
-        width: 40vw;
-    }
-
-    td{
-        width: 3vw;
-        height: 3vw;
-    }
-
-    table.taula-lletres{
-        height: 95%;
-        text-align: center;
-    }
-
-    table.taula-numeros{
-        width: 65%;
-        text-align: center;
-        margin-right: 5vw;
-    }
+    position: absolute;
+    top: 30vh;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3vh;
 }
 
-@media only screen and (max-width: 768px) and (orientation: portrait){
+#tablaJugador {
 
-    table.taula-lletres{
-        height: 94%;
-        text-align: center;
-    }
+    border-collapse: collapse;
+    margin: auto;
+    width:35vw;
+    height:35vw;
 
-    table.taula-numeros{
-        width: 90%;
-        text-align: center;
-        margin-left: 9vw;
-    }
 }
+
+#tablaJugador > tbody > tr > td {
+    font-weight: bolder;
+    color: white;
+    font-size: 0.9em;
+}
+
+.turnoRival {
+
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 5vh;
+    opacity: 0.5;
+}
+
+/* Estilos para las celdas de la tabla */
+td{
+    position: relative;
+    border: 1px solid #dddddd;
+    width: 10%;
+    height: 10%;
+    background-color: #295e8d;
+}
+
+.ocupado{
+  background-color: #959595;
+}
+
+.agua {
+    background-color: #71a1ff;
+}
+
+.tocado {
+    background-color: #e06666;
+}
+
+.cuadro-arrastrable {
+  position: absolute;
+  background-color: #66ccff;
+  user-select: none;
+}
+
+.button-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15vh;
+}
+
+.button-container > button {
+    width: 100%;
+    height: 3vh;
+    margin-top: 1vh;
+    border-radius: 2vh;
+    background-color: rgb(160, 22, 22);
+    color: white;
+    font-weight: bolder;
+}
+}
+
 @media only screen and (min-width: 1024px) {
     .tauler-jugador{
     display: flex;

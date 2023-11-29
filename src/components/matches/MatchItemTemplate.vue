@@ -64,7 +64,7 @@ setUser()
 
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .contact-box{
     width: 90%;
@@ -82,5 +82,29 @@ setUser()
     width: 5vh;
     cursor: pointer;
 }
+
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+ .contact-box{
+    height: 20vh;
+    justify-content: space-evenly;
+ }   
+
+ .contact-box > img {
+    width: 10vh;
+ }
+
+}
+
+ @media only screen and (min-width: $mobile-landscape-width){
+    .contact-box{
+    width: 40%;
+    justify-content: space-evenly;
+ }   
+
+ .contact-box > img {
+    width: 5vh;
+ }
+}
+
 
 </style>

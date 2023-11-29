@@ -18,7 +18,7 @@
       <div class="button-box">
         <button type="submit" class="send">LOGIN</button>
         <RouterLink to="/registre">
-          <button class="cancel">REGISTER</button>
+          <button class="cancel">REGISTRE</button>
         </RouterLink>
       </div>
     </form>
@@ -46,7 +46,10 @@ import router from '@/router';
 </script>
 
 <style scoped lang="scss">
-  .login {
+  
+  @media only screen and (orientation: portrait){
+
+    .login {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -124,74 +127,173 @@ import router from '@/router';
     width: 90vw;
     font-size: 0.8em;
   }
-  @media only screen and (min-width: 640px) and (max-width: 1024px) {
+  }
+
+
+
+  @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+  
     .login {
-      width: 50%;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60vw;
+    border: 1px solid grey;
+    padding: 10px;
+    padding-bottom: 5px;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+  }
 
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: 30px;
-    }
+  .login-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    
+  }
 
-    .login-field {
-      font-size: 1em;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  .login-field {
+    display: flex;
+    flex-direction: flex-end;
+    flex-wrap: wrap;
+    margin: 2%;
+    font-size: 0.8em;
+    width: 100%;
+  }
 
-    form {
-      text-align: center;
-    }
+  label {
+    width: 10%;
+    margin-right: auto;
+  }
 
-    label {
-      padding-right: 10px;
-      width: 10%;
-      margin-right: 10px;
-      margin-left: 20%;
-    }
-    input,
-    textarea {
-      width: 40%;
-      margin-left: 10%;
-    }
+  input,
+  textarea {
+    width: 70%;
+  }
 
-    .button-box {
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
+  .button-box {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .send {
+    width: 20vw;
+    height: 10vh;
+    background-color: #10d6a5;
+    color: #006845;
+    font-weight: 200;
+    font-size: 0.8em;
+    margin-right: 2vw;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cancel {
+    width: 20vw;
+    height: 10vh;
+    background-color: orangered;
+    color: white;
+    font-weight: 200;
+    font-size: 0.8em;
+    margin-left:2vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    border: none;
+    cursor: pointer;
+  }
+
+  .alert-danger{
+    width: 90vw;
+    font-size: 0.8em;
+  }
+
   }
 
   @media only screen and (min-width: 1024px) {
     .login {
-      width: 20%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: 10px;
-    }
-
-    .login-field {
-      font-size: 1em;
-    }
-
-    label {
-      padding-right: 10px;
-      width: 10%;
-    }
-    input,
-    textarea {
-      width: 60%;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 30vw;
+    border: 1px solid grey;
+    padding: 10px;
+    padding-bottom: 5px;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
   }
+
+  .login-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    
+  }
+
+  .login-field {
+    display: flex;
+    flex-direction: flex-end;
+    flex-wrap: wrap;
+    margin: 2%;
+    font-size: 0.8em;
+    width: 100%;
+  }
+
+  label {
+    width: 10%;
+    margin-right: auto;
+  }
+
+  input,
+  textarea {
+    width: 70%;
+  }
+
+  .button-box {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .send {
+    width: 5vw;
+    height: 5vh;
+    background-color: #10d6a5;
+    color: #006845;
+    font-weight: 200;
+    font-size: 0.8em;
+    margin-right: 2vw;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cancel {
+    width: 5vw;
+    height: 5vh;
+    background-color: orangered;
+    color: white;
+    font-weight: 200;
+    font-size: 0.8em;
+    margin-left:2vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    border: none;
+    cursor: pointer;
+  }
+
+  .alert-danger{
+    width: 90vw;
+    font-size: 0.8em;
+  }
+
+  }
+  
 </style>

@@ -20,13 +20,14 @@
     <div class="alert alert-success" role="alert" v-if="resultatSolicitud=='ok'">
         Sol·licitud enviada exitosament
     </div>
+    <div class="contact-box" v-if="friends.length == 0">
+        <p>De moment no tens contactes</p>
+    </div>
 </div>
     
 
     <ContactTemplate v-for="contact in friends" :key="contact.friendRequestId" :contact="contact"></ContactTemplate>
-    <div class="contact-box" v-if="friends.length == 0">
-        <p>De moment no tens contactes</p>
-    </div>
+    
 
 </template>
 
@@ -143,6 +144,54 @@ async function enviaSolicitudContacte(){
 .box-menu > img {
     width: 5vh;
     cursor: pointer;
+}
+
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+    .search-box{
+    width: 90%;
+    border: 1px solid black;
+    height: 20vh;
+    margin: auto;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5vh;
+}
+
+.alert-warning, .alert-success{
+    width: 90vw;
+    margin: auto;
+    margin-top: -4vh;
+    margin-bottom: 5vh;
+}
+
+.box-menu{
+   display: flex;
+   justify-content: space-around;
+}
+
+.box-menu > input {
+    width: 80%;
+}
+
+.box-menu > img {
+    width: 5vh;
+    cursor: pointer;
+}
+}
+
+@media only screen and (min-width: $mobile-landscape-width){
+
+.search-box{
+    width: 30%;
+}
+}
+
+.alert-warning, .alert-success{
+    width: 30vw;
+    margin: auto;
+    margin-top: -4vh;
+    margin-bottom: 5vh;
 }
 
 </style>

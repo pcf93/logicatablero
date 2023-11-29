@@ -15,9 +15,11 @@
         </table>
         
     </div>
-    <button v-if="width <= 768" @touchstart = "recognition?.start()" @touchend = "recognition?.stop">Atacar</button>
-    <button v-if="width > 768" @mousedown = "recognition?.start()" @mouseup = "recognition?.stop">Atacar</button>
+    <div class="button-container">
+    <button v-if="width <= 1024" @touchstart = "recognition?.start()" @touchend = "recognition?.stop">Pitja per atacar</button>
+    <button v-if="width > 1024" @mousedown = "recognition?.start()" @mouseup = "recognition?.stop">Pitja per atacar</button>
     <p> Resultado: {{ resultado }}</p>
+    </div>
 </template>
   
 <script setup lang="ts">
@@ -354,7 +356,7 @@ onMounted(() => {
     height: 75vw;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 8vh;
+    margin-bottom: 1vh;
 }
 
 #tablaRival {
@@ -422,8 +424,8 @@ td{
 }
 
 .button-container > button {
-    width: 100%;
-    height: 3vh;
+    width: 50%;
+    height: 6vh;
     margin-top: 1vh;
     border-radius: 2vh;
     background-color: rgb(160, 22, 22);
@@ -431,40 +433,95 @@ td{
     font-weight: bolder;
 }
 
-@media only screen and (max-width: 768px) and (orientation: landscape){
-    .tauler-jugador{
-        width: 40vw;
-    }
-
-    td{
-        width: 3vw;
-        height: 3vw;
-    }
-
-    table.taula-lletres{
-        height: 95%;
-        text-align: center;
-    }
-
-    table.taula-numeros{
-        width: 65%;
-        text-align: center;
-        margin-right: 5vw;
-    }
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+    .tauler-rival{
+    display: flex;
+    position: absolute;
+    top: 35vh;
+    width: 40%;
+    height: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 8vh;
 }
 
-@media only screen and (max-width: 768px) and (orientation: portrait){
+#tablaRival {
 
-    table.taula-lletres{
-        height: 94%;
-        text-align: center;
-    }
+    border-collapse: collapse;
+    margin: auto;
+    width:35vw;
+    height:35vw;
 
-    table.taula-numeros{
-        width: 90%;
-        text-align: center;
-        margin-left: 9vw;
-    }
+}
+
+#tablaRival > tbody > tr > td {
+    font-weight: bolder;
+    color: white;
+    font-size: 0.9em;
+}
+
+#tablaRival {
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 1vh;
+}
+.turnoRival {
+
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 5vh;
+    opacity: 0.5;
+}
+
+/* Estilos para las celdas de la tabla */
+td{
+    position: relative;
+    border: 1px solid #dddddd;
+    width: 4vw;
+    height: 3vw;
+    background-color: #295e8d;
+}
+
+.ocupado{
+  background-color: #959595;
+}
+
+.agua {
+    background-color: #71a1ff;
+}
+
+.tocado {
+    background-color: #e06666;
+}
+
+.cuadro-arrastrable {
+  position: absolute;
+  background-color: #66ccff;
+  user-select: none;
+}
+
+.button-container{
+    display: flex;
+    position: absolute;
+    top: 120vh;
+    flex-wrap: nowrap;
+    width: 50vw;
+    margin-left: auto;
+    margin-right: 50vw;
+    margin-bottom: 15vh;
+    margin-top: 1vh;
+}
+
+.button-container > button {
+    width: 100%;
+    height: 8vh;
+    margin-top: 1vh;
+    border-radius: 2vh;
+    background-color: rgb(160, 22, 22);
+    color: white;
+    font-weight: bolder;
+}
 }
 @media only screen and (min-width: 1024px) {
     .tauler-jugador{

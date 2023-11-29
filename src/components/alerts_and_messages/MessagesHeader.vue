@@ -155,7 +155,93 @@
     padding-right: 30px;
   }
 
-  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  @media only screen and (max-width: 768px) and (orientation: landscape){
+    .message-bar-header {
+    display: flex;
+    position: relative;
+    align-content: center;
+    justify-content: center;
+    height: 15vh;
+    border-bottom: 1px solid gray;
+    background-color: white;
+  }
+
+  .pendiente-inbox, .pendiente-inbox > img {
+    position: absolute;
+    top: -3vh;
+    left: 25vw;
+    width: 25%;
+  }
+
+  .contador-inbox {
+    position: absolute;
+    top: -1vh;
+    left: 27vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: white;
+  }
+
+  .new-message {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2vh;
+    width: 20vw;
+    height: 100%;
+    font-size: 0.75em;
+    background-color: lightgray;
+    cursor: pointer;
+  }
+  .new-message.selected {
+    background-color: orangered;
+    color: white;
+  }
+
+  .inbox {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding-top: 2vh;
+    font-size: 0.75em;
+    width: 20vw;
+    cursor: pointer;
+  }
+
+  .inbox.selected {
+    background-color: orangered;
+    color: white;
+  }
+  .sent {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: lightgray;
+    padding-top: 2vh;
+    font-size: 0.75em;
+    width: 20vw;
+    cursor: pointer;
+  }
+
+  .sent.selected {
+    background-color: orangered;
+    color: white;
+  }
+
+  .message-bar-header > input {
+    height: 50%;
+    width: 15vw;
+    margin: auto;
+    margin-right: 2vw;
+    padding-right: 30px;
+  }
+  }
+
+  @media only screen and (min-width: $mobile-landscape-width) and (max-width: 1024px) {
     .message-bar-header {
       height: 50px;
     }

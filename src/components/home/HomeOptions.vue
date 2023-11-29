@@ -51,9 +51,9 @@
           <div class="layer3">
             <img src="@/assets/images/Layer3.png" />
           </div>
-          <div class="pendiente">
+          <div v-if="activeMatchesList.length > 0" class="pendiente">
             <img src="@/assets/images/Ellipse1.png" />
-            <p class="contador">1</p>
+            <p class="contador"> {{ activeMatchesList.length }}</p>
           </div>
           <p class="option-text">PARTIDES INICIADES</p>
         </div>
@@ -105,7 +105,7 @@ import { useMatches } from '@/core/componentLogic/useMatches'
   const { userId, userName, parseJwt, getCookie } = useLogin()
   const { setReceivedMessages, setSentMessages, countUnread } = useMessages()
   const { setContacts, setContactRequests, countContacts } = useContacts()
-  const { setActiveMatches } = useMatches()
+  const { setActiveMatches, activeMatchesList } = useMatches()
 
   userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
   userId.value = parseInt(
@@ -196,7 +196,7 @@ import { useMatches } from '@/core/componentLogic/useMatches'
     right: 5vw;
   }
 
-  @media only screen and (max-width: 768px) and (orientation: landscape){
+  @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
     .menu {
     display: flex;
     justify-content: center;
@@ -237,12 +237,12 @@ import { useMatches } from '@/core/componentLogic/useMatches'
   .iconos {
     position: absolute;
     top: 3vh;
-    left: 5vw;
+    left: 4.5vw;
   }
 
   .iconos > img {
     width: 8vw;
-    height: 10vh;
+    height: 14vh;
   }
 
   .pendiente {
@@ -270,6 +270,83 @@ import { useMatches } from '@/core/componentLogic/useMatches'
     position: absolute;
     bottom: -1vw;
     right: 5vw;
+  }
+  }
+
+  @media only screen and (min-width: $mobile-landscape-width){
+    .menu {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+  }
+
+  .box {
+    position: relative;
+    width: 20vw;
+    height: 15vh;
+    margin-top: 1vh;
+    z-index: 2;
+    cursor: pointer;
+    margin: 1vw;
+  }
+
+  .option-fondo{
+    width: 20vw;
+    height: 15vh;
+    background-color: white;
+  }
+
+  .layer2 {
+    position: absolute;
+    top: 0.5vh;
+    left: 0.5vw;
+  }
+
+  .layer3 {
+    position: absolute;
+    bottom: 0.5vh;
+    right: 0.5vw;
+  }
+
+  .iconos {
+    position: absolute;
+    top: 3vh;
+    left: 2.5vw;
+  }
+
+  .iconos > img {
+    width: 6vw;
+    height: 10vh;
+  }
+
+  .pendiente {
+    position: absolute;
+    top: 1vh;
+    right: 2vw;
+  }
+
+  .contador {
+    position: absolute;
+    top: 0.5vh;
+    right: 0.5vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+
+  .option-text {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    max-width: 150px;
+    font-weight: bold;
+    text-align: right;
+    font-size: 0.9em;
+    color: grey;
+    position: absolute;
+    bottom: 1.5vw;
+    right: 2vw;
   }
   }
   

@@ -151,12 +151,30 @@
     width: 90%;
   }
 
+  @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+    .alerts {
+    top: 40vh;
+  }
+  }
+
   @media only screen and (min-width: 1024px) {
 
     .alerts {
-      width: 50%;
-      margin: auto;
-    }
+    position: absolute;
+    top: 20vh;
+    left: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content:left;
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid gray;
+    background-color: white;
+    width: 40%;
+  }
   }
 
 </style>

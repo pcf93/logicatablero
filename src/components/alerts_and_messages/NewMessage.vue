@@ -33,7 +33,7 @@
       <button class="send" @click="enviarMensaje">ENVIAR</button>
       <button class="cancel" @click="$emit('cambiarOpcion', 2)">CANCELAR</button>
     </div>
-    <p style="text-align: center">{{ resultado }}</p>
+    <div class="alert alert-warning" v-if="resultado.length > 0">{{ resultado }}</div>
   </div>
 </template>
 
@@ -77,12 +77,15 @@
       .then((response) => {
         console.log(response.data)
         sentMessages.value.push(response.data)
-        resultado.value = 'El mensaje se ha enviado con éxito'
+        resultado.value = "El missatge s'ha enviat amb èxit."
         replySubject.value = ''
       })
       .catch((error: AxiosError) => {
         if (error.code == 'ERR_BAD_RESPONSE') {
-          resultado.value = 'El usuario no existe'
+          resultado.value = "L'usuari no existeix."
+        }
+        if (error.code == 'ERR_NETWORK'){
+          resultado.value = 'Només pots enviar un missatge cada 20 segons. Espera una mica.'
         }
         console.log(error)
       })
@@ -145,6 +148,8 @@
     color: #006845;
     font-weight: 200;
     font-size: 0.8em;
+    margin-right: 5vw;
+    margin-bottom: 2vh;
     border: none;
     cursor: pointer;
   }
@@ -159,63 +164,164 @@
     border: none;
     cursor: pointer;
   }
-  @media only screen and (min-width: 640px) and (max-width: 1024px) {
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: 10px;
-    }
 
-    .new-message-field {
-      font-size: 1em;
-    }
-
-    label {
-      padding-right: 10px;
-      width: 10%;
-    }
-    input,
-    textarea {
-      width: 85%;
-    }
-
-    #content {
-      height: 100px;
-    }
-
-    .button-box {
-      text-align: left;
-      margin-left: 15%;
-    }
+  .alert-warning{
+    width: 80vw;
+    margin-left: 5vw;
+    margin-top: 2vh;
   }
 
-  @media only screen and (min-width: 1024px) {
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: 10px;
-    }
+  @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+    .write-message{
+    width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .new-message-field {
-      font-size: 1em;
-    }
+  .new-message-field {
+    display: flex;
+    flex-direction: flex-end;
+    flex-wrap: wrap;
+    margin: 2vw;
+    font-size: 0.8em;
+    width: 80%;
+    
+  }
 
-    label {
-      padding-right: 10px;
-      width: 10%;
-    }
-    input,
-    textarea {
-      width: 85%;
-    }
+  label {
+    width: 20vw;
+    font-size: 0.8em;
+    margin-right: auto;
+  }
 
-    #content {
-      height: 100px;
-    }
+  input,
+  textarea {
+    max-width: 60vw;
+  }
 
-    .button-box {
-      text-align: left;
-      margin-left: 15%;
-    }
+  #content {
+    max-width: 60vw;
+    max-height: 10vh;
+  }
+
+  .button-box {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .send {
+    width: 30vw;
+    height: 30px;
+    background-color: #10d6a5;
+    color: #006845;
+    font-weight: 200;
+    font-size: 0.8em;
+    border: none;
+    cursor: pointer;
+    margin-right: 5vw;
+  }
+
+  .cancel {
+    width: 30vw;
+    height: 30px;
+    background-color: orangered;
+    color: white;
+    font-weight: 200;
+    font-size: 0.8em;
+    border: none;
+    cursor: pointer;
+  }
+
+  .alert-warning{
+    width: 60vw;
+    margin-left: 15vw;
+    margin-top: 2vh;
+  }
+  }
+
+  @media only screen and (min-width: $mobile-landscape-width){
+    .write-message{
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .new-message-field {
+    display: flex;
+    flex-direction: flex-end;
+    flex-wrap: wrap;
+    margin: 2vw;
+    margin-left: 10%;
+    font-size: 0.8em;
+    width: 80%;
+    
+  }
+
+  label {
+    width: 10vw;
+    font-size: 1.2em;
+    margin-right: auto;
+  }
+
+  input,
+  textarea {
+    max-width: 30vw;
+  }
+
+  #content {
+    max-width: 30vw;
+    max-height: 10vh;
+  }
+
+  .button-box {
+    display: flex;
+    justify-content: center;
+    margin-left: 5%;
+    padding: 0;
+  }
+
+  .send {
+    width: 30vw;
+    height: 30px;
+    background-color: #10d6a5;
+    color: #006845;
+    font-weight: 200;
+    font-size: 0.8em;
+    border: none;
+    cursor: pointer;
+    margin-right: 5vw;
+  }
+
+  .cancel {
+    width: 30vw;
+    height: 30px;
+    background-color: orangered;
+    color: white;
+    font-weight: 200;
+    font-size: 0.8em;
+    border: none;
+    cursor: pointer;
+  }
+
+  .alert-warning{
+    width: 20vw;
+    margin-left: 25%;
+    margin-top: 2vh;
+  }
   }
 </style>

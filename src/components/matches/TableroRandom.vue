@@ -401,16 +401,17 @@ td {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15vh;
+    margin-bottom: 5vh;
 }
 }
 
-@media only screen and (max-width: 768px) and (orientation: landscape){
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
 
 .tauler-previ {
 display: flex;
 align-items: center;
 flex-wrap: nowrap;
+margin-bottom: 5vh;
 }
 
 table {
@@ -445,65 +446,53 @@ justify-content: center;
 width: 40%;
 margin-left: auto;
 margin-right: auto;
-margin-bottom: 15vh;
-}
-
-.button-container>button {
-width: 100%;
-height: 10vh;
-margin-top: 1vh;
-border-radius: 2vh;
-background-color: rgb(160, 22, 22);
-color: white;
-font-weight: bolder;
+margin-bottom: 1vh;
 }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: $mobile-landscape-width){
 
-    .tauler-previ {
-        display: flex;
-        align-items: center;
-    }
-
-    table {
-        width: 30%;
-        margin: 0;
-        margin-left: 10%;
-    }
-
-    td {
-        position: relative;
-        border: 1px solid #dddddd;
-        width: 3vw;
-        height: 3vw;
-        background-color: #295e8d;
-    }
-
-    .ocupado {
-    background-color: #959595;
+.tauler-previ {
+display: flex;
+align-items: center;
+flex-wrap: nowrap;
+margin-bottom: 5vh;
 }
 
-    .button-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 40%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 15vh;
-    }
+table {
+width: 30%;
+border-collapse: collapse;
+margin: auto;
+}
 
-    .button-container>button {
-        width: 100%;
-        height: 3vh;
-        margin-top: 1vh;
-        border-radius: 2vh;
-        background-color: rgb(160, 22, 22);
-        color: white;
-        font-weight: bolder;
-        font-size: 1.4em
-    }
+/* Estilos para las celdas de la tabla */
+td {
+position: relative;
+border: 1px solid #dddddd;
+width: 3vw;
+height: 3vw;
+background-color: #295e8d;
+}
+
+.ocupado {
+background-color: #959595;
+}
+
+.cuadro-arrastrable {
+position: absolute;
+background-color: #66ccff;
+user-select: none;
+}
+
+.button-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+width: 40%;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 1vh;
+}
 }
 </style>
   

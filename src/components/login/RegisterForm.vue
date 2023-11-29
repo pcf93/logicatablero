@@ -69,7 +69,7 @@
       </div>
       <div class="register-field">
         <label for="2FA">Autenticació dues passes?</label>
-        <input
+        <input 
           type="checkbox"
           id="2FA"
           name="2FA"
@@ -269,72 +269,114 @@
     width: 90vw;
     font-size: 0.8em;
   }
-  @media only screen and (min-width: 640px) and (max-width: 1024px) {
+
+  @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+
     .register {
-      width: 50%;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    border: 1px solid gray;
+    margin-top: 5vh;
+    background-color: white;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5vh;
+  }
 
-    .register-form {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: auto;
-      
-    }
+  .instruccions{
+    text-align: justify;
+    font-size: 0.8em;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 2vh;
+  }
 
-    .register-field {
-      display: flex;
-      flex-direction: flex-end;
-      flex-wrap: wrap;
-      margin: 1vh;
-      font-size: 0.8em;
-      width: 90%;
-    }
+  .register-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
 
-    label {
-      width: 10%;
-      margin-right: auto;
-    }
+  .register-field {
+    display: flex;
+    flex-direction: flex-end;
+    flex-wrap: wrap;
+    margin: 1vh;
+    font-size: 0.8em;
+    width: 100%;
+  }
 
-    input,
-    textarea {
-      width: 70%;
-    }
+  label {
+    width: 10%;
+    margin-right: auto;
+    margin-left: 10vh;
+  }
 
-    .register-box {
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      margin-bottom: 10px;
-    }
+  input,
+  textarea {
+    width: 60%;
+    margin-right: 10vh;
+  }
 
-    .send {
-      width: 80px;
-      height: 30px;
-      background-color: #10d6a5;
-      color: #006845;
-      font-weight: 200;
-      margin-right: 10px;
-      border: none;
-      cursor: pointer;
-    }
+  .register-box {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 10px;
+  }
 
-    .cancel {
-      width: 80px;
-      height: 30px;
-      background-color: orangered;
-      color: white;
-      font-weight: 200;
-      margin-left: 10px;
-      border: none;
-      cursor: pointer;
-    }
+  .send {
+    width: 20vw;
+    height: 10vh;
+    background-color: #10d6a5;
+    color: #006845;
+    font-weight: 200;
+    font-size: 0.8em;
+    margin-right: 5vw;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cancel {
+    width: 20vw;
+    height: 10vh;
+    background-color: orangered;
+    color: white;
+    font-weight: 200;
+    font-size: 0.8em;
+    margin-left:5vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    border: none;
+    cursor: pointer;
+  }
+
+  span.obligatori{
+    font-weight: bolder;
+    color: red;
+  }
+
+  .alert-danger{
+    width: 70vw;
+    font-size: 0.8em;
+  }
+
   }
 
   @media only screen and (min-width: 1024px) {
+    h2{
+      text-align: center;
+    }
+
+    .instruccions{
+    text-align: justify;
+    font-size: 0.8em;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 2vh;
+  }
+    
     .register {
       text-align: center;
       width: 30%;
@@ -362,6 +404,8 @@
     label {
       width: 20%;
       margin-right: auto;
+      margin-left: 5%;
+      text-align: left
     }
 
     input,
@@ -369,17 +413,19 @@
       width: 70%;
     }
 
+
+
     .register-box {
       width: 100%;
+      height: 100%;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
-      margin-bottom: 10px;
     }
 
     .send {
-      width: 80px;
-      height: 30px;
+      width: 20%;
+      height: 100%;
       background-color: #10d6a5;
       color: #006845;
       font-weight: 200;
@@ -389,14 +435,14 @@
     }
 
     .cancel {
-      width: 80px;
-      height: 30px;
+      width: 20%;
+      height: 100%;
       background-color: orangered;
       color: white;
       font-weight: 200;
-      margin-left: 10px;
       border: none;
       cursor: pointer;
     }
+
   }
 </style>

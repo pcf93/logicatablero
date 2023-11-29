@@ -132,7 +132,7 @@ async function setUsers(){
 
 <style scoped lang="scss">
 
-@media only screen and (max-width:768px) and (orientation: portrait){
+@media only screen and (max-width:$mobile-landscape-width) and (orientation: portrait){
 
     .vides{
         display: flex;
@@ -219,45 +219,184 @@ async function setUsers(){
 
 }
 
-@media only screen and (max-width:768px) and (orientation: landscape){
+@media only screen and (max-width:$mobile-landscape-width) and (orientation: landscape){
+
+    .vides{
+        display: flex;
+        position: absolute;
+        top: 25vh;
+        width: 50vw;
+        height: 10vh;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 1vh;
+        transform: translate(25vw, 2vw);
+    }
+
+    .marcador-torn{
+        display: flex;
+        border-radius: 10vw;
+    }
+
+    .marcador-torn.desactivat{
+        display: flex;
+        border-radius: 10vw;
+        border: 1px solid red;
+    }
 
     .tableros{
         display: flex;
-        
-
+        flex-wrap: nowrap;
+        width: 100%;
     }
 
-    .tablero{
+    .tableroJugador{
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        text-align: center;
         justify-content: center;
+        align-items: center;
+        width: 100%;
     }
 
-    h2 {
+    .vides-logo{
+        position: relative;
+    }
+    
+    .vides-logo > img {
         height: 10vh;
+        width: 10vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
+
+    .vides-logo > div.vides-contador-jugador, .vides-logo > div.vides-contador-rival{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+    }
+
+    .vides-contador-jugador, .vides-contador-rival{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
+
+    .vides-contador-jugador, .vides-contador-rival {
+        position: absolute;
+        color: white;
+        font-weight: bold;
+    }
+
+    .tableroRival{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+    }
+
+    .info{
+        font-weight: bolder;
+        margin-left: 5vw;
+        margin-right: 5vw;
     }
 
 }
 
-@media only screen and (min-width:1024px){
+@media only screen and (min-width:$mobile-landscape-width){
+
+.vides{
+    display: flex;
+    position: absolute;
+    top: 15vh;
+    width: 25vw;
+    height: 5vh;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1vh;
+    transform: translate(15vw, 2vw);
+}
+
+.marcador-torn{
+    display: flex;
+    border-radius: 10vw;
+}
+
+.marcador-torn.desactivat{
+    display: flex;
+    border-radius: 10vw;
+    border: 1px solid red;
+}
 
 .tableros{
     display: flex;
-    
-
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
-.tablero{
+.tableroJugador{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
     justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-h2 {
-    height: 10vh;
+.vides-logo{
+    position: relative;
 }
 
-}  
+.vides-logo > img {
+    height: 5vh;
+    width: 5vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.vides-logo > div.vides-contador-jugador, .vides-logo > div.vides-contador-rival{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.vides-contador-jugador, .vides-contador-rival{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.vides-contador-jugador, .vides-contador-rival {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+}
+
+.tableroRival{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.info{
+    font-weight: bolder;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+}
 
 </style>
