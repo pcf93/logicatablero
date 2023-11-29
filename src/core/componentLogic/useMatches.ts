@@ -11,6 +11,9 @@ const match = ref<Match | null>()
 const jugadorActual = ref<string>('')
 const rivalActual = ref<string>('')
 
+const ultimoMensaje = ref<MatchMessage>()
+const ultimoMensajeCerrado = ref(false)
+
 export function useMatches() {
   async function setActiveMatches(userId: number) {
     try {
@@ -34,6 +37,8 @@ export function useMatches() {
     match,
     jugadorActual,
     rivalActual,
+    ultimoMensaje,
+    ultimoMensajeCerrado,
     setActiveMatches
   }
 }

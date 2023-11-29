@@ -32,24 +32,33 @@
 <div class="tableroRival">
     <RivalBoard :match="matchData?.matchId!" :array="arrayRival!" :turn="matchData?.playerTurnId!" :rival="idRival!"></RivalBoard>
 </div>
+<div v-if="ultimoMensaje != null" class="message-notification" :class="{tancat: ultimoMensajeCerrado}">
+    <p class="message">{{ ultimoMensaje.matchMessageContent }}</p>
+    <button class="close-message" @click="ultimoMensajeCerrado = true">X</button>
+</div>
+<form class="send-message">
+    <input v-model="message.matchMessageContent" type="text">
+    <button @click.prevent="enviaMissatge()">Enviar</button>
+</form>
 </div>
 
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { Match } from '@/type';
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
+import { Match, MatchMessage, NewMatchMessage } from '@/type';
 import { useLogin } from '@/core/componentLogic/useLogin';
 import { useMatches } from '@/core/componentLogic/useMatches'
 import { getUser } from '@/core/services/APIUserRequests';
 import { getMatch } from '@/core/services/APIMatchRequests'
+import { getMatchMessages, getLastReceivedMatchMessage, sendMatchMessage} from '@/core/services/APIMatchMessageRequests'
 import { Console } from 'console';
 import PlayerBoard from './PlayerBoard.vue';
 import RivalBoard from './RivalBoard.vue';
 import { refDebounced } from '@vueuse/core';
 
 const { userId } = useLogin()
-const { match, jugadorActual, rivalActual } = useMatches()
+const { match, jugadorActual, rivalActual, ultimoMensaje, ultimoMensajeCerrado } = useMatches()
 
 const matchData = ref<Match | null | undefined>(match.value)
 const tuArray = ref<number[]>()
@@ -60,6 +69,12 @@ const idRival = ref<number>()
 const userName = ref<string>('')
 const rivalName = ref<string>('')
 const pollData = ref<NodeJS.Timer>()
+
+const message: NewMatchMessage = reactive({
+    messageSenderId: userId.value as number,
+    matchId: match.value?.matchId as number,
+    matchMessageContent: '',
+  })
 
 const setArrays = () => {
     if (userId.value == matchData?.value!.player1Id){
@@ -80,6 +95,9 @@ setArrays();
 setInterval(function(){setArrays()}, 2000)
 
 onMounted(() => {
+    
+    dameUltimoMensaje();
+    
     pollData.value = setInterval(function(){ 
         getMatch(match.value?.matchId!)
         .then((response) => {
@@ -90,6 +108,9 @@ onMounted(() => {
         .catch((error) => {
             console.log(error)
         })
+
+        compruebaUltimoMensaje();
+
     }, 3000)
 
     setUsers()
@@ -127,6 +148,59 @@ async function setUsers(){
         console.log(error)
     })
 }
+
+console.log(userId.value, match.value?.matchId)
+
+const resultado = ref<MatchMessage[]>()
+
+async function dameMensajes(){
+    await getMatchMessages(match.value?.matchId!)
+    .then((response) => {
+        ultimoMensaje.value = response.data
+        console.log(response.data)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
+async function dameUltimoMensaje(){
+    await getLastReceivedMatchMessage(match.value?.matchId!, userId.value)
+    .then((response) => {
+        ultimoMensaje.value = response.data
+        console.log(response.data)
+        console.log(ultimoMensaje.value)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
+async function compruebaUltimoMensaje(){
+    await getLastReceivedMatchMessage(match.value?.matchId!, userId.value)
+    .then((response) => {
+        if (ultimoMensaje.value == null){
+            ultimoMensaje.value = response.data
+        }
+        if (response.data.matchMessageId != ultimoMensaje.value.matchMessageId){
+            ultimoMensaje.value = response.data
+            ultimoMensajeCerrado.value = false;
+        }
+    })
+}
+
+async function enviaMissatge(){
+    await sendMatchMessage(message)
+    .then((response) => {
+        console.log(response)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
+
+console.log(resultado.value)
 
 </script>
 
@@ -215,6 +289,43 @@ async function setUsers(){
         font-weight: bolder;
         margin-left: 5vw;
         margin-right: 5vw;
+    }
+
+    .message-notification{
+        width: 80vw;
+        height: auto;
+        background-color: white;
+        opacity: 0.8;
+        position: fixed;
+        bottom: 10vh;
+        right: 5vw;
+        text-align: justify;
+        font-weight: bold;
+    }
+
+    .message-notification.tancat{
+        display: none;
+    }
+
+    .message-notification > p{
+        margin-top: 5vh;
+        margin-bottom: auto;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        opacity: 1;
+    }
+
+    .close-message{
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: none;
+        opacity: 0.8;
+        background-color: transparent;
+    }
+
+    input{
+        width: 100%;
     }
 
 }

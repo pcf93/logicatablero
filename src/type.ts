@@ -95,4 +95,17 @@ export type ShootCoordinate = {
   coordinate: number
 }
 
+export type MatchMessage = {
+  matchMessageId: number,
+  messageSenderId: number,
+  matchId: number,
+  content: string
+}
+
+export type NewMatchMessage = {
+  messageSenderId: number,
+  matchId: number,
+  matchMessageContent: string
+}
+
 
