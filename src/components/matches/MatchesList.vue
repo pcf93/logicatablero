@@ -6,7 +6,7 @@
     <button class="btn btn-secondary" id="tornar" v-if="activeMatchId != 0" @click="activeMatchId = 0">Torna a llista de partides</button>
     
     <div v-if="activeMatchId == 0">
-        <div class="contact-box" v-if="activeMatchesList.length == 0">
+        <div class="match-box" v-if="activeMatchesList.length == 0">
         <p>De moment no tens partides començades</p>
         </div>
         <MatchItemTemplate v-for="match in activeMatchesList" :key="match.matchId" :match="match"></MatchItemTemplate>
@@ -59,6 +59,45 @@ const matchSelected = ref(false)
     margin-bottom: 1vh;
 }
 
+.match-box{
+    width: 90%;
+    border: 1px solid black;
+    height: 10vh;
+    margin: auto;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 5vh;
+}
+
+.match-box > img {
+    width: 5vh;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+ .match-box{
+    height: 20vh;
+    justify-content: space-evenly;
+ }   
+
+ .match-box > img {
+    width: 10vh;
+ }
+
+}
+
+ @media only screen and (min-width: $mobile-landscape-width){
+    .match-box{
+    width: 40%;
+    justify-content: space-evenly;
+ }   
+
+ .match-box > img {
+    width: 5vh;
+ }
+}
 
 
 

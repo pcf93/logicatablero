@@ -1,9 +1,9 @@
 <template>
-    <div class="contact-box" v-if="!acceptada">
-        <p>{{ friendString }}</p>
-        <img src="@/assets/images/confirm.png" v-if="userId != props.contact.friendRequestSenderId" @click="acceptRequest">
-        <img src="@/assets/images/cancel.png" v-if="userId != props.contact.friendRequestSenderId" @click="refuseRequest">
-        <span v-if="userId == props.contact.friendRequestSenderId">Pendent</span>
+    <div class="request-box" v-if="!acceptada">
+            <p>{{ friendString }}</p>
+            <img src="@/assets/images/confirm.png" v-if="userId != props.contact.friendRequestSenderId" @click="acceptRequest">
+            <img src="@/assets/images/cancel.png" v-if="userId != props.contact.friendRequestSenderId" @click="refuseRequest">
+            <span v-if="userId == props.contact.friendRequestSenderId">Pendent</span>
     </div>
 </template>
 
@@ -77,28 +77,54 @@ async function refuseRequest(){
 
 
 
-<style scope lang="scss">
+<style scoped lang="scss">
 
-.contact-box{
+.request-box{
     width: 90%;
+    text-align: center;
     border: 1px solid black;
     height: 10vh;
-    margin: auto;
     background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     margin-bottom: 5vh;
 }
 
-.contact-box > img {
+.request-box > img {
+    display: flex;
+    flex-wrap: wrap;
     width: 5vh;
+    margin-right: 10%;
     cursor: pointer;
 }
 
-.contact-box > span{
+.request-box > span {
     color: orange;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5vw;
     font-weight: bolder;
+}
+
+@media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
+ .request-box{
+    height: 20vh;
+    justify-content: space-evenly;
+ }   
+
+ .request-box > img {
+    width: 10vh;
+ }
+
+}
+
+ @media only screen and (min-width: $mobile-landscape-width){
+    .request-box{
+    width: 40%;
+    justify-content: space-evenly;
+ }   
+
+ .request-box > img {
+    width: 5vh;
+ }
 }
 
 </style>

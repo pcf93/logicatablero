@@ -98,12 +98,15 @@
   import { RegisterUser } from '@/type'
   import { reactive, ref } from 'vue'
   import { VueRecaptcha } from 'vue-recaptcha'
+  import { useLogin } from '@/core/componentLogic/useLogin'
   import { toDataURL } from 'qrcode'
   import HomeFooter from '../home/HomeFooter.vue'
   import { setgroups } from 'process'
 
-  var errorMessage = ref<string>('')
+  var errorRegisterMessage = ref<string>('')
   var errorMessageList = ref<string[]>([])
+
+  const { errorMessage } = useLogin()
 
   var is2FAenabled = ref(false)
 
@@ -153,6 +156,7 @@
         .then((response) => {
           console.log(response.data)
           router.push('/login')
+          errorMessage.value = 'Registre completat!'
         })
         .catch((error) => {
           errorMessageList.value.push('Usuari i/o mail ja existeix.')
@@ -161,19 +165,19 @@
       return true;
     } else {
       if (!emailPattern.test(email)) {
-      errorMessage.value = 'El mail no es correcte'
-      errorMessageList.value.push(errorMessage.value)
+        errorRegisterMessage.value = 'El mail no es correcte'
+      errorMessageList.value.push(errorRegisterMessage.value)
       
     }
     if (!passwordPattern.test(password)) {
-      errorMessage.value = 'La contrasenya no es correcta'
-      errorMessageList.value.push(errorMessage.value)
+      errorRegisterMessage.value = 'La contrasenya no es correcta'
+      errorMessageList.value.push(errorRegisterMessage.value)
       
     }
 
     if (!captchaChecked){
-      errorMessage.value = 'No has marcat la casella del reCAPTCHA'
-      errorMessageList.value.push(errorMessage.value)
+      errorRegisterMessage.value = 'No has marcat la casella del reCAPTCHA'
+      errorMessageList.value.push(errorRegisterMessage.value)
       
     }
     return false;
@@ -425,7 +429,7 @@
 
     .send {
       width: 20%;
-      height: 100%;
+      height: 5vh;
       background-color: #10d6a5;
       color: #006845;
       font-weight: 200;
@@ -436,7 +440,7 @@
 
     .cancel {
       width: 20%;
-      height: 100%;
+      height: 5vh;
       background-color: orangered;
       color: white;
       font-weight: 200;

@@ -3,10 +3,12 @@
     <div class="header-item" id="logo">
       <img src="@/assets/images/enfonsa-la-flota-logo.png" />
     </div>
+    <RouterLink to="/panell-usuari">
     <div class="header-item" id="user" v-if="isLogged">
       <img src="@/assets/images/avatar.png" />
       <p>&nbsp;&nbsp;&nbsp;Hola, {{ userName }} </p>
     </div>
+  </RouterLink>
     <div class="header-item" id="logout" @click="logout()" v-if="isLogged">
       <RouterLink to="/login">
         <div class="logout-icon">
@@ -201,64 +203,8 @@
     transform: translateY(30px);
   }
 
-  .pendiente-user {
-    position: absolute;
-    top: -15px;
-    left: 25px;
   }
 
-  .contador-user {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
-    color: white;
-  }
-  }
-
-  @media only screen and (min-width: 640px) and (max-width: 1024px) {
-    #logo > img {
-      width: 400px;
-    }
-
-    #user {
-      display: flex;
-      align-items: center;
-      max-height: 80px;
-      width: auto;
-    }
-
-    #user > img {
-      max-height: 80px;
-      width: auto;
-      margin-right: 5px;
-    }
-
-    #user > p {
-    display: block;
-  }
-
-    #dots > img {
-      display: flex;
-      height: 20px;
-      width: auto;
-      margin: 0 auto;
-    }
-
-    #settings > img,
-    #logout > img {
-      height: 40px;
-      width: 40px;
-      margin: 0 auto;
-    }
-
-    .pendiente-user {
-      position: absolute;
-      top: -15px;
-      left: 50px;
-    }
-  }
 
   @media only screen and (min-width: 1024px) {
     #logo > img {
@@ -268,13 +214,13 @@
     #user {
       display: flex;
       align-items: center;
-      max-height: 80px;
+      max-height: 5vh;
       width: auto;
       margin-right: 50px;
     }
 
     #user > img {
-      max-height: 80px;
+      max-height: 7.5vh;
       width: auto;
       margin-right: 5px;
     }

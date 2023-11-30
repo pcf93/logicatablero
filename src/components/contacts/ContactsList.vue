@@ -146,6 +146,23 @@ async function enviaSolicitudContacte(){
     cursor: pointer;
 }
 
+.contact-box{
+    width: 90%;
+    border: 1px solid black;
+    height: 10vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 0;
+    margin-left: 5%;
+}
+
+.contact-box > img {
+    width: 5vh;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
     .search-box{
     width: 90%;

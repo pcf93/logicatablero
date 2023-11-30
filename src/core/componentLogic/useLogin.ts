@@ -1,7 +1,7 @@
 import { useMessages } from '@/core/componentLogic/useMessages'
 import { getIdByName, loginUser } from '@/core/services/APIUserRequests'
 import router from '@/router'
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useMatches } from './useMatches'
 
 const isLogged = ref(sessionStorage.getItem('isLogged') === 'true')

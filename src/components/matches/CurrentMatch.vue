@@ -1,7 +1,6 @@
 <template>
-<div class="tableros">
-    <div class="tableroJugador">
-        <div class="vides">
+<div class="pantalla-partida">
+    <div class="vides">
             <div id="torn-jugador" class="marcador-torn" :class="{desactivat: userId == match?.playerTurnId}">
             <div class="vides-logo">
                 <img src="@/assets/images/heart.png">
@@ -27,20 +26,28 @@
             </div>
         </div>
     </div>
+    <div class="tableros">
         <PlayerBoard :array="tuArray!"></PlayerBoard>
+        <RivalBoard :recognition="recognition" :match="matchData?.matchId!" :array="arrayRival!" :turn="matchData?.playerTurnId!" :rival="idRival!"></RivalBoard>
     </div>
-<div class="tableroRival">
-    <RivalBoard :match="matchData?.matchId!" :array="arrayRival!" :turn="matchData?.playerTurnId!" :rival="idRival!"></RivalBoard>
 </div>
-<div v-if="ultimoMensaje != null" class="message-notification" :class="{tancat: ultimoMensajeCerrado}">
-    <p class="message">{{ ultimoMensaje.matchMessageContent }}</p>
-    <button class="close-message" @click="ultimoMensajeCerrado = true">X</button>
-</div>
-<form class="send-message">
-    <input v-model="message.matchMessageContent" type="text">
-    <button @click.prevent="enviaMissatge()">Enviar</button>
-</form>
-</div>
+<div class="button-container">
+    <button class="attack-button" v-if="width <= 1024" @click="recognition?.start()">ATACAR</button>
+    <button class="attack-button" v-if="width > 1024" @click="recognition?.start()">ATACAR</button>
+    <div class="message-menu">
+        <input class="message-text" v-model="message.matchMessageContent">
+        <button class="send-button" @click="enviaMissatge">
+          ENVIAR
+        </button>
+        <button class="record-button">
+           GRABAR
+        </button>
+    </div>
+    </div>
+    <div class="message-notification" :class="{tancat: closedMessage}" v-if="ultimoMensaje != null">
+        <div class="close-message" @click="closedMessage = true">X</div>
+        <p> {{  ultimoMensaje.matchMessageContent }}</p>
+    </div>
 
 </template>
 
@@ -48,6 +55,7 @@
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import { Match, MatchMessage, NewMatchMessage } from '@/type';
 import { useLogin } from '@/core/componentLogic/useLogin';
+import { useWindowSize } from '@vueuse/core';
 import { useMatches } from '@/core/componentLogic/useMatches'
 import { getUser } from '@/core/services/APIUserRequests';
 import { getMatch } from '@/core/services/APIMatchRequests'
@@ -59,6 +67,7 @@ import { refDebounced } from '@vueuse/core';
 
 const { userId } = useLogin()
 const { match, jugadorActual, rivalActual, ultimoMensaje, ultimoMensajeCerrado } = useMatches()
+const { width } = useWindowSize()
 
 const matchData = ref<Match | null | undefined>(match.value)
 const tuArray = ref<number[]>()
@@ -75,6 +84,8 @@ const message: NewMatchMessage = reactive({
     matchId: match.value?.matchId as number,
     matchMessageContent: '',
   })
+
+const closedMessage = ref(false)
 
 const setArrays = () => {
     if (userId.value == matchData?.value!.player1Id){
@@ -94,7 +105,16 @@ const setArrays = () => {
 setArrays();
 setInterval(function(){setArrays()}, 2000)
 
+let recognition: SpeechRecognition | null= null;
+
+recognition = new webkitSpeechRecognition();
+recognition.lang = 'es-ES';
+recognition.continuous = true;
+recognition.interimResults = false; 
+
 onMounted(() => {
+
+
     
     dameUltimoMensaje();
     
@@ -151,19 +171,6 @@ async function setUsers(){
 
 console.log(userId.value, match.value?.matchId)
 
-const resultado = ref<MatchMessage[]>()
-
-async function dameMensajes(){
-    await getMatchMessages(match.value?.matchId!)
-    .then((response) => {
-        ultimoMensaje.value = response.data
-        console.log(response.data)
-    })
-    .catch((error) => {
-        console.log(error)
-    })
-}
-
 async function dameUltimoMensaje(){
     await getLastReceivedMatchMessage(match.value?.matchId!, userId.value)
     .then((response) => {
@@ -173,6 +180,7 @@ async function dameUltimoMensaje(){
     })
     .catch((error) => {
         console.log(error)
+        ultimoMensaje.value = null
     })
 }
 
@@ -181,9 +189,11 @@ async function compruebaUltimoMensaje(){
     .then((response) => {
         if (ultimoMensaje.value == null){
             ultimoMensaje.value = response.data
+            closedMessage.value = false
         }
         if (response.data.matchMessageId != ultimoMensaje.value.matchMessageId){
             ultimoMensaje.value = response.data
+            closedMessage.value = false
             ultimoMensajeCerrado.value = false;
         }
     })
@@ -199,15 +209,19 @@ async function enviaMissatge(){
     })
 }
 
-
-console.log(resultado.value)
-
 </script>
 
 <style scoped lang="scss">
 
 @media only screen and (max-width:$mobile-landscape-width) and (orientation: portrait){
 
+    .tableros{
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
     .vides{
         display: flex;
         width: 100vw;
@@ -228,7 +242,7 @@ console.log(resultado.value)
         border: 1px solid red;
     }
 
-    .tableros{
+    .pantalla-partida{
         display: flex;
         flex-wrap: wrap;
         width: 100%;
@@ -328,20 +342,48 @@ console.log(resultado.value)
         width: 100%;
     }
 
+    .button-container{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15vh;
+}
+
+input{
+    width: 20vw;
+    margin-right: 5vw;
+}
+
+.attack-button, .send-button, .record-button {
+    width: 20vw;
+    height: 6vw;
+    margin-top: 1vh;
+    border-radius: 2vh;
+    background-color: rgb(160, 22, 22);
+    color: white;
+    font-weight: bolder;
+}
+
 }
 
 @media only screen and (max-width:$mobile-landscape-width) and (orientation: landscape){
 
+    .tableros{
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        justify-content: space-evenly;
+    }
+
     .vides{
         display: flex;
-        position: absolute;
-        top: 25vh;
-        width: 50vw;
         height: 10vh;
         flex-direction: row;
         justify-content: space-around;
         margin-bottom: 1vh;
-        transform: translate(25vw, 2vw);
     }
 
     .marcador-torn{
@@ -355,9 +397,10 @@ console.log(resultado.value)
         border: 1px solid red;
     }
 
-    .tableros{
+    .pantalla-partida{
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        justify-content: center;
         width: 100%;
     }
 
@@ -418,94 +461,176 @@ console.log(resultado.value)
         margin-right: 5vw;
     }
 
+    input{
+        width: 100%;
+    }
+
+    .button-container{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15vh;
+}
+
+input{
+    width: 20vw;
+    margin-right: 5vw;
+}
+
+.attack-button, .send-button, .record-button {
+    width: 10vw;
+    height: 6vw;
+    margin-top: 1vh;
+    border-radius: 2vh;
+    background-color: rgb(160, 22, 22);
+    color: white;
+    font-weight: bolder;
+}
+
+.button-container > button {
+    width: 6vw;
+    height: 6vw;
+    margin-top: 1vh;
+    border-radius: 2vh;
+    background-color: rgb(160, 22, 22);
+    color: white;
+    font-weight: bolder;
+}
+
 }
 
 @media only screen and (min-width:$mobile-landscape-width){
 
-.vides{
+    .tableros{
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        justify-content: center;
+    }
+
+    .vides{
+        display: flex;
+        height: 5vh;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 1vh;
+    }
+
+    .marcador-torn{
+        display: flex;
+        border-radius: 10vw;
+    }
+
+    .marcador-torn.desactivat{
+        display: flex;
+        border-radius: 10vw;
+        border: 1px solid red;
+    }
+
+    .pantalla-partida{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .tableroJugador{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .vides-logo{
+        position: relative;
+    }
+    
+    .vides-logo > img {
+        height: 5vh;
+        width: 5vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
+
+    .vides-logo > div.vides-contador-jugador, .vides-logo > div.vides-contador-rival{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+    }
+
+    .vides-contador-jugador, .vides-contador-rival{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
+
+    .vides-contador-jugador, .vides-contador-rival {
+        position: absolute;
+        color: white;
+        font-weight: bold;
+    }
+
+    .tableroRival{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+    }
+
+    .info{
+        font-weight: bolder;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+
+    .button-container{
     display: flex;
-    position: absolute;
-    top: 15vh;
-    width: 25vw;
-    height: 5vh;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 1vh;
-    transform: translate(15vw, 2vw);
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15vh;
 }
 
-.marcador-torn{
-    display: flex;
-    border-radius: 10vw;
-}
+input{
+        width: 100%;
+    }
 
-.marcador-torn.desactivat{
-    display: flex;
-    border-radius: 10vw;
-    border: 1px solid red;
-}
-
-.tableros{
+    .button-container{
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
+    justify-content: space-evenly;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15vh;
 }
 
-.tableroJugador{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.vides-logo{
-    position: relative;
-}
-
-.vides-logo > img {
-    height: 5vh;
-    width: 5vh;
-    margin-left: 2vw;
-    margin-right: 2vw;
-}
-
-.vides-logo > div.vides-contador-jugador, .vides-logo > div.vides-contador-rival{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-}
-
-.vides-contador-jugador, .vides-contador-rival{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-}
-
-.vides-contador-jugador, .vides-contador-rival {
-    position: absolute;
-    color: white;
-    font-weight: bold;
-}
-
-.tableroRival{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: auto;
-}
-
-.info{
-    font-weight: bolder;
-    margin-left: 5vw;
+input{
+    width: 20vw;
     margin-right: 5vw;
+}
+
+.attack-button, .send-button, .record-button {
+    width: 20vw;
+    height: 6vw;
+    margin-top: 1vh;
+    border-radius: 2vh;
+    background-color: rgb(160, 22, 22);
+    color: white;
+    font-weight: bolder;
 }
 
 }

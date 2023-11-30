@@ -58,6 +58,16 @@ export type RegisterUser = {
   userLanguageID: number
 }
 
+export type ChangeUser = {
+  userNickname: string
+  userOldPassword: string
+  userNewPassword: string
+  userEmail: string
+  userPhone: string
+  userCity: string
+  userBirthDate: string
+}
+
 export type FriendRequest = {
   friendRequestId: number,
   friendRequestSenderId: number,
@@ -99,7 +109,7 @@ export type MatchMessage = {
   matchMessageId: number,
   messageSenderId: number,
   matchId: number,
-  content: string
+  matchMessageContent: string
 }
 
 export type NewMatchMessage = {

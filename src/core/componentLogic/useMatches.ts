@@ -1,4 +1,4 @@
-import { Match } from '@/type'
+import { Match, MatchMessage } from '@/type'
 import { ref } from 'vue'
 import {
   getActiveMatches
@@ -11,7 +11,7 @@ const match = ref<Match | null>()
 const jugadorActual = ref<string>('')
 const rivalActual = ref<string>('')
 
-const ultimoMensaje = ref<MatchMessage>()
+const ultimoMensaje = ref<MatchMessage | null>()
 const ultimoMensajeCerrado = ref(false)
 
 export function useMatches() {

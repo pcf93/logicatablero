@@ -14,24 +14,17 @@
             </tbody>
         </table>
         <div class="button-container">
-            <button class="btn btn-success" @click="cercaMatchmaking()">Partida VS rival aleatori</button>
-            <button class="btn btn-success">Partida VS amic</button>
+            <button class="btn btn-success" @click.prevent="cercaMatchmaking()">Partida VS rival aleatori</button>
+            <div v-if="mensajeExito.length > 0" class="alert alert-success">
+                {{ mensajeExito }}
+            </div>
+            <div v-if="mensajeError.length > 0" class="alert alert-danger">
+                {{ mensajeError }}
+            </div>
             <button class="btn btn-warning" @click="reiniciarTablero()">Canviar tauler</button>
+            
         </div>
     </div>
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="toast-header">
-    <img src="..." class="rounded mr-2" alt="...">
-    <strong class="mr-auto">Bootstrap</strong>
-    <small>11 mins ago</small>
-    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="toast-body">
-    Hello, world! This is a toast message.
-  </div>
-</div>
 
 </template>
   
@@ -57,6 +50,9 @@ userName.value = Object.values(parseJwt(getCookie('JWT')))[1] as string
 userId.value = parseInt(Object.values(parseJwt(getCookie('JWT')))[2] as string)
 
 const tabla = ref(Array.from({ length: 10 }, () => Array(10).fill('')))
+
+const mensajeExito = ref<string>('')
+const mensajeError = ref<string>('')
 
 const arrayIndex = ref<IndexInfo[]>([])
 const matchData: SearchMatchmaking = reactive({
@@ -318,16 +314,20 @@ asignarClaseOcupado();
 
 async function cercaMatchmaking() {
 
+    mensajeExito.value = ''
+    mensajeError.value = ''
+
     await findMatchmakingMatch()
         .then(() => {
-
             joinMatchmakingMatch(matchData)
                 .then((response) => {
                     console.log(response)
+                    mensajeExito.value = "T'has unit a una partida!"
                 })
                 .catch((error) => {
                     console.log(error)
                     console.log(matchData)
+                    mensajeError.value = "Ja has creat una partida. Espera a un altre usuari"
                 })
 
         })
@@ -336,11 +336,13 @@ async function cercaMatchmaking() {
             createMatchmakingMatch(matchData)
                 .then((response) => {
                     console.log(response)
+                    mensajeExito.value = "Partida creada. Espera a un altre usuari"
 
                 })
                 .catch((error) => {
                     console.log(error)
                     console.log(matchData)
+                    mensajeError.value = "Ja has creat una partida. Espera a un altre usuari"
                 })
 
         })

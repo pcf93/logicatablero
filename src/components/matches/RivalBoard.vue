@@ -15,11 +15,6 @@
         </table>
         
     </div>
-    <div class="button-container">
-    <button v-if="width <= 1024" @touchstart = "recognition?.start()" @touchend = "recognition?.stop">Pitja per atacar</button>
-    <button v-if="width > 1024" @mousedown = "recognition?.start()" @mouseup = "recognition?.stop">Pitja per atacar</button>
-    <p> Resultado: {{ resultado }}</p>
-    </div>
 </template>
   
 <script setup lang="ts">
@@ -47,6 +42,7 @@ const props = defineProps({
     turn: { type: Number, required: true},
     match: { type: Number, required: true},
     rival: { type: Number, required: true},
+    recognition: { type: Object as () => SpeechRecognition | null, required: true }
 })
 
     
@@ -55,12 +51,7 @@ const props = defineProps({
 
     onMounted(() => {
 
-        recognition = new webkitSpeechRecognition();
-        recognition.lang = 'es-ES';
-        recognition.continuous = true;
-        recognition.interimResults = false;
-
-        recognition.onresult = (event: SpeechRecognitionEvent) => {
+        props.recognition!.onresult = (event: SpeechRecognitionEvent) => {
             const results = event.results;
             const frase = results[results.length - 1][0].transcript.replace(/\s/g,'').split('.').join("");
             console.log(frase)
@@ -164,7 +155,7 @@ const props = defineProps({
 
         }
 
-        recognition.onerror = (event: Event) => {
+        props.recognition!.onerror = (event: Event) => {
             console.error('Error en el reconocimiento de voz', (event as SpeechRecognitionErrorEvent).error);
         }
 
@@ -393,6 +384,7 @@ td{
     width: 8vw;
     height: 7vw;
     background-color: #295e8d;
+    text-align: center;
 }
 
 .ocupado{
@@ -413,36 +405,11 @@ td{
   user-select: none;
 }
 
-.button-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15vh;
-}
-
-.button-container > button {
-    width: 50%;
-    height: 6vh;
-    margin-top: 1vh;
-    border-radius: 2vh;
-    background-color: rgb(160, 22, 22);
-    color: white;
-    font-weight: bolder;
-}
-
 @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
     .tauler-rival{
     display: flex;
-    position: absolute;
-    top: 35vh;
-    width: 40%;
-    height: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 8vh;
+    width: 100%;
+    height: 100%;
 }
 
 #tablaRival {
@@ -495,90 +462,62 @@ td{
     background-color: #e06666;
 }
 
-.cuadro-arrastrable {
-  position: absolute;
-  background-color: #66ccff;
-  user-select: none;
-}
-
-.button-container{
-    display: flex;
-    position: absolute;
-    top: 120vh;
-    flex-wrap: nowrap;
-    width: 50vw;
-    margin-left: auto;
-    margin-right: 50vw;
-    margin-bottom: 15vh;
-    margin-top: 1vh;
-}
-
-.button-container > button {
-    width: 100%;
-    height: 8vh;
-    margin-top: 1vh;
-    border-radius: 2vh;
-    background-color: rgb(160, 22, 22);
-    color: white;
-    font-weight: bolder;
-}
 }
 @media only screen and (min-width: 1024px) {
-    .tauler-jugador{
+    .tauler-rival{
     display: flex;
-    margin-left: 5vw;
+    width: 100%;
+    height: 100%;
 }
 
-#tabla {
+#tablaRival {
 
     border-collapse: collapse;
     margin: auto;
-    margin-bottom: 5vh;
+    width:30vw;
+    height:30vw;
+
 }
 
-td{
-    position: relative;
-    border: 1px solid #dddddd;
-    width: 3vw;
-    height: 3vw;
-    background-color: #295e8d;
-}
-
-table.taula-numeros{
-    width: 78%;
+#tablaRival > tbody > tr > td {
     font-weight: bolder;
-    margin-bottom: 0;
-    margin-left: 22%;
+    color: white;
+    font-size: 0.9em;
 }
 
-.taula-numeros > tr, .taula-numeros > tr > td {
-    border: hidden;
-    background-color: #78aad7;
-    font-weight:bolder;
-    font-size: 1em;
+#tablaRival {
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 1vh;
 }
-
-table.taula-lletres{
-    width: 3%;
-    margin-left: 2%;
-    height: 87%;
-    text-align: center;
-}
-
-div > .taula-lletres > tr, div > .taula-lletres > tr > td {
-    border: hidden;
-    background-color: #78aad7;
-    font-weight:bolder;
-    font-size: 1;
-}
-
 .turnoRival {
 
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 5vh;
     opacity: 0.5;
+}
+
+/* Estilos para las celdas de la tabla */
+td{
+    position: relative;
+    border: 1px solid #dddddd;
+    width: 4vw;
+    height: 3vw;
+    background-color: #295e8d;
+}
+
+.ocupado{
+  background-color: #959595;
+}
+
+.agua {
+    background-color: #71a1ff;
+}
+
+.tocado {
+    background-color: #e06666;
 }
   }
 

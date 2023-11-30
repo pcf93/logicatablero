@@ -160,6 +160,7 @@ td{
     width: 8vw;
     height: 7vw;
     background-color: #295e8d;
+    text-align: center;
 }
 
 .ocupado{
@@ -174,42 +175,11 @@ td{
     background-color: #e06666;
 }
 
-.cuadro-arrastrable {
-  position: absolute;
-  background-color: #66ccff;
-  user-select: none;
-}
-
-.button-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15vh;
-}
-
-.button-container > button {
-    width: 100%;
-    height: 3vh;
-    margin-top: 1vh;
-    border-radius: 2vh;
-    background-color: rgb(160, 22, 22);
-    color: white;
-    font-weight: bolder;
-}
-
 @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
     .tauler-jugador{
-    position: absolute;
-    top: 30vh;
     display: flex;
     width: 100%;
     height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3vh;
 }
 
 #tablaJugador {
@@ -253,92 +223,54 @@ td{
     background-color: #71a1ff;
 }
 
-.tocado {
-    background-color: #e06666;
-}
-
-.cuadro-arrastrable {
-  position: absolute;
-  background-color: #66ccff;
-  user-select: none;
-}
-
-.button-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15vh;
-}
-
-.button-container > button {
-    width: 100%;
-    height: 3vh;
-    margin-top: 1vh;
-    border-radius: 2vh;
-    background-color: rgb(160, 22, 22);
-    color: white;
-    font-weight: bolder;
-}
 }
 
 @media only screen and (min-width: 1024px) {
     .tauler-jugador{
     display: flex;
+    width: 100%;
+    height: 100%;
 }
 
-#tabla {
+#tablaJugador {
 
     border-collapse: collapse;
     margin: auto;
-    margin-bottom: 5vh;
+    width:30vw;
+    height:30vw;
+
 }
 
-td{
-    position: relative;
-    border: 1px solid #dddddd;
-    width: 3vw;
-    height: 3vw;
-    background-color: #295e8d;
-}
-
-table.taula-numeros{
-    width: 89%;
+#tablaJugador > tbody > tr > td {
     font-weight: bolder;
-    margin-bottom: 0;
-    margin-left: 10%;
-}
-
-.taula-numeros > tr, .taula-numeros > tr > td {
-    border: hidden;
-    background-color: #78aad7;
-    font-weight:bolder;
-    font-size: 1em;
-}
-
-table.taula-lletres{
-    width: 3%;
-    margin-left: 2%;
-    height: 90%;
-    text-align: center;
-}
-
-div > .taula-lletres > tr, div > .taula-lletres > tr > td {
-    border: hidden;
-    background-color: #78aad7;
-    font-weight:bolder;
-    font-size: 1;
+    color: white;
+    font-size: 0.9em;
 }
 
 .turnoRival {
 
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     margin: auto;
     margin-bottom: 5vh;
     opacity: 0.5;
+}
+
+/* Estilos para las celdas de la tabla */
+td{
+    position: relative;
+    border: 1px solid #dddddd;
+    width: 10%;
+    height: 10%;
+    background-color: #295e8d;
+}
+
+.ocupado{
+  background-color: #959595;
+}
+
+.agua {
+    background-color: #71a1ff;
 }
   }
 

@@ -339,14 +339,14 @@ import { useMatches } from '@/core/componentLogic/useMatches'
 
   .option-text {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    max-width: 150px;
+    max-width: 5vw;
     font-weight: bold;
     text-align: right;
-    font-size: 0.9em;
+    font-size: 0.7em;
     color: grey;
     position: absolute;
     bottom: 1.5vw;
-    right: 2vw;
+    right: 4vw;
   }
   }
   

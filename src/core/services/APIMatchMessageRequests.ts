@@ -50,7 +50,7 @@ const sendMatchMessage = async (message: NewMatchMessage) => {
   return axiosInstance.post<MatchMessage>('/MatchMessage/add', {
     messageSenderId: message.messageSenderId,
     matchId: message.matchId,
-    matchMessageContent: message.content
+    matchMessageContent: message.matchMessageContent
   },
   {
     headers: {

@@ -17,9 +17,9 @@
 
       <div class="button-box">
         <button type="submit" class="send">LOGIN</button>
-        <RouterLink to="/registre">
-          <button class="cancel">REGISTRE</button>
-        </RouterLink>
+
+          <button class="cancel" @click="aRegistre">REGISTRE</button>
+
       </div>
     </form>
     <div class="alert alert-danger" v-if="errorMessage.length > 0">{{ errorMessage }}</div>
@@ -29,7 +29,7 @@
 <script setup lang="ts">
   import { useLogin } from '@/core/componentLogic/useLogin'
 import router from '@/router';
-  import { ref } from 'vue'
+  import { ref, inject } from 'vue'
   import HomeFooter from '../home/HomeFooter.vue';
 
   const userPassword = ref<string>('')
@@ -42,6 +42,11 @@ import router from '@/router';
 
   async function loginUser() {
     await useLogin().login(userName.value, userPassword.value)
+  }
+
+  function aRegistre(){
+    errorMessage.value = ''
+    router.push('/registre')
   }
 </script>
 
@@ -264,7 +269,7 @@ import router from '@/router';
   }
 
   .send {
-    width: 5vw;
+    width: 10vw;
     height: 5vh;
     background-color: #10d6a5;
     color: #006845;
@@ -276,7 +281,7 @@ import router from '@/router';
   }
 
   .cancel {
-    width: 5vw;
+    width: 10vw;
     height: 5vh;
     background-color: orangered;
     color: white;

@@ -1,5 +1,5 @@
 <template>
-    <div class="contact-box">
+    <div class="match-box">
         <p>{{ player1 + ' VS ' + player2 }}</p>
         <img src="@/assets/images/challenge.png" @click=" setMatch() ">
     </div>
@@ -66,7 +66,7 @@ setUser()
 
 <style scoped lang="scss">
 
-.contact-box{
+.match-box{
     width: 90%;
     border: 1px solid black;
     height: 10vh;
@@ -75,33 +75,32 @@ setUser()
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 5vh;
 }
 
-.contact-box > img {
+.match-box > img {
     width: 5vh;
     cursor: pointer;
 }
 
 @media only screen and (max-width: $mobile-landscape-width) and (orientation: landscape){
- .contact-box{
+ .match-box{
     height: 20vh;
     justify-content: space-evenly;
  }   
 
- .contact-box > img {
+ .match-box > img {
     width: 10vh;
  }
 
 }
 
  @media only screen and (min-width: $mobile-landscape-width){
-    .contact-box{
+    .match-box{
     width: 40%;
     justify-content: space-evenly;
  }   
 
- .contact-box > img {
+ .match-box > img {
     width: 5vh;
  }
 }

@@ -16,8 +16,8 @@
     <p class="show-message-subject">{{ message.messageSubject }}</p>
     <p class="show-message-content">{{ message.messageContent }}</p>
     <div class="button-box">
-      <button class="reply" @click="respondeMensaje()" v-if="props.section == 'inbox' ">REPLY</button>
-      <button class="delete" @click="borraMensaje()" v-if="props.section == 'inbox' ">DELETE</button>
+      <button class="reply" @click="respondeMensaje()" v-if="props.section == 'inbox' ">RESPONDRE</button>
+      <button class="delete" @click="borraMensaje()" v-if="props.section == 'inbox' ">ELIMINAR</button>
     </div>
   </div>
 </template>
@@ -126,7 +126,7 @@
   }
 </script>
 
-<style scope lang="scss">
+<style scoped lang="scss">
   .message-bar,
   .message-footer {
     display: flex;
@@ -206,13 +206,13 @@
   }
 
   .button-box {
-    text-align: right;
-    margin-right: 50px;
-    padding-bottom: 30px;
+    display: flex;
+    margin-left: 5vw;
+    justify-content: center;
   }
 
   .reply {
-    width: 80px;
+    width: 40vw;
     height: 30px;
     background-color: #10d6a5;
     color: #006845;
@@ -221,7 +221,7 @@
   }
 
   .delete {
-    width: 80px;
+    width: 40vw;
     height: 30px;
     background-color: orangered;
     color: white;

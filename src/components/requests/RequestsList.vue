@@ -1,8 +1,9 @@
 <template>
-    <HomeOptions v-if="isLogged" />
     <RequestsHeader></RequestsHeader>
+    <RouterLink to="/home">
+        <button class="btn btn-primary">Tornar al menu</button>
+    </RouterLink>
     <ContactRequests></ContactRequests>
-    <MatchRequests></MatchRequests>
 </template>
 
 
